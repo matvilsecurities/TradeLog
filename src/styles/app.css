@@ -1,0 +1,91 @@
+@keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+        .checklist-item{transition:all 0.15s ease}.checklist-item:hover{transform:translateX(4px)}
+        .save-btn{transition:all 0.2s ease}.save-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(77,138,255,0.4)}
+
+/* ============================================================
+   TRADELOG — SIDEBAR
+   (legacy ".tl-sidebar" premium-sidebar block removed — the
+   current Sidebar component in App.jsx only ever renders
+   ".td-*" classes; the old ".tl-*" ruleset had zero references
+   left in the app and was orphaned CSS from an earlier design.)
+   ============================================================ */
+
+/* Prevent horizontal scrolling inside the TradeLog sidebar */
+.td-sidebar {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  min-width: 200px;
+  max-width: 200px;
+}
+
+.td-nav {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.td-nav button,
+.td-sidebar-bottom button {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.td-nav button span:last-child,
+.td-sidebar-bottom button span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Phase 12 — Desktop UX / workflow system */
+.td-nav { padding: 10px 8px 12px; }
+.td-nav-group { padding: 0 0 12px; margin-bottom: 6px; border-bottom: 1px solid rgba(127,127,127,.12); }
+.td-nav-group:last-child { border-bottom: 0; }
+.td-nav-label { display:block; padding: 4px 10px 7px; font-size: 9px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; color: var(--td-nav-label, #8d95a3); }
+.td-nav button { min-height: 38px; border-radius: 9px; transition: background .16s ease, color .16s ease, transform .16s ease; }
+.td-nav button:hover { transform: translateX(2px); background: rgba(99,115,145,.10); }
+.td-nav button.active { background: rgba(76, 120, 210, .15); box-shadow: inset 2px 0 0 #4d8aff; }
+.td-add { margin: 12px 10px 4px !important; width: calc(100% - 20px) !important; min-height: 42px; border-radius: 10px !important; font-weight: 700; box-shadow: 0 8px 20px rgba(77,138,255,.16); }
+.td-sidebar-bottom { padding: 10px 8px !important; border-top: 1px solid rgba(127,127,127,.12); }
+
+.td-page-loading { height:100vh; display:flex; align-items:center; justify-content:center; gap:14px; color:var(--td-loading-text,#aeb6c4); }
+.td-page-loading strong { display:block; color:var(--td-loading-strong,#f5f7fa); font-size:16px; }
+.td-page-loading p { margin:4px 0 0; font-size:12px; color:inherit; }
+.td-loading-mark { width:38px; height:38px; border-radius:11px; display:grid; place-items:center; background:rgba(77,138,255,.12); border:1px solid rgba(77,138,255,.25); }
+.td-loading-mark span { width:16px; height:16px; border:2px solid currentColor; border-top-color:transparent; border-radius:50%; animation:tdSpin .7s linear infinite; }
+@keyframes tdSpin { to { transform:rotate(360deg); } }
+
+.td-toast-viewport { position:fixed; right:22px; bottom:22px; z-index:5000; display:flex; flex-direction:column; gap:9px; width:min(390px, calc(100vw - 32px)); pointer-events:none; }
+.td-toast { pointer-events:auto; display:grid; grid-template-columns:28px 1fr 24px; align-items:center; gap:9px; padding:11px 12px; border-radius:11px; background:rgba(20,23,29,.97); color:#eef2f7; border:1px solid rgba(255,255,255,.10); box-shadow:0 18px 44px rgba(0,0,0,.28); font-size:12px; animation:tdToastIn .2s ease both; }
+.td-toast-success { border-color:rgba(76,205,150,.30); }
+.td-toast-warning { border-color:rgba(232,184,74,.34); }
+.td-toast-error { border-color:rgba(226,99,112,.38); }
+.td-toast-icon { width:24px; height:24px; display:grid; place-items:center; border-radius:7px; background:rgba(255,255,255,.07); font-weight:800; }
+.td-toast-success .td-toast-icon { color:#53c99f; }
+.td-toast-warning .td-toast-icon { color:#e5b84a; }
+.td-toast-error .td-toast-icon { color:#e26370; }
+.td-toast button { border:0; background:transparent; color:#8d95a3; cursor:pointer; font-size:18px; line-height:1; }
+@keyframes tdToastIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+.td-shortcut-hint { display:inline-flex; align-items:center; gap:5px; margin-left:auto; font-size:10px; color:#8d95a3; }
+.td-shortcut-hint kbd { padding:2px 5px; border:1px solid rgba(127,127,127,.25); border-bottom-width:2px; border-radius:4px; background:rgba(127,127,127,.08); font-family:inherit; }
+
+@media (max-width:900px) { .td-toast-viewport { right:12px; bottom:12px; } }
+
+/* Post-trade evaluation checkpoint */
+.td-post-trade-overlay{position:fixed;inset:0;z-index:11000;display:grid;place-items:center;padding:20px;background:rgba(20,24,34,.28);backdrop-filter:blur(7px)}
+.td-post-trade-modal{width:min(440px,calc(100vw - 32px));box-sizing:border-box;padding:20px;border:1px solid rgba(77,91,125,.16);border-radius:16px;background:rgba(255,255,255,.98);box-shadow:0 24px 80px rgba(30,40,70,.20);color:#263247}
+.td-post-trade-eyebrow{font-size:9px;font-weight:800;letter-spacing:1.1px;color:#7657d0}
+.td-post-trade-modal h2{margin:6px 0 5px;font-size:18px;line-height:1.2}
+.td-post-trade-modal p{margin:0;color:#6b7688;font-size:11px;line-height:1.5}
+.td-post-trade-actions{display:flex;flex-direction:column;gap:7px;margin-top:16px}
+.td-post-trade-actions button{min-height:36px;border-radius:9px;padding:0 12px;font:700 10px/1 Inter,system-ui,sans-serif;cursor:pointer}
+.td-post-trade-primary{border:1px solid rgba(53,223,162,.30);background:rgba(53,223,162,.10);color:#13845f}
+.td-post-trade-secondary{border:1px solid rgba(118,87,255,.24);background:rgba(118,87,255,.08);color:#6246bd}
+.td-post-trade-dismiss{border:1px solid rgba(20,30,50,.10);background:#f7f8fb;color:#667287}
+.app-theme-dark .td-post-trade-modal{border-color:#302b46;background:#151225;color:#eeeafa;box-shadow:0 24px 90px rgba(0,0,0,.50)}
+.app-theme-dark .td-post-trade-modal p{color:#8f899e}
+.app-theme-dark .td-post-trade-dismiss{border-color:#302b46;background:#11101a;color:#aaa3b5}

@@ -1,0 +1,1983 @@
+.td-reference-calendar {
+    --rc-bg: #151719;
+    --rc-cell: #141618;
+    --rc-border: #292d31;
+
+    --rc-green: #53c99f;
+    --rc-green-bg: rgba(34, 154, 118, 0.19);
+    --rc-green-border: rgba(66, 191, 151, 0.58);
+
+    --rc-red: #e26370;
+    --rc-red-bg: rgba(150, 42, 54, 0.31);
+    --rc-red-border: rgba(216, 71, 88, 0.62);
+
+    --rc-blue: #778cf3;
+    --rc-blue-bg: rgba(76, 91, 184, 0.25);
+    --rc-blue-border: rgba(103, 119, 225, 0.58);
+
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 8px 10px 9px;
+    background: var(--rc-bg);
+    border: 1px solid var(--rc-border);
+    border-radius: 6px;
+    color: #dce2e8;
+    overflow: visible;
+}
+
+.td-reference-calendar * {
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   Calendar Header
+   ======================================== */
+
+.td-reference-calendar-head {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 0 3px 9px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.035);
+}
+
+.td-reference-calendar-left,
+.td-reference-calendar-tools {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.td-reference-calendar-left {
+    gap: 8px;
+}
+
+
+/* ========================================
+   Navigation Buttons
+   ======================================== */
+
+.td-reference-calendar-nav,
+.td-reference-calendar-this-month,
+.td-reference-calendar-tools button,
+.td-reference-month-label {
+    appearance: none;
+    border: 1px solid #2a3035;
+    background: #15181b;
+    color: #aeb6bf;
+    font: inherit;
+    cursor: pointer;
+}
+
+.td-reference-calendar-nav {
+    width: 27px;
+    height: 27px;
+    padding: 0;
+    border-radius: 6px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 18px;
+    line-height: 1;
+    color: #87919b;
+}
+
+.td-reference-calendar-nav:hover,
+.td-reference-calendar-this-month:hover,
+.td-reference-calendar-tools button:hover {
+    background: #1a1d20;
+    border-color: #363c42;
+    color: #d8dee5;
+}
+
+
+/* ========================================
+   Month Picker
+   ======================================== */
+
+.td-reference-month-picker {
+    position: relative;
+    min-width: 0;
+}
+
+.td-reference-month-label {
+    height: 27px;
+    padding: 0 2px;
+
+    border: 0;
+    background: transparent;
+
+    color: #dbe1e7;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.td-reference-calendar-this-month {
+    height: 27px;
+    padding: 0 10px;
+    border-radius: 6px;
+
+    font-size: 9px;
+    font-weight: 500;
+    color: #b4bcc5;
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   Month Dropdown
+   ======================================== */
+
+.td-reference-month-menu {
+    position: absolute;
+    z-index: 30;
+    top: calc(100% + 7px);
+    left: 0;
+
+    width: 208px;
+    padding: 9px;
+
+    border: 1px solid #30353a;
+    border-radius: 7px;
+
+    background: #181b1e;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+}
+
+.td-reference-year-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    margin-bottom: 8px;
+}
+
+.td-reference-year-row span {
+    color: #707983;
+    font-size: 7px;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.td-reference-year-row select {
+    height: 24px;
+    padding: 0 5px;
+
+    border: 1px solid #2b3035;
+    border-radius: 5px;
+
+    background: #121416;
+    color: #cbd1d8;
+    font-size: 8px;
+}
+
+.td-reference-month-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+}
+
+.td-reference-month-grid button {
+    height: 24px;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    background: transparent;
+    color: #7f8993;
+    font-size: 8px;
+    cursor: pointer;
+}
+
+.td-reference-month-grid button:hover,
+.td-reference-month-grid button.active {
+    background: #252a30;
+    border-color: #353b42;
+    color: #dce2e8;
+}
+
+
+/* ========================================
+   Calendar Tools
+   ======================================== */
+
+.td-reference-calendar-tools {
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.td-reference-stat-cards {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+    margin-right: 4px;
+}
+
+.td-reference-stat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+
+    padding: 7px 14px;
+
+    border-radius: 8px;
+    background: #1a1d20;
+    border: 1px solid #2a3035;
+
+    min-width: 68px;
+}
+
+.td-reference-stat-card span {
+    color: #6e7882;
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.td-reference-stat-card strong {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.15;
+    color: #dce2e8;
+    white-space: nowrap;
+}
+
+.td-reference-stat-card strong.positive {
+    color: var(--rc-green);
+}
+
+.td-reference-stat-card strong.negative {
+    color: var(--rc-red);
+}
+
+.td-reference-calendar-tools button {
+    width: 27px;
+    height: 27px;
+    padding: 0;
+
+    border-radius: 6px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 10px;
+    color: #7d8790;
+}
+
+
+/* ========================================
+   Calendar Body
+   ======================================== */
+
+.td-reference-calendar-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 118px;
+    gap: 7px;
+    margin-top: 8px;
+}
+
+.td-reference-calendar-main {
+    min-width: 0;
+}
+
+
+/* ========================================
+   Weekdays & Calendar Grid
+   ======================================== */
+
+.td-reference-weekdays,
+.td-reference-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 5px;
+}
+
+.td-reference-weekdays {
+    padding: 0 1px 5px;
+}
+
+.td-reference-weekdays > div {
+    text-align: center;
+    color: #5e6872;
+    font-size: 6px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+.td-reference-calendar-grid {
+    grid-auto-rows: minmax(72px, 1fr);
+}
+
+
+/* ========================================
+   Calendar Day
+   ======================================== */
+
+.td-reference-calendar-day {
+    position: relative;
+    min-width: 0;
+    min-height: 72px;
+
+    border: 1px solid #191c1f;
+    border-radius: 5px;
+
+    background: var(--rc-cell);
+    overflow: hidden;
+}
+
+.td-reference-calendar-day.has-trades {
+    cursor: pointer;
+}
+
+
+/* ========================================
+   Trade Day States
+   ======================================== */
+
+.td-reference-calendar-day.has-trades.win {
+    background: var(--rc-green-bg);
+    border-color: var(--rc-green-border);
+}
+
+.td-reference-calendar-day.has-trades.loss {
+    background: var(--rc-red-bg);
+    border-color: var(--rc-red-border);
+}
+
+.td-reference-calendar-day.has-trades.neutral {
+    background: var(--rc-blue-bg);
+    border-color: var(--rc-blue-border);
+}
+
+
+/* ========================================
+   Calendar Date
+   ======================================== */
+
+.td-reference-calendar-date {
+    position: absolute;
+    top: 7px;
+    left: 8px;
+
+    color: #77808a;
+    font-size: 7px;
+    line-height: 1;
+    font-weight: 500;
+}
+
+.td-reference-calendar-day.win .td-reference-calendar-date {
+    color: #65cda7;
+}
+
+.td-reference-calendar-day.loss .td-reference-calendar-date {
+    color: #df6975;
+}
+
+.td-reference-calendar-day.neutral .td-reference-calendar-date {
+    color: #8292ee;
+}
+
+
+/* ========================================
+   Calendar Trade Information
+   ======================================== */
+
+.td-reference-calendar-info {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+.td-reference-calendar-info strong {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+}
+
+.td-reference-calendar-info small {
+  position: absolute !important;
+  top: auto !important;
+  bottom: 4px !important;
+  margin: 0 !important;
+  font-size: 6px !important;
+  line-height: 1 !important;
+}
+
+.td-reference-calendar-info small:first-of-type {
+  left: 10px !important;
+  right: auto !important;
+}
+
+.td-reference-calendar-info small:last-of-type {
+  right: 10px !important;
+  left: auto !important;
+}
+
+.td-reference-calendar-info strong {
+    color: var(--rc-green);
+    font-size: clamp(9px, 0.7vw, 12px);
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+.td-reference-calendar-day.loss .td-reference-calendar-info strong {
+    color: var(--rc-red);
+}
+
+.td-reference-calendar-day.neutral .td-reference-calendar-info strong {
+    color: var(--rc-blue);
+}
+
+.td-reference-calendar-info small {
+    margin-top: 3px;
+    color: #6e7882;
+    font-size: 6px;
+    line-height: 1;
+    font-weight: 400;
+    position: relative;
+    top: 10px;
+}
+
+.td-reference-calendar-weeks {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.td-reference-calendar-week {
+    min-height: 72px;
+    padding: 9px 8px;
+    border: 1px solid #292e33;
+    border-radius: 5px;
+    background: #171a1c;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.td-reference-calendar-week > span {
+    color: #68727c;
+    font-size: 7px;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.td-reference-calendar-week > strong {
+    color: var(--rc-green);
+    font-size: 9px;
+    line-height: 1;
+    font-weight: 500;
+}
+
+.td-reference-calendar-week > strong.negative {
+    color: var(--rc-red);
+}
+
+.td-reference-calendar-week > small {
+    margin-top: 6px;
+    color: #7580ee;
+    font-size: 6px;
+    line-height: 1;
+}
+
+.td-reference-calendar-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 13px;
+    padding: 8px 1px 0;
+
+    color: #59636d;
+    font-size: 7px;
+    line-height: 1;
+}
+
+
+/* ================================
+   Responsive: Tablet
+   ================================ */
+
+@media (max-width: 900px) {
+    .td-reference-calendar-body {
+        grid-template-columns: minmax(0, 1fr) 96px;
+    }
+
+    .td-reference-calendar-grid {
+        grid-auto-rows: minmax(64px, 1fr);
+    }
+
+    .td-reference-calendar-day,
+    .td-reference-calendar-week {
+        min-height: 64px;
+    }
+
+    .td-reference-calendar-tools button {
+        display: none;
+    }
+
+    .td-reference-stat-card {
+        padding: 6px 10px;
+        min-width: 56px;
+    }
+
+    .td-reference-stat-card strong {
+        font-size: 14px;
+    }
+}
+
+
+/* ================================
+   Responsive: Mobile
+   ================================ */
+
+@media (max-width: 680px) {
+    .td-reference-calendar-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .td-reference-calendar-tools {
+        width: 100%;
+    }
+
+    .td-reference-stat-cards {
+        flex-wrap: wrap;
+    }
+
+    .td-reference-calendar-body {
+        grid-template-columns: 1fr;
+    }
+
+    .td-reference-calendar-weeks {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+/* ============================================================
+   DASHBOARD CALENDAR — LIGHT THEME
+   ============================================================ */
+
+.td-reference-calendar {
+  --rc-bg: #ffffff !important;
+  --rc-cell: #ffffff !important;
+  --rc-border: #e3e8ef !important;
+
+  background: #ffffff !important;
+  border-color: #e3e8ef !important;
+  color: #172033 !important;
+}
+
+.td-reference-calendar-head {
+  border-bottom-color: #edf0f4 !important;
+}
+
+.td-reference-calendar-nav,
+.td-reference-calendar-this-month,
+.td-reference-month-label,
+.td-reference-calendar-tools button {
+  background: #ffffff !important;
+  border-color: #e3e8ef !important;
+  color: #52627a !important;
+}
+
+.td-reference-calendar-nav:hover,
+.td-reference-calendar-this-month:hover,
+.td-reference-calendar-tools button:hover {
+  background: #f7f8fc !important;
+  border-color: #d9dfea !important;
+  color: #172033 !important;
+}
+
+.td-reference-month-label {
+  color: #172033 !important;
+}
+
+.td-reference-weekdays > div {
+  color: #8a96a8 !important;
+}
+
+.td-reference-calendar-day {
+  background: #ffffff !important;
+  border-color: #edf0f4 !important;
+}
+
+.td-reference-calendar-date {
+  color: #8a96a8 !important;
+}
+
+.td-reference-calendar-info small {
+  color: #8a96a8 !important;
+}
+
+.td-reference-calendar-week {
+  background: #ffffff !important;
+  border-color: #e3e8ef !important;
+}
+
+.td-reference-calendar-week > span {
+  color: #8a96a8 !important;
+}
+
+.td-reference-calendar-week > small {
+  color: #6278d8 !important;
+}
+
+.td-reference-calendar-footer {
+  color: #8a96a8 !important;
+}
+
+.td-reference-month-menu {
+  background: #ffffff !important;
+  border-color: #e3e8ef !important;
+  box-shadow: 0 14px 34px rgba(30,45,70,.12) !important;
+}
+
+.td-reference-year-row span {
+  color: #8a96a8 !important;
+}
+
+.td-reference-year-row select {
+  background: #ffffff !important;
+  border-color: #e3e8ef !important;
+  color: #52627a !important;
+}
+
+.td-reference-month-grid button {
+  color: #52627a !important;
+}
+
+.td-reference-month-grid button:hover,
+.td-reference-month-grid button.active {
+  background: #f1efff !important;
+  border-color: #d8d1ff !important;
+  color: #6255c7 !important;
+}
+
+/* ============================================================
+   DASHBOARD CALENDAR — LIGHT P&L DAY COLORS
+   ============================================================ */
+
+.td-reference-calendar-day.has-trades.win {
+  background: #edf9f5 !important;
+  border-color: #a9ddca !important;
+}
+
+.td-reference-calendar-day.has-trades.loss {
+  background: #fdf0f2 !important;
+  border-color: #e7b0b8 !important;
+}
+
+.td-reference-calendar-day.has-trades.neutral {
+  background: #f2f4ff !important;
+  border-color: #c6cef5 !important;
+}
+
+.td-reference-calendar-day.win .td-reference-calendar-date {
+  color: #299b78 !important;
+}
+
+.td-reference-calendar-day.loss .td-reference-calendar-date {
+  color: #d45b68 !important;
+}
+
+.td-reference-calendar-day.neutral .td-reference-calendar-date {
+  color: #6278d8 !important;
+}
+
+.td-reference-calendar-info strong {
+  color: #299b78 !important;
+}
+
+.td-reference-calendar-day.loss .td-reference-calendar-info strong {
+  color: #d45b68 !important;
+}
+
+.td-reference-calendar-day.neutral .td-reference-calendar-info strong {
+  color: #6278d8 !important;
+}
+
+/* ============================================================
+   DASHBOARD CALENDAR — LIGHT STAT CARDS
+   ============================================================ */
+
+.td-reference-stat-card {
+  background: #ffffff !important;
+  border-color: #e3e8ef !important;
+  box-shadow: 0 2px 7px rgba(30,45,70,.025) !important;
+}
+
+.td-reference-stat-card span {
+  color: #8a96a8 !important;
+}
+
+.td-reference-stat-card strong {
+  color: #172033 !important;
+}
+
+.td-reference-stat-card strong.positive {
+  color: #299b78 !important;
+}
+
+.td-reference-stat-card strong.negative {
+  color: #d45b68 !important;
+}
+
+/* ============================================================
+   DASHBOARD CALENDAR — LIGHT WEEKLY CARDS
+   ============================================================ */
+
+.td-reference-calendar-week {
+  background: #ffffff !important;
+  border-color: #e3e8ef !important;
+  box-shadow: 0 1px 5px rgba(30,45,70,.025) !important;
+}
+
+.td-reference-calendar-week > span {
+  color: #8a96a8 !important;
+}
+
+.td-reference-calendar-week > strong {
+  color: #299b78 !important;
+}
+
+.td-reference-calendar-week > strong.negative {
+  color: #d45b68 !important;
+}
+
+.td-reference-calendar-week > small {
+  color: #6278d8 !important;
+}
+
+/* ============================================================
+   DASHBOARD REFERENCE CALENDAR — DARK THEME
+   ============================================================ */
+
+.td-theme-dark .td-reference-calendar {
+  --rc-bg: #141719;
+  --rc-cell: #171a1d;
+  --rc-border: #292d33;
+
+  background: #141719 !important;
+  border-color: #292d33 !important;
+  color: #dce2e8 !important;
+}
+
+
+/* HEADER */
+
+.td-theme-dark .td-reference-calendar-head {
+  border-bottom-color: #292d33 !important;
+}
+
+.td-theme-dark .td-reference-calendar-nav,
+.td-theme-dark .td-reference-calendar-this-month,
+.td-theme-dark .td-reference-calendar-tools button {
+  background: #171a1d !important;
+  border-color: #30353c !important;
+  color: #aeb6bf !important;
+}
+
+.td-theme-dark .td-reference-calendar-nav:hover,
+.td-theme-dark .td-reference-calendar-this-month:hover,
+.td-theme-dark .td-reference-calendar-tools button:hover {
+  background: #1d2125 !important;
+  border-color: #4a515a !important;
+  color: #ffffff !important;
+}
+
+.td-theme-dark .td-reference-month-label {
+  color: #dce2e8 !important;
+}
+
+
+/* MONTH MENU */
+
+.td-theme-dark .td-reference-month-menu {
+  background: #181b1e !important;
+  border-color: #30353a !important;
+}
+
+.td-theme-dark .td-reference-year-row span {
+  color: #707983 !important;
+}
+
+.td-theme-dark .td-reference-year-row select {
+  background: #121416 !important;
+  border-color: #2b3035 !important;
+  color: #cbd1d8 !important;
+}
+
+.td-theme-dark .td-reference-month-grid button {
+  color: #7f8993 !important;
+}
+
+.td-theme-dark .td-reference-month-grid button:hover,
+.td-theme-dark .td-reference-month-grid button.active {
+  background: #252a30 !important;
+  border-color: #353b42 !important;
+  color: #dce2e8 !important;
+}
+
+
+/* MONTH STAT CARDS */
+
+.td-theme-dark .td-reference-stat-card {
+  background: #1a1d20 !important;
+  border-color: #2a3035 !important;
+}
+
+.td-theme-dark .td-reference-stat-card span {
+  color: #6e7882 !important;
+}
+
+.td-theme-dark .td-reference-stat-card strong {
+  color: #dce2e8 !important;
+}
+
+
+/* WEEKDAY LABELS */
+
+.td-theme-dark .td-reference-weekdays > div {
+  color: #68727c !important;
+}
+
+
+/* CALENDAR CELLS */
+
+.td-theme-dark .td-reference-calendar-day {
+  background: #171a1d !important;
+  border-color: #292e33 !important;
+}
+
+.td-theme-dark .td-reference-calendar-day.empty {
+  background: #151719 !important;
+  border-color: #202429 !important;
+}
+
+.td-theme-dark .td-reference-calendar-date {
+  color: #77808a !important;
+}
+
+
+/* PROFIT DAY */
+
+.td-theme-dark .td-reference-calendar-day.has-trades.win {
+  background: rgba(34,154,118,.19) !important;
+  border-color: rgba(66,191,151,.58) !important;
+}
+
+
+/* LOSS DAY */
+
+.td-theme-dark .td-reference-calendar-day.has-trades.loss {
+  background: rgba(150,42,54,.31) !important;
+  border-color: rgba(216,71,88,.62) !important;
+}
+
+
+/* NEUTRAL DAY */
+
+.td-theme-dark .td-reference-calendar-day.has-trades.neutral {
+  background: rgba(76,91,184,.25) !important;
+  border-color: rgba(103,119,225,.58) !important;
+}
+
+
+/* CALENDAR TEXT */
+
+.td-theme-dark .td-reference-calendar-info small {
+  color: #747d87 !important;
+}
+
+
+/* WEEKLY CARDS */
+
+.td-theme-dark .td-reference-calendar-week {
+  background: #171a1d !important;
+  border-color: #292e33 !important;
+}
+
+.td-theme-dark .td-reference-calendar-week > span {
+  color: #68727c !important;
+}
+
+.td-theme-dark .td-reference-calendar-week > strong {
+  color: #53c99f !important;
+}
+
+.td-theme-dark .td-reference-calendar-week > strong.negative {
+  color: #e26370 !important;
+}
+
+.td-theme-dark .td-reference-calendar-week > small {
+  color: #7580ee !important;
+}
+
+
+/* FOOTER */
+
+.td-theme-dark .td-reference-calendar-footer {
+  color: #59636d !important;
+}
+
+/* ============================================================
+   DARK THEME — MONTH SELECTOR
+   ============================================================ */
+
+.td-theme-dark .td-reference-calendar input,
+.td-theme-dark .td-reference-calendar select {
+  background: #171a1d !important;
+  color: #dce2e8 !important;
+  border-color: #30353c !important;
+  color-scheme: dark;
+}
+
+.td-theme-dark .td-reference-calendar input::placeholder {
+  color: #68727c !important;
+}
+
+/* ============================================================
+   DARK THEME — MONTH LABEL ACTIVE STYLE
+   ============================================================ */
+
+.td-theme-dark .td-reference-month-label {
+  background: #171a1d !important;
+  border: 1px solid #30353c !important;
+  color: #cbd2da !important;
+  border-radius: 6px !important;
+
+  box-shadow: none !important;
+
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    color .15s ease,
+    box-shadow .15s ease;
+}
+
+.td-theme-dark .td-reference-month-label:hover {
+  background: #1c2024 !important;
+  border-color: #7665e8 !important;
+  color: #ffffff !important;
+
+  box-shadow: 0 0 0 3px rgba(98, 85, 199, 0.10) !important;
+}
+
+/* ============================================================
+   CALENDAR CONTROLS — DARK HOVER
+   ============================================================ */
+
+.td-theme-dark .td-reference-calendar-nav:hover,
+.td-theme-dark .td-reference-calendar-this-month:hover,
+.td-theme-dark .td-reference-calendar-tools button:hover {
+  background: #1c2024 !important;
+  border-color: #6255c7 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+.td-theme-dark .td-reference-calendar-nav,
+.td-theme-dark .td-reference-calendar-this-month,
+.td-theme-dark .td-reference-calendar-tools button {
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+/* ============================================================
+   CALENDAR DAY CELLS — DARK HOVER
+   ============================================================ */
+
+.td-theme-dark .td-reference-calendar-day.has-trades {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-dark .td-reference-calendar-day.has-trades:hover {
+  border-color: #6255c7 !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   CALENDAR WEEK CARDS — DARK HOVER
+   ============================================================ */
+
+.td-theme-dark .td-reference-week-card {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-dark .td-reference-week-card:hover {
+  border-color: #6255c7 !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   CALENDAR TOP STAT CARDS — DARK HOVER
+   ============================================================ */
+
+.td-reference-stat-card {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-reference-stat-card:hover {
+  border-color: #6255c7 !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   CALENDAR TOP STAT CARDS — LIGHT HOVER
+   ============================================================ */
+
+.td-theme-light .td-reference-stat-card {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-light .td-reference-stat-card:hover {
+  border-color: #6255c7 !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+.td-theme-light .td-reference-calendar-nav:hover,
+.td-theme-light .td-reference-calendar-this-month:hover,
+.td-theme-light .td-reference-calendar-tools button:hover,
+.td-theme-light .td-reference-month-label:hover {
+  background: #ffffff !important;
+  border-color: #6255c7 !important;
+  color: #4f46b8 !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+.td-theme-light .td-reference-calendar-day.has-trades {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-light .td-reference-calendar-day.has-trades:hover {
+  border-color: #6255c7 !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+.td-theme-light .td-reference-stat-card {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-light .td-reference-stat-card:hover {
+  border-color: #6255c7 !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+.td-theme-light .td-reference-calendar-week {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-light .td-reference-calendar-week:hover {
+  border-color: #6255c7 !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+.td-theme-dark .td-reference-calendar-week {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-dark .td-reference-calendar-week:hover {
+  border-color: #6255c7 !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+/* KPI card hover — dark + light themes */
+.td-theme-dark .td-kpi,
+.td-theme-light .td-kpi {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-dark .td-kpi:hover,
+.td-theme-light .td-kpi:hover {
+  border-color: #6255c7 !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.10) !important;
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   CALENDAR — LIGHT THEME HOVER & GLOW
+   ========================================================= */
+
+/* Overall calendar boundary */
+.td-theme-light .td-reference-calendar {
+  border: 1px solid #dfe5ed !important;
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.td-theme-light .td-reference-calendar:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .16),
+    0 0 18px rgba(98, 85, 199, .09) !important;
+  transform: translateY(-1px);
+}
+
+/* Navigation + This month buttons */
+.td-theme-light .td-reference-calendar-nav,
+.td-theme-light .td-reference-calendar-this-month,
+.td-theme-light .td-reference-calendar-tools button {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  color: #667386 !important;
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-light .td-reference-calendar-nav:hover,
+.td-theme-light .td-reference-calendar-this-month:hover,
+.td-theme-light .td-reference-calendar-tools button:hover {
+  background: #faf9ff !important;
+  border-color: #6255c7 !important;
+  color: #4f43b5 !important;
+  box-shadow: 0 0 0 3px rgba(98, 85, 199, .08) !important;
+  transform: translateY(-1px);
+}
+
+/* Month selector */
+.td-theme-light .td-reference-month-label {
+  background: #ffffff !important;
+  border: 1px solid #dfe5ed !important;
+  color: #46546a !important;
+  border-radius: 6px !important;
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    color .15s ease,
+    box-shadow .15s ease;
+}
+
+.td-theme-light .td-reference-month-label:hover {
+  background: #faf9ff !important;
+  border-color: #6255c7 !important;
+  color: #4f43b5 !important;
+  box-shadow: 0 0 0 3px rgba(98, 85, 199, .08) !important;
+}
+
+/* Top statistic cards */
+.td-theme-light .td-reference-stat-card {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-light .td-reference-stat-card:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .14),
+    0 0 12px rgba(98, 85, 199, .08) !important;
+  transform: translateY(-1px);
+}
+
+/* Calendar day cells */
+.td-theme-light .td-reference-calendar-day.has-trades {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-light .td-reference-calendar-day.has-trades:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 2px rgba(98, 85, 199, .10),
+    0 0 10px rgba(98, 85, 199, .07) !important;
+  transform: translateY(-1px);
+}
+
+/* Weekly summary cards */
+.td-theme-light .td-reference-calendar-week {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-light .td-reference-calendar-week:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .14),
+    0 0 12px rgba(98, 85, 199, .08) !important;
+  transform: translateY(-1px);
+}
+
+/* Month picker */
+.td-theme-light .td-reference-month-menu {
+  border-color: #dfe5ed !important;
+  background: #ffffff !important;
+  box-shadow:
+    0 14px 34px rgba(29, 48, 77, .12) !important;
+}
+
+.td-theme-light .td-reference-month-grid button:hover,
+.td-theme-light .td-reference-month-grid button.active {
+  background: #faf9ff !important;
+  border-color: #6255c7 !important;
+  color: #4f43b5 !important;
+}
+
+/* =========================================================
+   CALENDAR — DARK THEME HOVER & GLOW
+   ========================================================= */
+
+/* Overall calendar */
+.td-theme-dark .td-reference-calendar {
+  border: 1px solid #292d33 !important;
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.td-theme-dark .td-reference-calendar:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .18),
+    0 0 18px rgba(98, 85, 199, .10) !important;
+  transform: translateY(-1px);
+}
+
+/* Calendar navigation buttons */
+.td-theme-dark .td-reference-calendar-nav,
+.td-theme-dark .td-reference-calendar-this-month,
+.td-theme-dark .td-reference-calendar-tools button {
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-dark .td-reference-calendar-nav:hover,
+.td-theme-dark .td-reference-calendar-this-month:hover,
+.td-theme-dark .td-reference-calendar-tools button:hover {
+  background: #1c2024 !important;
+  border-color: #6255c7 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(98, 85, 199, .08) !important;
+  transform: translateY(-1px);
+}
+
+/* Month selector */
+.td-theme-dark .td-reference-month-label {
+  background: #171a1d !important;
+  border: 1px solid #30353c !important;
+  color: #cbd2da !important;
+  border-radius: 6px !important;
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    color .15s ease,
+    box-shadow .15s ease;
+}
+
+.td-theme-dark .td-reference-month-label:hover {
+  background: #1c2024 !important;
+  border-color: #6255c7 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(98, 85, 199, .10) !important;
+}
+
+/* Top statistic cards */
+.td-theme-dark .td-reference-stat-card {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-dark .td-reference-stat-card:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .16),
+    0 0 12px rgba(98, 85, 199, .08) !important;
+  transform: translateY(-1px);
+}
+
+/* Calendar trading-day cells */
+.td-theme-dark .td-reference-calendar-day.has-trades {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-dark .td-reference-calendar-day.has-trades:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 2px rgba(98, 85, 199, .10),
+    0 0 10px rgba(98, 85, 199, .07) !important;
+  transform: translateY(-1px);
+}
+
+/* Weekly summary cards */
+.td-theme-dark .td-reference-calendar-week {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-dark .td-reference-calendar-week:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .14),
+    0 0 12px rgba(98, 85, 199, .08) !important;
+  transform: translateY(-1px);
+}
+
+/* Month picker */
+.td-theme-dark .td-reference-month-menu {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease;
+}
+
+.td-theme-dark .td-reference-month-grid button:hover,
+.td-theme-dark .td-reference-month-grid button.active {
+  background: #1f2227 !important;
+  border-color: #6255c7 !important;
+  color: #ffffff !important;
+}
+
+/* =========================================================
+   Master Theme — Light Calendar
+   ========================================================= */
+
+.calendar-light .td-reference-calendar {
+  --rc-bg: #ffffff;
+  --rc-cell: #ffffff;
+  --rc-border: #dfe5ed;
+  --rc-green: #42ad8a;
+  --rc-green-bg: rgba(66, 173, 138, 0.08);
+  --rc-green-border: rgba(66, 173, 138, 0.34);
+  --rc-red: #d96470;
+  --rc-red-bg: rgba(217, 100, 112, 0.08);
+  --rc-red-border: rgba(217, 100, 112, 0.34);
+  --rc-blue: #7184df;
+  --rc-blue-bg: rgba(113, 132, 223, 0.08);
+  --rc-blue-border: rgba(113, 132, 223, 0.30);
+
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  color: #172033 !important;
+  box-shadow: 0 2px 8px rgba(30, 45, 70, 0.035) !important;
+}
+
+.calendar-light .td-reference-calendar-head {
+  border-bottom-color: #e7ebf1 !important;
+}
+
+.calendar-light .td-reference-calendar-nav,
+.calendar-light .td-reference-calendar-this-month,
+.calendar-light .td-reference-calendar-tools button {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  color: #59677a !important;
+}
+
+.calendar-light .td-reference-calendar-nav:hover,
+.calendar-light .td-reference-calendar-this-month:hover,
+.calendar-light .td-reference-calendar-tools button:hover {
+  background: #faf9ff !important;
+  border-color: #6255c7 !important;
+  color: #6255c7 !important;
+}
+
+.calendar-light .td-reference-month-label {
+  color: #172033 !important;
+}
+
+.calendar-light .td-reference-stat-card {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+}
+
+.calendar-light .td-reference-stat-card span {
+  color: #71809a !important;
+}
+
+.calendar-light .td-reference-stat-card strong {
+  color: #172033 !important;
+}
+
+.calendar-light .td-reference-stat-card strong.positive {
+  color: #42ad8a !important;
+}
+
+.calendar-light .td-reference-stat-card strong.negative {
+  color: #d96470 !important;
+}
+
+.calendar-light .td-reference-weekdays > div {
+  color: #71809a !important;
+}
+
+.calendar-light .td-reference-calendar-day {
+  background: #ffffff !important;
+  border-color: transparent !important;
+}
+
+.calendar-light .td-reference-calendar-day.empty {
+  background: #ffffff !important;
+  border-color: #eef2f6 !important;
+}
+
+.calendar-light .td-reference-calendar-day.has-trades.win {
+  background: rgba(66, 173, 138, 0.08) !important;
+  border-color: rgba(66, 173, 138, 0.34) !important;
+}
+
+.calendar-light .td-reference-calendar-day.has-trades.loss {
+  background: rgba(217, 100, 112, 0.08) !important;
+  border-color: rgba(217, 100, 112, 0.34) !important;
+}
+
+.calendar-light .td-reference-calendar-day.has-trades.neutral {
+  background: rgba(113, 132, 223, 0.08) !important;
+  border-color: rgba(113, 132, 223, 0.30) !important;
+}
+
+.calendar-light .td-reference-calendar-date {
+  color: #71809a !important;
+}
+
+.calendar-light .td-reference-calendar-day.win .td-reference-calendar-date {
+  color: #42ad8a !important;
+}
+
+.calendar-light .td-reference-calendar-day.loss .td-reference-calendar-date {
+  color: #d96470 !important;
+}
+
+.calendar-light .td-reference-calendar-day.neutral .td-reference-calendar-date {
+  color: #7184df !important;
+}
+
+.calendar-light .td-reference-calendar-info small {
+  color: #71809a !important;
+}
+
+.calendar-light .td-reference-calendar-day.win .td-reference-calendar-info strong {
+  color: #42ad8a !important;
+}
+
+.calendar-light .td-reference-calendar-day.loss .td-reference-calendar-info strong {
+  color: #d96470 !important;
+}
+
+.calendar-light .td-reference-calendar-day.neutral .td-reference-calendar-info strong {
+  color: #7184df !important;
+}
+
+.calendar-light .td-reference-calendar-week {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+}
+
+.calendar-light .td-reference-calendar-week > span {
+  color: #71809a !important;
+}
+
+.calendar-light .td-reference-calendar-week > strong {
+  color: #42ad8a !important;
+}
+
+.calendar-light .td-reference-calendar-week > strong.negative {
+  color: #d96470 !important;
+}
+
+.calendar-light .td-reference-calendar-week > small {
+  color: #7184df !important;
+}
+
+.calendar-light .td-reference-calendar-footer {
+  color: #71809a !important;
+}
+
+/* Month picker */
+.calendar-light .td-reference-month-menu {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  box-shadow: 0 14px 34px rgba(30, 45, 70, 0.12) !important;
+}
+
+.calendar-light .td-reference-year-row span {
+  color: #71809a !important;
+}
+
+.calendar-light .td-reference-year-row select {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  color: #536177 !important;
+}
+
+.calendar-light .td-reference-month-grid button {
+  color: #71809a !important;
+}
+
+.calendar-light .td-reference-month-grid button:hover,
+.calendar-light .td-reference-month-grid button.active {
+  background: #faf9ff !important;
+  border-color: #ded9f6 !important;
+  color: #6255c7 !important;
+}
+
+/* =========================================================
+   Master Theme — Dark Calendar
+   ========================================================= */
+
+.calendar-dark .td-reference-calendar {
+  background: #151719 !important;
+  border-color: #292d31 !important;
+  color: #dce2e8 !important;
+}
+
+.calendar-dark .td-reference-calendar-head {
+  border-bottom-color: rgba(255,255,255,.035) !important;
+}
+
+.calendar-dark .td-reference-calendar-nav,
+.calendar-dark .td-reference-calendar-this-month,
+.calendar-dark .td-reference-calendar-tools button {
+  background: #15181b !important;
+  border-color: #2a3035 !important;
+  color: #aeb6bf !important;
+}
+
+.calendar-dark .td-reference-calendar-nav:hover,
+.calendar-dark .td-reference-calendar-this-month:hover,
+.calendar-dark .td-reference-calendar-tools button:hover {
+  background: #1a1d20 !important;
+  border-color: #363c42 !important;
+  color: #d8dee5 !important;
+}
+
+.calendar-dark .td-reference-month-label {
+  color: #dbe1e7 !important;
+}
+
+.calendar-dark .td-reference-stat-card {
+  background: #1a1d20 !important;
+  border-color: #2a3035 !important;
+}
+
+.calendar-dark .td-reference-stat-card span {
+  color: #6e7882 !important;
+}
+
+.calendar-dark .td-reference-stat-card strong {
+  color: #dce2e8 !important;
+}
+
+.calendar-dark .td-reference-stat-card strong.positive {
+  color: #53c99f !important;
+}
+
+.calendar-dark .td-reference-stat-card strong.negative {
+  color: #e26370 !important;
+}
+
+.calendar-dark .td-reference-weekdays > div {
+  color: #5e6872 !important;
+}
+
+.calendar-dark .td-reference-calendar-day {
+  background: #141618 !important;
+  border-color: transparent !important;
+}
+
+.calendar-dark .td-reference-calendar-day.empty {
+  background: #141618 !important;
+  border-color: #191c1f !important;
+}
+
+.calendar-dark .td-reference-calendar-day.has-trades.win {
+  background: rgba(34,154,118,.19) !important;
+  border-color: rgba(66,191,151,.58) !important;
+}
+
+.calendar-dark .td-reference-calendar-day.has-trades.loss {
+  background: rgba(150,42,54,.31) !important;
+  border-color: rgba(216,71,88,.62) !important;
+}
+
+.calendar-dark .td-reference-calendar-day.has-trades.neutral {
+  background: rgba(76,91,184,.25) !important;
+  border-color: rgba(103,119,225,.58) !important;
+}
+
+.calendar-dark .td-reference-calendar-date {
+  color: #77808a !important;
+}
+
+.calendar-dark .td-reference-calendar-info small {
+  color: #6e7882 !important;
+}
+
+.calendar-dark .td-reference-calendar-week {
+  background: #171a1c !important;
+  border-color: #292e33 !important;
+}
+
+.calendar-dark .td-reference-calendar-week > span {
+  color: #68727c !important;
+}
+
+.calendar-dark .td-reference-calendar-footer {
+  color: #59636d !important;
+}
+
+/* Month picker */
+
+.calendar-dark .td-reference-month-menu {
+  background: #181b1e !important;
+  border-color: #30353a !important;
+}
+
+.calendar-dark .td-reference-year-row span {
+  color: #707983 !important;
+}
+
+.calendar-dark .td-reference-year-row select {
+  background: #121416 !important;
+  border-color: #2b3035 !important;
+  color: #cbd1d8 !important;
+}
+
+.calendar-dark .td-reference-month-grid button {
+  color: #7f8993 !important;
+}
+
+.calendar-dark .td-reference-month-grid button:hover,
+.calendar-dark .td-reference-month-grid button.active {
+  background: #252a30 !important;
+  border-color: #353b42 !important;
+  color: #dce2e8 !important;
+}
+
+/* =========================================================
+   Calendar — Dark Hover + Month Selector Fix
+   ========================================================= */
+
+/* Month selector */
+.calendar-dark .td-reference-month-label {
+  appearance: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  outline: none !important;
+  color: #dbe1e7 !important;
+  padding: 0 2px !important;
+  height: 27px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+}
+
+.calendar-dark .td-reference-month-label:hover {
+  background: #1a1d20 !important;
+  color: #ffffff !important;
+}
+
+/* Calendar day hover */
+.calendar-dark .td-reference-calendar-day {
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease !important;
+}
+
+.calendar-dark .td-reference-calendar-day:not(.empty):hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .18),
+    0 4px 14px rgba(0, 0, 0, .18) !important;
+  transform: translateY(-1px);
+}
+
+/* Preserve the P&L colors while hovering */
+.calendar-dark .td-reference-calendar-day.has-trades.win:hover {
+  background: rgba(34, 154, 118, .25) !important;
+  border-color: #53c99f !important;
+}
+
+.calendar-dark .td-reference-calendar-day.has-trades.loss:hover {
+  background: rgba(150, 42, 54, .40) !important;
+  border-color: #e26370 !important;
+}
+
+.calendar-dark .td-reference-calendar-day.has-trades.neutral:hover {
+  background: rgba(76, 91, 184, .34) !important;
+  border-color: #778cf3 !important;
+}
+
+/* Week summary cards */
+.calendar-dark .td-reference-calendar-week {
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease !important;
+}
+
+.calendar-dark .td-reference-calendar-week:hover {
+  background: #1c2024 !important;
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .14),
+    0 4px 14px rgba(0, 0, 0, .18) !important;
+  transform: translateY(-1px);
+}
+
+/* Top statistic cards */
+.calendar-dark .td-reference-stat-card {
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease !important;
+}
+
+.calendar-dark .td-reference-stat-card:hover {
+  background: #1d2024 !important;
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .12),
+    0 4px 12px rgba(0, 0, 0, .16) !important;
+  transform: translateY(-1px);
+}
+
+/* Previous / Next / This month / utility buttons */
+.calendar-dark .td-reference-calendar-nav,
+.calendar-dark .td-reference-calendar-this-month,
+.calendar-dark .td-reference-calendar-tools button {
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease !important;
+}
+
+.calendar-dark .td-reference-calendar-nav:hover,
+.calendar-dark .td-reference-calendar-this-month:hover,
+.calendar-dark .td-reference-calendar-tools button:hover {
+  background: #1c2024 !important;
+  border-color: #6255c7 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(98, 85, 199, .08) !important;
+  transform: translateY(-1px);
+}
+
+.calendar-dark .td-reference-calendar-nav:active,
+.calendar-dark .td-reference-calendar-this-month:active,
+.calendar-dark .td-reference-calendar-tools button:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   Calendar — Light Hover Effects
+   ========================================================= */
+
+.calendar-light .td-reference-calendar-day {
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease !important;
+}
+
+.calendar-light .td-reference-calendar-day:not(.empty):hover {
+  background: transparent !important;
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .35),
+    0 0 12px rgba(98, 85, 199, .16) !important;
+  transform: translateY(-1px);
+}
+
+.calendar-light .td-reference-calendar-day.has-trades.win:hover,
+.calendar-light .td-reference-calendar-day.has-trades.loss:hover,
+.calendar-light .td-reference-calendar-day.has-trades.neutral:hover {
+  background: transparent !important;
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .35),
+    0 0 12px rgba(98, 85, 199, .16) !important;
+}
+
+/* Week summary cards */
+.calendar-light .td-reference-calendar-week {
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease !important;
+}
+
+.calendar-light .td-reference-calendar-week:hover {
+  background: transparent !important;
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .35),
+    0 0 12px rgba(98, 85, 199, .14) !important;
+  transform: translateY(-1px);
+}
+
+/* Month P&L / Trades / Win Rate / Trading Days */
+.calendar-light .td-reference-stat-card {
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease !important;
+}
+
+.calendar-light .td-reference-stat-card:hover {
+  background: transparent !important;
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .35),
+    0 0 12px rgba(98, 85, 199, .14) !important;
+  transform: translateY(-1px);
+}
+
+/* Previous / Next / This Month / utility buttons */
+.calendar-light .td-reference-calendar-nav,
+.calendar-light .td-reference-calendar-this-month,
+.calendar-light .td-reference-calendar-tools button {
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease !important;
+}
+
+.calendar-light .td-reference-calendar-nav:hover,
+.calendar-light .td-reference-calendar-this-month:hover,
+.calendar-light .td-reference-calendar-tools button:hover {
+  background: transparent !important;
+  border-color: #6255c7 !important;
+  color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .35),
+    0 0 10px rgba(98, 85, 199, .12) !important;
+  transform: translateY(-1px);
+}
+
+.calendar-light .td-reference-calendar-nav:active,
+.calendar-light .td-reference-calendar-this-month:active,
+.calendar-light .td-reference-calendar-tools button:active {
+  transform: translateY(0);
+}
+
+/* Month selector */
+.calendar-light .td-reference-month-label {
+  background: transparent !important;
+  border: 0 !important;
+  color: #172033 !important;
+  transition:
+    background .15s ease,
+    color .15s ease !important;
+}
+
+.calendar-light .td-reference-month-label:hover {
+  background: #faf9ff !important;
+  color: #6255c7 !important;
+}
+
+.td-reference-stat-card:first-child {
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.td-reference-stat-card:nth-child(2) {
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.td-reference-stat-card:nth-child(3) {
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.td-reference-stat-card:nth-child(4) {
+  align-items: center !important;
+  text-align: center !important;
+}

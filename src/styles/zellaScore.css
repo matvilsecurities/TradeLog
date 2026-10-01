@@ -1,0 +1,258 @@
+/* Zella Score — inner visual layer only */
+.zella-score-card {
+  position: relative;
+  min-width: 0;
+}
+
+.zella-period-dropdown {
+  position: relative;
+  width: 90px;
+  min-width: 90px;
+  z-index: 20;
+}
+
+.zella-period-trigger {
+  position: relative;
+  width: 100%;
+  height: 26px;
+  padding: 0 22px 0 8px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 6px;
+  background: rgba(255,255,255,.025);
+  color: #9ea5b1;
+  font: inherit;
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color .15s ease,
+    background .15s ease;
+}
+
+.zella-period-trigger:hover,
+.zella-period-dropdown.is-open .zella-period-trigger {
+  border-color: rgba(155,124,255,.42);
+  background: rgba(155,124,255,.045);
+}
+
+.zella-period-chevron {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid #9ea5b1;
+  border-bottom: 1.5px solid #9ea5b1;
+  transform: translateY(-65%) rotate(45deg);
+  transition: transform .15s ease;
+}
+
+.zella-period-dropdown.is-open .zella-period-chevron {
+  transform: translateY(-30%) rotate(225deg);
+}
+
+.zella-period-menu {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  padding: 3px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 6px;
+  background: #181a1d;
+  box-shadow: 0 10px 24px rgba(0,0,0,.34);
+  overflow: hidden;
+}
+
+.zella-period-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 24px;
+  padding: 4px 5px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #858c98;
+  font: inherit;
+  font-size: 7px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+}
+
+.zella-period-option:hover {
+  background: rgba(155,124,255,.10);
+  color: #c9c0ff;
+}
+
+.zella-period-option.is-selected {
+  background: rgba(155,124,255,.14);
+  color: #ddd5ff;
+  font-weight: 500;
+}
+
+.zella-radar-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  overflow: visible;
+}
+
+.zella-radar {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: 218px;
+  overflow: visible;
+}
+
+.zella-radar-ring {
+  fill: none;
+  stroke: rgba(137, 112, 220, .14);
+  stroke-width: 1;
+}
+
+.zella-radar-axis {
+  stroke: rgba(137, 112, 220, .12);
+  stroke-width: 1;
+}
+
+.zella-radar-shape {
+  fill: url(#zellaRadarFill);
+  stroke: #9b7cff;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.zella-radar-point {
+  fill: #f5f2ff;
+  stroke: #9b7cff;
+  stroke-width: 1.8;
+}
+
+.zella-radar-outer-point {
+  fill: #8993a2;
+  stroke: #aeb7c3;
+  stroke-width: .7;
+}
+
+.zella-radar text {
+  fill: #737b88;
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0;
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+.zella-score-divider {
+  height: 1px;
+  margin: 0 22px;
+  background: linear-gradient(
+    90deg,
+    rgba(155,124,255,.75),
+    rgba(155,124,255,.30),
+    rgba(155,124,255,.75)
+  );
+}
+
+.zella-score-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 22px 14px;
+  min-width: 0;
+}
+
+.zella-score-value {
+  flex: 0 0 auto;
+  min-width: 92px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.zella-score-value span {
+  color: #858b94;
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.zella-score-value strong {
+  color: #ddd5ff;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -.03em;
+}
+
+.zella-score-scale {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.zella-score-track {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #d96470 0%,
+    #e58b61 25%,
+    #d8bd65 50%,
+    #71b878 75%,
+    #53b98e 100%
+  );
+  overflow: visible;
+}
+
+.zella-score-track i {
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #a58cff;
+  border: 1px solid #d0c4ff;
+  box-shadow: 0 0 7px rgba(165,140,255,.25);
+  transform: translate(-50%, -50%);
+}
+
+.zella-score-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  color: #626972;
+  font-size: 6px;
+  line-height: 1;
+}
+
+@media (max-width: 720px) {
+  .zella-score-row {
+    padding-left: 14px;
+    padding-right: 14px;
+    gap: 10px;
+  }
+
+  .zella-score-divider {
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+
+  .zella-radar {
+    max-width: 280px;
+    height: 205px;
+  }
+}

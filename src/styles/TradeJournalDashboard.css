@@ -1,0 +1,3325 @@
+@keyframes modalIn{from{opacity:0;margin-top:10px}to{opacity:1;margin-top:0}}
+        .checklist-item{transition:all 0.15s ease}.checklist-item:hover{transform:translateX(4px)}
+        .save-btn{transition:all 0.2s ease}.save-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(77,138,255,0.4)}
+
+/* ============================================================
+   TRADELOG — PREMIUM SIDEBAR
+   ============================================================ */
+
+.tl-sidebar {
+  --tl-sidebar-bg: #070b13;
+  --tl-sidebar-surface: #0b111c;
+  --tl-sidebar-border: rgba(255, 255, 255, 0.065);
+  --tl-sidebar-text: #eef3fb;
+  --tl-sidebar-muted: #7f8a9d;
+  --tl-sidebar-faint: #4f596b;
+  --tl-sidebar-blue: #4d8aff;
+  --tl-sidebar-blue-soft: rgba(77, 138, 255, 0.11);
+  --tl-sidebar-blue-border: rgba(77, 138, 255, 0.22);
+  --tl-sidebar-purple: #9b7cff;
+
+  position: sticky;
+  top: 0;
+  left: 0;
+
+  width: 238px;
+  min-width: 238px;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 17, 28, 0.98) 0%,
+      rgba(7, 11, 19, 1) 100%
+    );
+
+  border-right: 1px solid var(--tl-sidebar-border);
+
+  box-sizing: border-box;
+  z-index: 100;
+
+  overflow: hidden;
+}
+
+
+/* ------------------------------------------------------------
+   BRAND
+   ------------------------------------------------------------ */
+
+.tl-sidebar-brand {
+  height: 76px;
+  min-height: 76px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+  padding: 0 20px;
+
+  border-bottom: 1px solid var(--tl-sidebar-border);
+}
+
+.tl-brand-mark {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  gap: 3px;
+
+  padding: 6px;
+  box-sizing: border-box;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(77, 138, 255, 0.18),
+      rgba(155, 124, 255, 0.10)
+    );
+
+  border: 1px solid rgba(77, 138, 255, 0.20);
+
+  box-shadow:
+    0 0 24px rgba(77, 138, 255, 0.08);
+}
+
+.tl-brand-mark span {
+  display: block;
+
+  width: 4px;
+
+  border-radius: 3px;
+
+  background: linear-gradient(
+    180deg,
+    #74a5ff,
+    #4d8aff
+  );
+}
+
+.tl-brand-mark span:nth-child(1) {
+  height: 9px;
+}
+
+.tl-brand-mark span:nth-child(2) {
+  height: 15px;
+}
+
+.tl-brand-mark span:nth-child(3) {
+  height: 12px;
+}
+
+.tl-brand-copy {
+  min-width: 0;
+}
+
+.tl-brand-name {
+  color: var(--tl-sidebar-text);
+
+  font-size: 16px;
+  font-weight: 750;
+
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.tl-brand-subtitle {
+  margin-top: 4px;
+
+  color: var(--tl-sidebar-muted);
+
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+
+/* ------------------------------------------------------------
+   NAVIGATION
+   ------------------------------------------------------------ */
+
+.tl-sidebar-nav {
+  flex: 1;
+
+  padding: 18px 10px 12px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.08) transparent;
+}
+
+.tl-nav-label {
+  padding: 0 11px 9px;
+
+  color: var(--tl-sidebar-faint);
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.tl-nav-item {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 0 11px;
+
+  margin-bottom: 3px;
+
+  border: 1px solid transparent;
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: var(--tl-sidebar-muted);
+
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.tl-nav-item:hover {
+  background: rgba(255,255,255,0.035);
+
+  color: #cbd4e2;
+
+  transform: translateX(2px);
+}
+
+.tl-nav-item.active {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(77,138,255,0.12),
+      rgba(77,138,255,0.055)
+    );
+
+  border-color: var(--tl-sidebar-blue-border);
+
+  color: #edf4ff;
+
+  box-shadow:
+    inset 2px 0 0 var(--tl-sidebar-blue);
+}
+
+.tl-nav-icon {
+  width: 20px;
+  min-width: 20px;
+
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--tl-sidebar-faint);
+
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.tl-nav-item:hover .tl-nav-icon {
+  color: #aeb9ca;
+}
+
+.tl-nav-item.active .tl-nav-icon {
+  color: var(--tl-sidebar-blue);
+}
+
+.tl-nav-icon i {
+  font-size: 16px;
+}
+
+.tl-nav-text {
+  flex: 1;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tl-nav-item.active .tl-nav-text {
+  font-weight: 600;
+}
+
+.tl-nav-active-dot {
+  width: 5px;
+  height: 5px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--tl-sidebar-blue);
+
+  box-shadow:
+    0 0 8px rgba(77,138,255,0.7);
+}
+
+
+/* ------------------------------------------------------------
+   BOTTOM ACTIONS
+   ------------------------------------------------------------ */
+
+.tl-sidebar-bottom {
+  padding: 12px 10px 14px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7,11,19,0.4),
+      rgba(7,11,19,0.98)
+    );
+}
+
+.tl-sidebar-divider {
+  height: 1px;
+
+  margin: 0 4px 12px;
+
+  background: var(--tl-sidebar-border);
+}
+
+.tl-sidebar-action {
+  width: 100%;
+
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 11px;
+
+  margin-bottom: 3px;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: var(--tl-sidebar-muted);
+
+  font: inherit;
+  font-size: 11px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
+}
+
+.tl-sidebar-action:hover {
+  background: rgba(255,255,255,0.035);
+
+  border-color: rgba(255,255,255,0.05);
+
+  color: #d7deea;
+}
+
+.tl-action-icon {
+  width: 19px;
+
+  display: flex;
+  justify-content: center;
+
+  color: var(--tl-sidebar-faint);
+}
+
+.tl-sidebar-action:hover .tl-action-icon {
+  color: #aeb9ca;
+}
+
+
+/* ------------------------------------------------------------
+   LOG TRADE
+   ------------------------------------------------------------ */
+
+.tl-log-trade-btn {
+  position: relative;
+
+  width: 100%;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 10px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4d8aff,
+      #6a78ff
+    );
+
+  color: white;
+
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 24px rgba(77,138,255,0.16);
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    filter 160ms ease;
+}
+
+.tl-log-trade-btn:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 11px 30px rgba(77,138,255,0.24);
+
+  filter: brightness(1.06);
+}
+
+.tl-log-trade-btn:active {
+  transform: translateY(0);
+}
+
+.tl-log-trade-plus {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+
+/* ------------------------------------------------------------
+   GUIDED ENTRY
+   ------------------------------------------------------------ */
+
+.tl-guided-btn {
+  width: 100%;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 7px;
+
+  border: 1px solid rgba(155,124,255,0.22);
+  border-radius: 9px;
+
+  background: rgba(155,124,255,0.055);
+
+  color: #b9a7ff;
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.tl-guided-btn:hover {
+  background: rgba(155,124,255,0.10);
+
+  border-color: rgba(155,124,255,0.34);
+
+  color: #c9bbff;
+
+  transform: translateY(-1px);
+}
+
+.tl-guided-icon {
+  display: flex;
+  align-items: center;
+}
+
+
+/* ------------------------------------------------------------
+   ACCESSIBILITY / REDUCED MOTION
+   ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-nav-item,
+  .tl-nav-icon,
+  .tl-sidebar-action,
+  .tl-log-trade-btn,
+  .tl-guided-btn {
+    transition: none;
+  }
+
+  .tl-nav-item:hover,
+  .tl-log-trade-btn:hover,
+  .tl-guided-btn:hover {
+    transform: none;
+  }
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .tl-sidebar {
+    width: 210px;
+    min-width: 210px;
+  }
+
+  .tl-sidebar-brand {
+    padding: 0 15px;
+  }
+
+  .tl-nav-item {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+}
+
+@media (max-width: 700px) {
+  .tl-sidebar {
+    width: 64px;
+    min-width: 64px;
+  }
+
+  .tl-sidebar-brand {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .tl-brand-copy,
+  .tl-nav-label,
+  .tl-nav-text,
+  .tl-nav-active-dot,
+  .tl-sidebar-action > span:not(.tl-action-icon),
+  .tl-log-trade-btn span:not(.tl-log-trade-plus),
+  .tl-guided-btn span:not(.tl-guided-icon) {
+    display: none;
+  }
+
+  .tl-brand-mark {
+    margin: 0;
+  }
+
+  .tl-nav-item {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .tl-nav-icon {
+    width: 100%;
+  }
+
+  .tl-sidebar-action {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .tl-log-trade-btn {
+    justify-content: center;
+  }
+
+  .tl-guided-btn {
+    justify-content: center;
+  }
+
+  .tl-guided-icon {
+    margin: 0;
+  }
+}
+
+/* Sidebar presentation is owned by professional-ui.css. */
+
+.td-empty-row {
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #686f79;
+  font-size: 10px;
+}
+
+.td-chart-empty {
+  height: 230px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #6f7783;
+
+  font-size: 11px;
+}
+
+.td-chart-empty-icon {
+  margin-bottom: 8px;
+
+  font-size: 24px;
+
+  color: #6d4bd9;
+}
+
+.td-chart-empty small {
+  margin-top: 4px;
+
+  color: #4f5661;
+
+  font-size: 10px;
+}
+
+.td-zero-line {
+  stroke: rgba(255,255,255,0.13);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.td-chart-dot {
+  fill: #49c491;
+
+  filter:
+    drop-shadow(0 0 5px rgba(73,196,145,.55));
+}
+
+.td-current-pnl {
+  fill: #49c491;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ================================
+   TRADING CALENDAR
+================================ */
+
+.td-calendar-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.td-calendar-month {
+  min-width: 105px;
+  text-align: center;
+  font-size: 10px;
+  color: #a8afb9;
+  font-weight: 600;
+}
+
+.td-calendar-nav {
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.025);
+  color: #aeb5bf;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.td-calendar-nav:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.14);
+}
+
+.td-calendar {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.td-calendar-weekdays,
+.td-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  width: 100%;
+}
+
+.td-calendar-weekdays {
+  margin-bottom: 6px;
+}
+
+.td-calendar-weekdays > div {
+  min-width: 0;
+  text-align: center;
+  color: #555d68;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.td-calendar-grid {
+  gap: 4px;
+}
+
+.td-calendar-day {
+  min-width: 0;
+  min-height: 72px;
+  padding: 7px;
+  border: 1px solid rgba(255,255,255,0.045);
+  background: rgba(255,255,255,0.015);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.td-calendar-day.empty {
+  border-color: transparent;
+  background: transparent;
+}
+
+.td-calendar-day.has-trades {
+  cursor: default;
+}
+
+.td-calendar-day.win {
+  border-color: rgba(73,196,145,0.18);
+  background: rgba(73,196,145,0.045);
+}
+
+.td-calendar-day.loss {
+  border-color: rgba(224,92,92,0.18);
+  background: rgba(224,92,92,0.045);
+}
+
+.td-calendar-date {
+  display: block;
+  font-size: 10px;
+  color: #737b87;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.td-calendar-day.win .td-calendar-date {
+  color: #49c491;
+}
+
+.td-calendar-day.loss .td-calendar-date {
+  color: #e05c5c;
+}
+
+.td-calendar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.td-calendar-info strong {
+  display: block;
+  font-size: 11px;
+  line-height: 1.1;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.td-calendar-day.win .td-calendar-info strong {
+  color: #49c491;
+}
+
+.td-calendar-day.loss .td-calendar-info strong {
+  color: #e05c5c;
+}
+
+.td-calendar-info small {
+  display: block;
+  color: #68717d;
+  font-size: 8px;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.td-calendar-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.045);
+}
+
+.td-calendar-legend span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #69717c;
+  font-size: 9px;
+}
+
+.td-calendar-legend i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.td-calendar-legend i.win {
+  background: #49c491;
+}
+
+.td-calendar-legend i.loss {
+  background: #e05c5c;
+}
+
+.td-calendar-legend i.neutral {
+  background: #4d5560;
+}
+
+.td-calendar-weekdays,
+.td-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+
+
+.td-calendar-weekdays > div {
+  text-align: center;
+  color: #555d68;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.td-calendar-grid {
+  gap: 4px;
+}
+
+.td-calendar-day {
+  min-height: 72px;
+  padding: 7px;
+  border: 1px solid rgba(255,255,255,0.045);
+  background: rgba(255,255,255,0.015);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.td-calendar-day.empty {
+  border-color: transparent;
+  background: transparent;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.td-calendar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.td-calendar-info strong {
+  font-size: 11px;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+
+
+
+
+.td-calendar-info small {
+  color: #68717d;
+  font-size: 8px;
+  line-height: 1.1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   TRADELOG DASHBOARD — REFERENCE DESIGN OVERRIDES
+   ============================================================ */
+.td-app{width:100%;min-height:100%;box-sizing:border-box;background:#0b0d0f;color:#e5e8eb}
+.td-main{width:100%;min-height:100vh;box-sizing:border-box;padding:24px 22px 36px;background:#0b0d0f}
+.td-header{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:18px}
+.td-header h1{margin:0;font-size:19px;line-height:1.1;font-weight:600;letter-spacing:-.025em;color:#f1f3f6}
+.td-header p{margin:7px 0 0;color:#727a85;font-size:10px}
+.td-header-actions{display:flex;align-items:center;gap:7px}
+.td-header-actions>button,.td-select,.td-link{border:1px solid #2b3037;background:#111417;color:#c4c9d0;border-radius:6px;font-size:9px;padding:8px 10px;cursor:pointer}
+.td-header-actions>button:hover,.td-select:hover{border-color:#424851;background:#171a1e}
+.td-header-actions .td-export{color:#d9ceff;border-color:#6249b4;background:#171322}
+.td-sync{margin:0 0 10px;text-align:right;color:#656d77;font-size:9px}
+.td-sync button{margin-left:10px;background:#181522;border:1px solid #4d3d83;color:#c8b9ff;border-radius:5px;padding:5px 8px;font-size:9px;cursor:pointer}
+.td-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-bottom:10px}
+.td-kpi{min-width:0;height:72px;padding:9px 11px;border:1px solid #282c32;background:#141719;border-radius:7px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
+.td-kpi>span{color:#858b94;font-size:8px;margin-bottom:4px}.td-kpi strong{color:#e8ebef;font-size:17px;font-weight:500;line-height:1.1}.td-kpi small{color:#707780;margin-top:4px;font-size:8px}.td-kpi.green strong,.td-kpi.green small{color:#53c69b}.td-kpi.violet strong{color:#ddd5ff}
+.td-layout{display:grid;grid-template-columns:minmax(390px,.92fr) minmax(0,2.08fr);gap:10px;align-items:start}.td-left,.td-right{display:grid;gap:10px;min-width:0}.td-card{min-width:0;border:1px solid #292d33;background:#141619;border-radius:7px;overflow:hidden;box-sizing:border-box}.td-card-head{min-height:42px;height:42px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #282c31;box-sizing:border-box}.td-card-head h2{margin:0;font-size:11px;font-weight:500;color:#dfe2e7}
+.td-chart{width:100%;height:245px;display:block;padding:12px 12px 6px;box-sizing:border-box}.td-radar{display:block;width:100%;height:245px;padding:7px 30px 0;box-sizing:border-box}
+.td-score-row{display:grid;grid-template-columns:100px 1fr;gap:18px;align-items:center;padding:0 14px 14px}.td-score-row>div:first-child{display:flex;flex-direction:column;gap:4px}.td-score-row>div:first-child span{color:#6f7680;font-size:8px}.td-score-row>div:first-child strong{color:#e4e7ec;font-size:18px;font-weight:500}.td-score-scale{min-width:0}.td-score-track{height:5px;border-radius:999px;background:linear-gradient(90deg,#db6572 0%,#e2c85b 48%,#55b98e 100%);position:relative;margin-bottom:5px}.td-score-track i{position:absolute;top:50%;left:83%;width:7px;height:7px;border-radius:50%;background:#53c69b;border:1px solid #d8e9e1;transform:translate(-50%,-50%)}.td-score-scale>div:last-child{display:flex;justify-content:space-between;color:#606872;font-size:7px}
+.td-tr{display:grid;grid-template-columns: 1.35fr .8fr .8fr .8fr;gap:8px;align-items:center;min-height:38px;padding:0 12px;border-bottom:1px solid #25292e;color:#c8ccd2;font-size:9px;box-sizing:border-box}.td-tr.th{min-height:30px;color:#696f78;font-size:8px;text-transform:uppercase;letter-spacing:.05em}.td-tr:last-child{border-bottom:0}.td-tr .profit,.td-tr .long{color:#53c69b}.td-tr .loss,.td-tr .short{color:#d96470}.td-link{border:0;background:transparent;color:#a995e9;padding:4px 0}.td-link:hover{color:#c6b9ff}.td-empty-row{min-height:55px;display:flex;align-items:center;justify-content:center;color:#686f79;font-size:10px}
+.td-calendar-card{min-height:530px}.td-calendar-toolbar{display:flex;align-items:center;gap:7px;min-width:0}.td-calendar-nav,.td-calendar-this-month,.td-calendar-icon{height:27px;border:1px solid #2b3037;background:#111417;color:#9ba2ac;border-radius:6px;cursor:pointer;font-size:9px;box-sizing:border-box}.td-calendar-nav{width:27px;font-size:15px;line-height:1}.td-calendar-this-month{padding:0 10px;color:#d1d5dc}.td-calendar-icon{width:27px;padding:0}.td-calendar-nav:hover,.td-calendar-this-month:hover,.td-calendar-icon:hover{background:#191c20;border-color:#41464f;color:#e6e9ed}
+.td-calendar-month-stats{margin-left:auto;display:inline-flex;align-items:center;gap:7px;color:#747b85;font-size:8px;white-space:nowrap}.td-calendar-month-stats strong{color:#63c9a1;background:rgba(83,198,155,.12);border-radius:5px;padding:4px 7px;font-weight:600}.td-calendar-month-stats b{color:#c7baff;background:rgba(135,104,220,.18);border-radius:5px;padding:4px 7px;font-weight:500}
+.td-calendar-shell{display:grid;grid-template-columns:minmax(0,1fr) 118px;gap:10px;padding:12px 10px 10px}.td-calendar-main{min-width:0}.td-calendar-weekdays,.td-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));width:100%}.td-calendar-weekdays{gap:5px;margin-bottom:5px}.td-calendar-weekdays>div{text-align:center;color:#777e88;font-size:8px}.td-calendar-grid{grid-template-rows:repeat(5,minmax(0,1fr));gap:5px}.td-calendar-day{min-width:0;min-height:82px;padding:7px;border:1px solid #2a2e34;background:#171a1d;border-radius:6px;position:relative;overflow:hidden;box-sizing:border-box}.td-calendar-day.empty{background:#17191c}.td-calendar-day.win{background:rgba(19,91,71,.42);border-color:rgba(61,172,135,.48)}.td-calendar-day.loss{background:rgba(103,32,39,.50);border-color:rgba(193,76,88,.55)}.td-calendar-day.neutral{background:rgba(37,55,82,.48);border-color:rgba(70,99,142,.58)}.td-calendar-date{display:block;color:#8b929c;font-size:8px;line-height:1}.td-calendar-day.win .td-calendar-date{color:#65cda7}.td-calendar-day.loss .td-calendar-date{color:#e1707a}.td-calendar-day.neutral .td-calendar-date{color:#8ea9d4}.td-calendar-info{position:absolute;inset:26px 5px 4px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:2px}.td-calendar-info strong{color:#e5e8eb;font-size:13px;line-height:1.05;font-weight:500;white-space:nowrap}.td-calendar-info small{color:#9aa2a8;font-size:8px;line-height:1.1}
+.td-calendar-weeks{display:flex;flex-direction:column;gap:5px;min-width:0;padding-top:16px;box-sizing:border-box;}.td-calendar-week-stat{min-height:82px;padding:10px 9px;border:1px solid #292d33;background:#171a1d;border-radius:6px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}.td-calendar-week-stat span{color:#8a919a;font-size:8px}.td-calendar-week-stat strong{color:#53c69b;font-size:12px;line-height:1.2;font-weight:500;margin-top:3px}.td-calendar-week-stat strong.loss{color:#d96470}.td-calendar-week-stat small{color:#b4a6ef;font-size:7px;margin-top:4px}.td-calendar-footer{display:flex;justify-content:flex-end;gap:12px;padding:0 11px 10px;color:#6d747d;font-size:8px}
+.td-bottom-grid{display:grid;grid-template-columns:1.55fr .9fr;gap:10px}.td-bars{height:145px;padding:18px 12px 4px;display:flex;align-items:center;justify-content:space-around;gap:3px;border-bottom:1px solid #282c31;box-sizing:border-box}.td-bars span{width:7px;border-radius:1px 1px 0 0;align-self:center}.td-bars .positive{background:#3ca97f}.td-bars .negative{background:#c95361}.td-axis{display:flex;justify-content:space-between;color:#696f78;font-size:8px;padding:7px 12px 9px}.td-links{padding:3px 11px 8px}.td-links a{display:grid;grid-template-columns:1fr auto;gap:2px;text-decoration:none;color:#c8ccd2;padding:8px 3px;border-bottom:1px solid #25282d;font-size:9px}.td-links a:last-child{border-bottom:0}.td-links small{color:#6f757e;grid-column:1}
+@media(max-width:1200px){.td-layout{grid-template-columns:minmax(340px,.9fr) minmax(0,1.7fr)}.td-calendar-shell{grid-template-columns:minmax(0,1fr)}.td-calendar-weeks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.td-calendar-week-stat{min-height:58px}}
+@media(max-width:900px){.td-main{padding:18px 14px 28px}.td-header{flex-direction:column}.td-header-actions{width:100%;overflow-x:auto}.td-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.td-layout{grid-template-columns:1fr}.td-calendar-card{min-height:auto}}
+@media(max-width:650px){.td-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.td-calendar-month-stats{display:none}.td-calendar-grid{gap:3px}.td-calendar-day{min-height:62px;padding:5px}.td-calendar-info strong{font-size:10px}.td-bottom-grid{grid-template-columns:1fr}}
+
+.td-month-picker{
+  position:relative;
+  z-index:5;
+}
+
+.td-month-picker-menu{
+  position:absolute;
+  top:32px;
+  left:0;
+  width:180px;
+  z-index:5;
+  padding:10px;
+  background:#111417;
+  border:1px solid #2b3037;
+  border-radius:8px;
+  box-shadow:0 12px 30px rgba(0,0,0,.35);
+  z-index:50;
+}
+
+.td-month-picker-year{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  color:#7f8791;
+  font-size:8px;
+  font-weight:500;
+  padding:2px 2px 9px;
+  border-bottom:1px solid #292d33;
+  margin-bottom:8px;
+}
+
+.td-month-picker-year span{
+  color:#7f8791;
+}
+
+.td-month-picker-year select{
+  width:82px;
+  height:25px;
+  padding:0 6px;
+  border:1px solid #30353c;
+  border-radius:5px;
+  background:#171a1d;
+  color:#d1d5dc;
+  font-size:9px;
+  outline:none;
+  cursor:pointer;
+}
+
+.td-month-picker-year select:hover,
+.td-month-picker-year select:focus{
+  border-color:#4a5059;
+  background:#1b1e22;
+}
+
+.td-month-picker-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+}
+
+.td-month-picker-grid button{
+  height:27px;
+  border:1px solid transparent;
+  border-radius:5px;
+  background:transparent;
+  color:#8f969f;
+  font-size:9px;
+  cursor:pointer;
+}
+
+.td-month-picker-grid button:hover{
+  background:#191c20;
+  border-color:#343941;
+  color:#e6e9ed;
+}
+
+.td-month-picker-grid button.active{
+  background:rgba(83,198,155,.12);
+  border-color:rgba(83,198,155,.4);
+  color:#53c69b;
+}
+
+/* SVG CHART STYLES */
+.td-chart text{
+  fill:#737b85;
+  font-size:10px;
+}
+
+.td-chart .td-grid line{
+  stroke:rgba(255,255,255,.055);
+  stroke-width:1;
+}
+
+.td-chart .td-zero-line{
+  stroke:rgba(255,255,255,.13);
+  stroke-width:1;
+  stroke-dasharray:4 4;
+}
+
+.td-chart .td-area{
+  fill:url(#tdArea);
+}
+
+.td-chart .td-line{
+  stroke:#49c491;
+  stroke-width:2.2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.td-chart .td-chart-dot{
+  fill:#49c491;
+  filter:drop-shadow(0 0 5px rgba(73,196,145,.55));
+}
+
+.td-chart .td-current-pnl{
+  fill:#49c491;
+  font-size:12px;
+  font-weight:600;
+}
+
+/* ZELLA RADAR */
+.td-radar text{
+  fill:#737b85;
+  font-size:10px;
+}
+
+.td-radar .td-radar-ring{
+  fill:none;
+  stroke:rgba(255,255,255,.08);
+  stroke-width:1;
+}
+
+.td-radar .td-radar-shape{
+  fill:rgba(109,75,217,.16);
+  stroke:#9b7cff;
+  stroke-width:1.5;
+}
+
+/* TRADEZELLA-STYLE CALENDAR HEADER */
+.td-calendar-card .td-card-head{
+  justify-content:space-between;
+}
+
+.td-calendar-card .td-card-head h2{
+  display:flex;
+  align-items:center;
+  min-width:0;
+  flex:1;
+}
+
+.td-calendar-left-controls{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-width:0;
+  position:relative;
+}
+
+.td-calendar-month-label{
+  height:27px;
+  padding:0 8px;
+  border:0;
+  background:transparent;
+  color:#dfe2e7;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:500;
+  white-space:nowrap;
+  box-sizing:border-box;
+}
+
+.td-calendar-month-label:hover{
+  background:#191c20;
+  color:#f0f2f5;
+}
+
+
+.td-calendar-left-controls .td-month-picker{
+  position:relative;
+  z-index:5;
+}
+
+
+.td-calendar-left-controls .td-month-picker-menu{
+  top:32px;
+  left:0;
+}
+
+.td-calendar-right-tools{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-shrink:0;
+}
+
+/* =========================================================
+   JOURNAL LEDGER — ACTION BUTTONS
+   ========================================================= */
+
+.trade-actions {
+  display: flex !important;
+  align-items: center;
+  gap: 2px;
+  min-height: 30px;
+}
+
+.trade-actions button {
+  width: 30px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+
+  cursor: pointer;
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.trade-actions button i {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px !important;
+  line-height: 1 !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Chart */
+.trade-actions button:first-child {
+  color: #4d8aff !important;
+}
+
+.trade-actions button:first-child:hover {
+  background: rgba(77,138,255,.12) !important;
+  transform: translateY(-1px);
+}
+
+/* Edit */
+.trade-actions button:nth-child(2) {
+  color: #9aa1aa !important;
+}
+
+.trade-actions button:nth-child(2):hover {
+  background: rgba(255,255,255,.07) !important;
+  color: #e5e8ec !important;
+  transform: translateY(-1px);
+}
+
+/* Delete */
+.trade-actions button:last-child {
+  color: #9aa1aa !important;
+}
+
+.trade-actions button:last-child:hover {
+  background: rgba(217,100,112,.12) !important;
+  color: #d96470 !important;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   ZELLA SCORE — REFINED RADAR
+   ============================================================ */
+
+.td-radar {
+  display: block;
+  width: 100%;
+  height: 218px;
+  padding: 2px 14px 0;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.td-radar text {
+  fill: #858b94;
+  font-size: 9px;
+  font-weight: 400;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  letter-spacing: 0;
+}
+
+.td-radar .td-radar-ring {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.075);
+  stroke-width: 1;
+}
+
+.td-radar .td-radar-shape {
+  fill: rgba(109, 75, 217, 0.13);
+  stroke: #9b7cff;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+
+
+.td-radar .td-radar-point {
+  fill: #f3f0ff;
+  stroke: #9b7cff;
+  stroke-width: 2;
+}
+
+.td-radar .td-radar-outer-point {
+  fill: #8993a2;
+  stroke: #aeb7c3;
+  stroke-width: 0.7;
+}
+
+/* ============================================================
+   ZELLA SCORE — BOTTOM SCORE AREA REFINEMENT
+   ============================================================ */
+
+.td-score-row {
+  margin-top: 2px !important;
+  padding: 0 30px 24px !important;
+  align-items: flex-end !important;
+}
+
+.td-score-value {
+  margin-top: 5px !important;
+}
+
+.td-score-value strong {
+  font-size: 38px !important;
+  line-height: 1 !important;
+  letter-spacing: -0.035em !important;
+}
+
+.td-score-slider {
+  margin-top: 0 !important;
+}
+
+.td-score-slider input[type="range"] {
+  height: 4px !important;
+}
+
+.td-score-slider-labels {
+  margin-top: 6px !important;
+}
+
+.td-score-slider-labels span {
+  font-size: 7px !important;
+}
+
+/* ============================================================
+   ZELLA SCORE — PERIOD DROPDOWN
+   ============================================================ */
+
+.td-zella-period {
+  appearance: auto !important;
+  -webkit-appearance: auto !important;
+  min-width: 118px !important;
+  height: 34px !important;
+  padding: 0 10px !important;
+  border: 1px solid #2b3037 !important;
+  border-radius: 7px !important;
+  background: #111417 !important;
+  color: #d1d5dc !important;
+  font-size: 9px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  outline: none !important;
+}
+
+.td-zella-period:hover {
+  border-color: #41464f !important;
+}
+
+.td-zella-period:focus {
+  border-color: #6255e8 !important;
+  box-shadow: 0 0 0 2px rgba(98, 85, 232, 0.12) !important;
+}
+
+.td-zella-period option {
+  background: #151719;
+  color: #d1d5dc;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT THEME FOUNDATION
+   ============================================================ */
+
+.td-app {
+  background: #f5f7fb !important;
+  color: #172033 !important;
+}
+
+.td-main {
+  background: #f5f7fb !important;
+  color: #172033 !important;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT KPI CARDS
+   ============================================================ */
+
+.td-kpi {
+  background: #ffffff !important;
+  border: 1px solid #e3e8ef !important;
+  box-shadow: 0 2px 8px rgba(30,45,70,.035) !important;
+}
+
+.td-kpi > span {
+  color: #7a879b !important;
+}
+
+.td-kpi strong {
+  color: #172033 !important;
+}
+
+.td-kpi small {
+  color: #8a96a8 !important;
+}
+
+.td-kpi.green strong,
+.td-kpi.green small {
+  color: #42b98d !important;
+}
+
+.td-kpi.violet strong {
+  color: #6255c7 !important;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT HEADER
+   ============================================================ */
+
+.td-header h1 {
+  color: #172033 !important;
+}
+
+.td-header p {
+  color: #7a879b !important;
+}
+
+.td-header-actions button {
+  background: #ffffff !important;
+  border: 1px solid #e3e8ef !important;
+  color: #52627a !important;
+  box-shadow: none !important;
+}
+
+.td-header-actions button:hover {
+  border-color: rgba(111, 77, 232, 0.40) !important;
+  box-shadow:
+    0 4px 12px rgba(111, 77, 232, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+.td-header-actions .td-export {
+  background: #ffffff !important;
+  border-color: #6255e8 !important;
+  color: #6255e8 !important;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT CONTENT CARDS
+   ============================================================ */
+
+.td-card {
+  background: #ffffff !important;
+  border: 1px solid #e3e8ef !important;
+  box-shadow: 0 2px 10px rgba(30,45,70,.035) !important;
+}
+
+.td-card h2,
+.td-card h3 {
+  color: #172033 !important;
+}
+
+.td-card p,
+.td-card small {
+  color: #7a879b !important;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT CARD TYPOGRAPHY
+   ============================================================ */
+
+.td-card-header {
+  border-bottom: 1px solid #edf0f4 !important;
+}
+
+.td-card-header h2,
+.td-card-header h3 {
+  color: #172033 !important;
+}
+
+.td-card-header span,
+.td-card-header small {
+  color: #8a96a8 !important;
+}
+
+.td-section-title {
+  color: #172033 !important;
+}
+
+.td-muted {
+  color: #8a96a8 !important;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT WORKSPACE SPACING
+   ============================================================ */
+
+.td-main {
+  background: #f5f7fb !important;
+}
+
+.td-layout {
+  gap: 10px !important;
+}
+
+.td-left,
+.td-right {
+  gap: 10px !important;
+}
+
+.td-sync {
+  color: #8a96a8 !important;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT INNER SURFACES
+   ============================================================ */
+
+.td-chart,
+.td-chart-wrap,
+.td-table-wrap,
+.td-recent-trades,
+.td-calendar-wrap {
+  background: #ffffff !important;
+}
+
+.td-chart-grid line {
+  stroke: #edf0f4 !important;
+}
+
+.td-chart-label,
+.td-axis-label {
+  color: #8a96a8 !important;
+  fill: #8a96a8 !important;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT TABLE
+   ============================================================ */
+
+.td-table {
+  background: #ffffff !important;
+  color: #172033 !important;
+}
+
+.td-table thead th {
+  background: #fafbfc !important;
+  color: #8a96a8 !important;
+  border-bottom: 1px solid #e8ecf1 !important;
+}
+
+.td-table tbody td {
+  color: #52627a !important;
+  border-bottom: 1px solid #eef1f5 !important;
+}
+
+.td-table tbody tr:hover {
+  background: #fafbfe !important;
+}
+
+.td-table tbody td strong {
+  color: #172033 !important;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT CHART TYPOGRAPHY
+   ============================================================ */
+
+.td-chart-title {
+  color: #172033 !important;
+}
+
+.td-chart-subtitle {
+  color: #8a96a8 !important;
+}
+
+.td-chart-value {
+  color: #172033 !important;
+}
+
+.td-chart-legend {
+  color: #52627a !important;
+}
+
+.td-chart-legend span {
+  color: #8a96a8 !important;
+}
+
+.td-chart-tooltip {
+  background: #ffffff !important;
+  border: 1px solid #e3e8ef !important;
+  color: #172033 !important;
+  box-shadow: 0 6px 18px rgba(30,45,70,.10) !important;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT TRADING CALENDAR
+   ============================================================ */
+
+.td-calendar,
+.td-calendar-wrap {
+  background: #ffffff !important;
+  color: #172033 !important;
+}
+
+.td-calendar-header {
+  color: #172033 !important;
+}
+
+.td-calendar-weekday {
+  color: #8a96a8 !important;
+}
+
+.td-calendar-day {
+  background: #ffffff !important;
+  border-color: #edf0f4 !important;
+  color: #52627a !important;
+}
+
+.td-calendar-day.empty {
+  background: #fafbfc !important;
+}
+
+.td-calendar-day:hover {
+  background: #f7f8fc !important;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT KPI VALUE COLORS
+   ============================================================ */
+
+.td-kpi.green strong {
+  color: #299b78 !important;
+}
+
+.td-kpi.red strong {
+  color: #d45b68 !important;
+}
+
+.td-kpi.blue strong {
+  color: #4d78c8 !important;
+}
+
+.td-kpi.violet strong {
+  color: #6255c7 !important;
+}
+
+.td-kpi.green small {
+  color: #42b98d !important;
+}
+
+.td-kpi.red small {
+  color: #d45b68 !important;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT SELECT CONTROLS
+   ============================================================ */
+
+.td-select {
+  background: #ffffff !important;
+  border: 1px solid #e3e8ef !important;
+  color: #52627a !important;
+  box-shadow: none !important;
+}
+
+.td-select:hover {
+  background: #f8f9fc !important;
+  border-color: #d8deea !important;
+  color: #172033 !important;
+}
+
+.td-select:focus {
+  outline: none !important;
+  border-color: #b9aef5 !important;
+  box-shadow: 0 0 0 3px rgba(98,85,199,.08) !important;
+}
+
+/* ============================================================
+   DASHBOARD — LIGHT SYNC BUTTON
+   ============================================================ */
+
+.td-sync button {
+  background: #ffffff !important;
+  border: 1px solid #e3e8ef !important;
+  color: #52627a !important;
+  box-shadow: none !important;
+}
+
+.td-sync button:hover {
+  background: #f8f9fc !important;
+  border-color: #6255c7 !important;
+  color: #6255c7 !important;
+}
+
+.td-sync {
+  color: #8a96a8 !important;
+}
+
+.td-sync button {
+  border-radius: 6px !important;
+}
+
+/* ============================================================
+   DASHBOARD — THEME TOGGLE
+   ============================================================ */
+
+.td-theme-toggle {
+  width: 34px !important;
+  min-width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  border: 1px solid #e3e8ef !important;
+  border-radius: 8px !important;
+
+  background: #ffffff !important;
+  color: #6255c7 !important;
+
+  cursor: pointer !important;
+  font-size: 12px !important;
+
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease !important;
+}
+
+.td-theme-toggle:hover {
+  border-color: #c9c4e8 !important;
+  color: #6255c7 !important;
+
+  box-shadow:
+    0 3px 12px rgba(101, 88, 216, 0.12) !important;
+}
+
+/* ============================================================
+   DASHBOARD — THEME TOGGLE
+   ============================================================ */
+
+.td-theme-toggle {
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid #dfe5ed !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  color: #59677a !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+  transition:
+    border-color .16s ease,
+    box-shadow .16s ease,
+    color .16s ease,
+    transform .16s ease !important;
+}
+
+.td-theme-toggle:hover {
+  border-color: #b8c5d6 !important;
+  color: #6255c7 !important;
+  box-shadow: 0 0 0 3px rgba(98,85,199,.08) !important;
+  transform: translateY(-1px);
+}
+
+.td-theme-toggle:active {
+  transform: translateY(0);
+}
+
+/* DARK */
+
+.app-theme-dark .td-theme-toggle {
+  background: #171a1d !important;
+  border-color: #30363e !important;
+  color: #cbd2dc !important;
+}
+
+.app-theme-dark .td-theme-toggle:hover {
+  border-color: #555d68 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(155,124,255,.10) !important;
+}
+
+/* ============================================================
+   DASHBOARD — THEME ENGINE
+   Core shell + cards
+   ============================================================ */
+
+/* LIGHT THEME */
+
+.td-theme-light {
+  background: #f5f7fb !important;
+  color: #172033 !important;
+}
+
+.td-theme-light .td-main {
+  background: #f5f7fb !important;
+  color: #172033 !important;
+}
+
+.td-theme-light .td-header h1 {
+  color: #172033 !important;
+}
+
+.td-theme-light .td-header p {
+  color: #7a879b !important;
+}
+
+.td-theme-light .td-header-actions > button {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  color: #52627a !important;
+}
+
+.td-theme-light .td-header-actions > button:hover {
+  background: #ffffff !important;
+  border-color: #c8d2df !important;
+}
+
+.td-theme-light .td-export {
+  background: #ffffff !important;
+  color: #6255c7 !important;
+  border-color: #7665e8 !important;
+}
+
+.td-theme-light .td-sync {
+  color: #7a879b !important;
+}
+
+.td-theme-light .td-sync button {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  color: #6255c7 !important;
+}
+
+
+/* KPI CARDS */
+
+.td-theme-light .td-kpi {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  box-shadow: 0 2px 8px rgba(30,45,70,.035) !important;
+}
+
+.td-theme-light .td-kpi > span {
+  color: #7a879b !important;
+}
+
+.td-theme-light .td-kpi strong {
+  color: #172033 !important;
+}
+
+.td-theme-light .td-kpi small {
+  color: #8a96a8 !important;
+}
+
+.td-theme-light .td-kpi.green strong,
+.td-theme-light .td-kpi.green small {
+  color: #42b98d !important;
+}
+
+.td-theme-light .td-kpi.violet strong {
+  color: #6255c7 !important;
+}
+
+
+/* MAIN CARDS */
+
+.td-theme-light .td-card {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  box-shadow: 0 2px 10px rgba(30,45,70,.025) !important;
+}
+
+.td-theme-light .td-card-head {
+  border-bottom-color: #dfe5ed !important;
+}
+
+.td-theme-light .td-card-head h2 {
+  color: #172033 !important;
+}
+
+
+/* DARK THEME */
+
+.td-theme-dark {
+  background: #0b0d0f !important;
+  color: #e5e8eb !important;
+}
+
+.td-theme-dark .td-main {
+  background: #0b0d0f !important;
+  color: #e5e8eb !important;
+}
+
+.td-theme-dark .td-header h1 {
+  color: #f1f3f6 !important;
+}
+
+.td-theme-dark .td-header p {
+  color: #727a85 !important;
+}
+
+.td-theme-dark .td-header-actions > button {
+  background: #111417 !important;
+  border-color: #2b3037 !important;
+  color: #c4c9d0 !important;
+}
+
+.td-theme-dark .td-export {
+  background: #171322 !important;
+  color: #d9ceff !important;
+  border-color: #6249b4 !important;
+}
+
+.td-theme-dark .td-kpi {
+  background: #141719 !important;
+  border-color: #282c32 !important;
+  box-shadow: none !important;
+}
+
+.td-theme-dark .td-kpi > span {
+  color: #858b94 !important;
+}
+
+.td-theme-dark .td-kpi strong {
+  color: #e8ebef !important;
+}
+
+.td-theme-dark .td-kpi small {
+  color: #707780 !important;
+}
+
+.td-theme-dark .td-card {
+  background: #141619 !important;
+  border-color: #292d33 !important;
+}
+
+.td-theme-dark .td-card-head {
+  border-bottom-color: #282c31 !important;
+}
+
+.td-theme-dark .td-card-head h2 {
+  color: #e5e8eb !important;
+}
+
+/* ============================================================
+   DARK THEME — P&L ACCOUNT DROPDOWN
+   ============================================================ */
+
+.td-theme-dark .td-left .td-card button {
+  background: #171a1d !important;
+  color: #dce2e8 !important;
+  border-color: #30353c !important;
+}
+
+.td-theme-dark .td-left .td-card button:hover {
+  background: #1d2125 !important;
+  border-color: #4a515a !important;
+  color: #ffffff !important;
+}
+
+/* ============================================================
+   DARK THEME — SYNC BUTTON
+   ============================================================ */
+
+.td-theme-dark .td-sync button {
+  background: #171a1d !important;
+  border: 1px solid #30353c !important;
+  color: #cbd2da !important;
+  box-shadow: none !important;
+}
+
+.td-theme-dark .td-sync button:hover {
+  background: #1d2125 !important;
+  border-color: #4b535d !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(98,85,199,.08) !important;
+}
+
+/* ============================================================
+   DAILY P&L — DARK THEME CLEANUP
+   ============================================================ */
+
+.td-theme-dark .td-card {
+  background: #111416 !important;
+  border-color: #292e34 !important;
+}
+
+.td-theme-dark .td-card-header {
+  background: #111416 !important;
+  border-bottom-color: #292e34 !important;
+}
+
+.td-theme-dark .td-card-header h3 {
+  color: #e8ebef !important;
+}
+
+.td-theme-dark .td-select,
+.td-theme-dark .td-link {
+  background: #171a1e !important;
+  border-color: #30353c !important;
+  color: #c8ced6 !important;
+}
+
+.td-theme-dark .td-select:hover,
+.td-theme-dark .td-link:hover {
+  border-color: #6255c7 !important;
+  color: #ffffff !important;
+}
+
+.td-theme-dark .td-left .td-card:has(.td-chart),
+.td-theme-light .td-left .td-card:has(.td-chart) {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-dark .td-left .td-card:has(.td-chart):hover,
+.td-theme-light .td-left .td-card:has(.td-chart):hover {
+  border-color: #6255c7 !important;
+  box-shadow: 0 1px 8px rgba(98, 85, 199, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+.td-theme-dark .td-kpi-streak,
+.td-theme-light .td-kpi-streak {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-dark .td-kpi-streak:hover,
+.td-theme-light .td-kpi-streak:hover {
+  border-color: #6255c7 !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.10) !important;
+  transform: translateY(-1px);
+}
+
+.td-theme-dark .td-left .td-card:has(.td-recent-trades),
+.td-theme-light .td-left .td-card:has(.td-recent-trades) {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.td-theme-dark .td-left .td-card:has(.td-recent-trades):hover,
+.td-theme-light .td-left .td-card:has(.td-recent-trades):hover {
+  border-color: #6255c7 !important;
+  box-shadow: 0 0 0 1px rgba(98, 85, 199, 0.10) !important;
+  transform: translateY(-1px);
+}
+
+/* Recent Trades — dark theme */
+.td-theme-dark .td-table {
+  background: #141619 !important;
+}
+
+.td-theme-dark .td-tr {
+  background: #141619 !important;
+  color: #c8ccd2 !important;
+  border-bottom-color: #292d33 !important;
+}
+
+.td-theme-dark .td-tr.th {
+  background: #111417 !important;
+  color: #737c87 !important;
+}
+
+.td-theme-dark .td-tr:last-child {
+  border-bottom-color: transparent !important;
+}
+
+.td-theme-dark .td-tr .profit,
+.td-theme-dark .td-tr .long {
+  color: #53c69b !important;
+}
+
+.td-theme-dark .td-tr .loss,
+.td-theme-dark .td-tr .short {
+  color: #d96470 !important;
+}
+
+.td-theme-dark .td-empty-row {
+  background: #141619 !important;
+  color: #686f79 !important;
+}
+
+/* =========================================================
+   RECENT TRADES — POLISHED DARK INTERACTIONS
+   ========================================================= */
+
+.td-theme-dark .td-layout .td-left > .td-card:last-child {
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.td-theme-dark .td-layout .td-left > .td-card:last-child:hover {
+  border-color: #3a4048 !important;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, .22),
+    0 0 0 1px rgba(98, 85, 199, .08) !important;
+  transform: translateY(-1px);
+}
+
+/* Row interaction */
+.td-theme-dark .td-tr:not(.th) {
+  position: relative;
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease;
+}
+
+.td-theme-dark .td-tr:not(.th):hover {
+  background: #181b1f !important;
+  border-bottom-color: #353a42 !important;
+  box-shadow:
+    inset 3px 0 0 #6255c7,
+    inset 0 1px 0 rgba(98, 85, 199, .08),
+    inset 0 -1px 0 rgba(98, 85, 199, .08);
+}
+
+/* Date + symbol become slightly brighter */
+.td-theme-dark .td-tr:not(.th):hover > span:first-child,
+.td-theme-dark .td-tr:not(.th):hover > span:nth-child(2) {
+  color: #ffffff !important;
+}
+
+/* P&L gets a very subtle glow */
+.td-theme-dark .td-tr:not(.th):hover .profit {
+  text-shadow: 0 0 10px rgba(83, 198, 155, .25);
+}
+
+.td-theme-dark .td-tr:not(.th):hover .loss {
+  text-shadow: 0 0 10px rgba(217, 100, 112, .22);
+}
+
+/* View all */
+.td-theme-dark .td-layout .td-left > .td-card:last-child .td-link {
+  transition:
+    color .15s ease,
+    background .15s ease,
+    box-shadow .15s ease;
+  border-radius: 7px;
+}
+
+.td-theme-dark .td-layout .td-left > .td-card:last-child .td-link:hover {
+  color: #ffffff !important;
+  background: #1c2025 !important;
+  box-shadow: 0 0 0 3px rgba(98, 85, 199, .08);
+}
+
+/* =========================================================
+   ZELLA SCORE RING
+   ========================================================= */
+
+.td-recent-zella {
+  --zella-progress: 0%;
+  --zella-color: #53c99f;
+
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  padding: 0 !important;
+  border-radius: 50%;
+
+  background:
+    conic-gradient(
+      from -90deg,
+      var(--zella-color) 0%,
+      var(--zella-color) var(--zella-progress),
+      #30353b var(--zella-progress),
+      #30353b 100%
+    );
+
+  transition:
+    transform .15s ease,
+    filter .15s ease;
+}
+
+/* Inner dark circle */
+.td-recent-zella::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: #141619;
+}
+
+/* Score number */
+.td-recent-zella i {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  color: #e7ebef;
+  font-size: 9px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1;
+}
+
+/* Ring hover */
+.td-tr:not(.th):hover .td-recent-zella {
+  transform: scale(1.08);
+  filter:
+    drop-shadow(0 0 5px rgba(83, 201, 159, .28));
+}
+
+/* Recent Trades — purple boundary hover */
+.td-theme-dark .td-layout .td-left > .td-card:last-child {
+  border: 1px solid #292d33 !important;
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.td-theme-dark .td-layout .td-left > .td-card:last-child:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .18),
+    0 0 18px rgba(98, 85, 199, .10) !important;
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   ZELLA SCORE — CARD HOVER
+   ========================================================= */
+
+.td-theme-dark .td-layout .td-left > .td-card:nth-child(2) {
+  border: 1px solid #292d33 !important;
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.td-theme-dark .td-layout .td-left > .td-card:nth-child(2):hover {
+  border-color: #6255c7 !important;
+
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .18),
+    0 0 18px rgba(98, 85, 199, .10) !important;
+
+  transform: translateY(-1px);
+}
+
+/* Zella period selector */
+.td-theme-dark .td-layout .td-left > .td-card:nth-child(2) .td-zella-period {
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    background .15s ease;
+}
+
+.td-theme-dark .td-layout .td-left > .td-card:nth-child(2) .td-zella-period:hover {
+  border-color: #6255c7 !important;
+  background: #1a1d22 !important;
+  box-shadow: 0 0 0 3px rgba(98, 85, 199, .08) !important;
+}
+
+/* =========================================================
+   LIGHT THEME — ZELLA SCORE + RECENT TRADES HOVER
+   ========================================================= */
+
+/* Zella Score card */
+.td-theme-light .td-left .td-card {
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.td-theme-light .td-left .td-card:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .16),
+    0 0 18px rgba(98, 85, 199, .09) !important;
+  transform: translateY(-1px);
+}
+
+/* Zella period selector */
+.td-theme-light .td-zella-period {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  color: #4f5d72 !important;
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    background .15s ease;
+}
+
+.td-theme-light .td-zella-period:hover {
+  background: #faf9ff !important;
+  border-color: #6255c7 !important;
+  box-shadow: 0 0 0 3px rgba(98, 85, 199, .08) !important;
+}
+
+/* Recent Trades rows */
+.td-theme-light .td-tr:not(.th) {
+  transition:
+    background .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease;
+}
+
+.td-theme-light .td-tr:not(.th):hover {
+  background: #faf9ff !important;
+  border-bottom-color: #d9d4f5 !important;
+  box-shadow:
+    inset 3px 0 0 #6255c7,
+    inset 0 1px 0 rgba(98, 85, 199, .07),
+    inset 0 -1px 0 rgba(98, 85, 199, .07);
+}
+
+/* Date + Symbol brighten */
+.td-theme-light .td-tr:not(.th):hover > span:first-child,
+.td-theme-light .td-tr:not(.th):hover > span:nth-child(2) {
+  color: #273348 !important;
+}
+
+/* P&L glow */
+.td-theme-light .td-tr:not(.th):hover .profit {
+  text-shadow: 0 0 9px rgba(66, 173, 138, .25);
+}
+
+.td-theme-light .td-tr:not(.th):hover .loss {
+  text-shadow: 0 0 9px rgba(217, 100, 112, .20);
+}
+
+/* =========================================================
+   RECENT TRADES — LIGHT THEME FINAL
+   ========================================================= */
+
+.td-theme-light .td-layout .td-left .td-card:last-child {
+  background: #ffffff !important;
+  border: 1px solid #dfe5ed !important;
+  box-shadow: 0 2px 8px rgba(30, 45, 70, .035) !important;
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.td-theme-light .td-layout .td-left .td-card:last-child:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .14),
+    0 6px 20px rgba(98, 85, 199, .08) !important;
+  transform: translateY(-1px);
+}
+
+/* Header */
+.td-theme-light .td-layout .td-left .td-card:last-child .td-card-head {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e3e8ef !important;
+}
+
+.td-theme-light .td-layout .td-left .td-card:last-child .td-card-head h2 {
+  color: #172033 !important;
+}
+
+/* Table */
+.td-theme-light .td-layout .td-left .td-card:last-child .td-table {
+  background: #ffffff !important;
+}
+
+/* Column headings */
+.td-theme-light .td-layout .td-left .td-card:last-child .td-tr.th {
+  background: #f8fafc !important;
+  color: #71809a !important;
+  border-bottom: 1px solid #e3e8ef !important;
+}
+
+/* Rows */
+.td-theme-light .td-layout .td-left .td-card:last-child .td-tr:not(.th) {
+  background: #ffffff !important;
+  color: #536177 !important;
+  border-bottom: 1px solid #e7ebf1 !important;
+}
+
+.td-theme-light .td-layout .td-left .td-card:last-child .td-tr:not(.th):hover {
+  background: #faf9ff !important;
+  border-bottom-color: #ded9f6 !important;
+  box-shadow:
+    inset 3px 0 0 #6255c7,
+    inset 0 1px 0 rgba(98, 85, 199, .06),
+    inset 0 -1px 0 rgba(98, 85, 199, .06);
+}
+
+/* Date + Symbol */
+.td-theme-light .td-layout .td-left .td-card:last-child .td-tr:not(.th) > span:first-child,
+.td-theme-light .td-layout .td-left .td-card:last-child .td-tr:not(.th) > span:nth-child(2) {
+  color: #536177 !important;
+}
+
+.td-theme-light .td-layout .td-left .td-card:last-child .td-tr:not(.th):hover > span:first-child,
+.td-theme-light .td-layout .td-left .td-card:last-child .td-tr:not(.th):hover > span:nth-child(2) {
+  color: #172033 !important;
+}
+
+/* P&L */
+.td-theme-light .td-layout .td-left .td-card:last-child .profit {
+  color: #42ad8a !important;
+}
+
+.td-theme-light .td-layout .td-left .td-card:last-child .loss {
+  color: #d96470 !important;
+}
+
+/* View all */
+.td-theme-light .td-layout .td-left .td-card:last-child .td-link {
+  color: #806ee8 !important;
+}
+
+.td-theme-light .td-layout .td-left .td-card:last-child .td-link:hover {
+  color: #6255c7 !important;
+  background: #faf9ff !important;
+  box-shadow: 0 0 0 3px rgba(98, 85, 199, .07);
+}
+
+/* =========================================================
+   ZELLA SCORE — LIGHT THEME FINAL
+   ========================================================= */
+
+.td-theme-light .zella-score-card {
+  background: #ffffff !important;
+  border: 1px solid #dfe5ed !important;
+  box-shadow: 0 2px 8px rgba(30, 45, 70, .035) !important;
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.td-theme-light .zella-score-card:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .14),
+    0 6px 20px rgba(98, 85, 199, .08) !important;
+  transform: translateY(-1px);
+}
+
+/* Header */
+.td-theme-light .zella-score-card .td-card-head {
+  background: #ffffff !important;
+  border-bottom-color: #e3e8ef !important;
+}
+
+.td-theme-light .zella-score-card .td-card-head h2 {
+  color: #172033 !important;
+}
+
+/* Radar */
+.td-theme-light .zella-score-card .zella-radar-ring {
+  stroke: rgba(98, 85, 199, .13) !important;
+}
+
+.td-theme-light .zella-score-card .zella-radar-axis {
+  stroke: rgba(98, 85, 199, .11) !important;
+}
+
+.td-theme-light .zella-score-card .zella-radar-outer-point {
+  fill: #8793a2 !important;
+  stroke: #aeb7c3 !important;
+}
+
+.td-theme-light .zella-score-card .zella-radar-point {
+  fill: #ffffff !important;
+  stroke: #806ee8 !important;
+}
+
+.td-theme-light .zella-score-card .zella-radar text {
+  fill: #71809a !important;
+}
+
+/* Divider */
+.td-theme-light .zella-score-card .zella-score-divider {
+  background: linear-gradient(
+    90deg,
+    rgba(98, 85, 199, .55),
+    rgba(98, 85, 199, .20),
+    rgba(98, 85, 199, .55)
+  ) !important;
+}
+
+/* Score */
+.td-theme-light .zella-score-card .zella-score-value span {
+  color: #71809a !important;
+}
+
+.td-theme-light .zella-score-card .zella-score-value strong {
+  color: #6255c7 !important;
+}
+
+/* Period selector */
+.td-theme-light .zella-score-card .zella-period-trigger {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  color: #536177 !important;
+}
+
+.td-theme-light .zella-score-card .zella-period-trigger:hover {
+  border-color: #6255c7 !important;
+  background: #faf9ff !important;
+  box-shadow: 0 0 0 3px rgba(98, 85, 199, .07) !important;
+}
+
+/* Period dropdown */
+.td-theme-light .zella-score-card .zella-period-menu {
+  background: #ffffff !important;
+  border-color: #dfe5ed !important;
+  box-shadow: 0 12px 30px rgba(30, 45, 70, .12) !important;
+}
+
+.td-theme-light .zella-score-card .zella-period-option {
+  color: #536177 !important;
+}
+
+.td-theme-light .zella-score-card .zella-period-option:hover {
+  background: #faf9ff !important;
+  color: #6255c7 !important;
+}
+
+.td-theme-light .zella-score-card .zella-period-option.is-selected {
+  background: #f3f0ff !important;
+  color: #6255c7 !important;
+}
+
+.td-theme-light .td-recent-zella::before {
+  background: #ffffff !important;
+}
+
+.td-theme-light .td-recent-zella i {
+  color: #334155 !important;
+}
+
+/* ============================================================
+   Net Daily P&L — Reference Chart
+   ============================================================ */
+
+.td-daily-pnl-chart {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 205px;
+  box-sizing: border-box;
+  padding: 12px 12px 8px 44px;
+}
+
+.td-daily-pnl-y-axis {
+  position: absolute;
+  left: 8px;
+  top: 12px;
+  bottom: 8px;
+  width: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #8a929c;
+  font-size: 10px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.td-daily-pnl-plot {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  min-width: 0;
+}
+
+.td-daily-pnl-grid {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.td-daily-pnl-grid span {
+  display: block;
+  width: 100%;
+  height: 1px;
+  border-top: 1px dashed #e4e7eb;
+}
+
+.td-daily-pnl-grid span.zero {
+  border-top: 1px solid #aeb5bd;
+}
+
+.td-daily-pnl-plot .td-bars {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+  border: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.td-daily-pnl-plot .td-bars span {
+  position: relative;
+  width: 6px;
+  min-width: 5px;
+  max-width: 6px;
+  margin: 0;
+  border-radius: 1px;
+  flex: 0 1 6px;
+}
+.td-daily-pnl-plot .td-bars span.positive {
+  background: #55bfa0 !important;
+  align-self: center;
+  transform: translateY(-50%);
+}
+
+.td-daily-pnl-plot .td-bars span.negative {
+  background: #e26c76 !important;
+  align-self: center;
+  transform: translateY(50%);
+}
+
+.td-daily-pnl-plot .td-bars span {
+  box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .td-daily-pnl-chart {
+    height: 190px;
+    padding-left: 40px;
+  }
+
+  .td-daily-pnl-y-axis {
+    width: 34px;
+    font-size: 9px;
+  }
+
+  .td-daily-pnl-plot .td-bars {
+    gap: 3px;
+  }
+
+  .td-daily-pnl-plot .td-bars span {
+    width: 6px;
+    flex-basis: 6px;
+  }
+}
+
+.td-daily-pnl-plot .td-bars span.positive {
+  background: #55bfa0 !important;
+}
+
+.td-daily-pnl-plot .td-bars span.negative {
+  background: #e26c76 !important;
+}
+
+.td-daily-pnl-chart {
+  position: relative !important;
+}
+
+.td-daily-pnl-chart > .td-axis {
+  position: absolute !important;
+  left: 44px !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 14px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important;
+  color: #696f78 !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+}
+
+.td-daily-pnl-chart > .td-daily-pnl-plot {
+  height: calc(100% - 18px) !important;
+}
+
+/* Net Daily P&L — bar hover */
+
+.td-daily-pnl-plot .td-bars span {
+  transition:
+    transform .15s ease,
+    filter .15s ease,
+    opacity .15s ease;
+  cursor: pointer;
+}
+
+.td-daily-pnl-plot .td-bars span:hover {
+  filter: brightness(1.08);
+  opacity: 1;
+}
+
+.td-daily-pnl-plot .td-bars span.positive:hover {
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .45),
+    0 0 10px rgba(98, 85, 199, .18);
+}
+
+.td-daily-pnl-plot .td-bars span.negative:hover {
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .45),
+    0 0 10px rgba(98, 85, 199, .18);
+}
+
+/* Net Daily P&L — custom bar tooltip */
+
+.td-daily-pnl-plot .td-bars span {
+  position: relative;
+}
+
+.td-daily-pnl-plot .td-bars span::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+bottom: calc(100% + 8px);
+transform: translateX(-50%) translateY(4px);
+max-width: 120px;
+  padding: 6px 9px;
+  border: 1px solid #6255c7;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #172033;
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .10),
+    0 6px 16px rgba(30, 45, 70, .12);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 20;
+  transition:
+    opacity .14s ease,
+    transform .14s ease;
+}
+
+/* Keep tooltip inside the chart at the left edge */
+.td-daily-pnl-plot .td-bars span:first-child::after {
+  left: 0;
+  transform: translateX(0) translateY(4px);
+}
+
+.td-daily-pnl-plot .td-bars span:first-child:hover::after {
+  transform: translateX(0) translateY(0);
+}
+
+/* Keep tooltip inside the chart at the right edge */
+.td-daily-pnl-plot .td-bars span:last-child::after {
+  left: auto;
+  right: 0;
+  transform: translateX(0) translateY(4px);
+}
+
+.td-daily-pnl-plot .td-bars span:last-child:hover::after {
+  transform: translateX(0) translateY(0);
+}
+
+/* Keep positive-bar tooltips inside the upper chart boundary */
+
+.td-daily-pnl-plot .td-bars span.positive::after {
+  bottom: auto;
+  top: calc(100% + 8px);
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.td-daily-pnl-plot .td-bars span.positive:hover::after {
+  transform: translateX(-50%) translateY(0);
+}
+
+.td-daily-pnl-plot .td-bars span:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Net Daily P&L — outer card hover */
+
+.td-theme-light .td-bottom-grid > .td-card:first-child,
+.td-theme-dark .td-bottom-grid > .td-card:first-child {
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.td-theme-light .td-bottom-grid > .td-card:first-child:hover,
+.td-theme-dark .td-bottom-grid > .td-card:first-child:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .18),
+    0 0 18px rgba(98, 85, 199, .10) !important;
+  transform: translateY(-1px);
+}
+
+/* Net Daily P&L — dark theme grid lines */
+
+.td-theme-dark .td-daily-pnl-grid span {
+  border-color: #4a4f56 !important;
+}
+
+/* External Links — hover effects */
+
+.td-links a {
+  position: relative;
+  transition:
+    background .16s ease,
+    color .16s ease,
+    border-color .16s ease,
+    transform .16s ease,
+    box-shadow .16s ease;
+}
+
+.td-links a:hover {
+  background: rgba(98, 85, 199, .07);
+  color: #ffffff;
+  border-bottom-color: rgba(98, 85, 199, .35);
+  transform: translateX(2px);
+  box-shadow:
+    inset 2px 0 0 #6255c7;
+}
+
+.td-links a:hover small {
+  color: #a9a0dc;
+}
+
+.td-links a:hover::after {
+  color: #6255c7;
+}
+
+/* External Links — outer card hover */
+
+.td-theme-light .td-bottom-grid > .td-card:last-child,
+.td-theme-dark .td-bottom-grid > .td-card:last-child {
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.td-theme-light .td-bottom-grid > .td-card:last-child:hover,
+.td-theme-dark .td-bottom-grid > .td-card:last-child:hover {
+  border-color: #6255c7 !important;
+  box-shadow:
+    0 0 0 1px rgba(98, 85, 199, .18),
+    0 0 18px rgba(98, 85, 199, .10) !important;
+  transform: translateY(-1px);
+}
+
+/* External Links — light theme readability */
+
+.td-theme-light .td-links a {
+  color: #475569 !important;
+}
+
+.td-theme-light .td-links small {
+  color: #64748b !important;
+}
+
+.td-theme-light .td-links a:hover {
+  color: #172033 !important;
+}
+
+.td-theme-light .td-links a:hover small {
+  color: #6255c7 !important;
+}
+
+.td-sidebar-theme-toggle {
+  width: 100%;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: #858d97;
+  font: inherit;
+  font-size: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    color .16s ease,
+    background .16s ease,
+    border-color .16s ease,
+    transform .16s ease;
+}
+
+.td-sidebar-theme-toggle:hover {
+  color: #ffffff;
+  background: rgba(98, 85, 199, .08);
+  border-color: rgba(98, 85, 199, .35);
+}
+
+.td-sidebar-theme-toggle span:first-child {
+  width: 18px;
+  display: inline-flex;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* PHASE 42 — ZELLA-STYLE DASHBOARD DROPDOWNS */
+.td-dashboard-dropdown {
+  width: 94px !important;
+  min-width: 94px !important;
+}
+.td-dashboard-dropdown.td-account-chart-dropdown {
+  width: 118px !important;
+  min-width: 118px !important;
+}
+.td-dashboard-dropdown .zella-period-trigger {
+  text-align: left;
+  padding-left: 9px;
+  padding-right: 21px;
+}
+.td-dashboard-dropdown .zella-period-option {
+  justify-content: flex-start;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-theme-light .td-dashboard-dropdown .zella-period-trigger {
+  background: #fff !important;
+  border-color: #dfe5ed !important;
+  color: #536177 !important;
+}
+.app-theme-light .td-dashboard-dropdown .zella-period-trigger:hover,
+.app-theme-light .td-dashboard-dropdown.is-open .zella-period-trigger {
+  border-color: #6255c7 !important;
+  background: #faf9ff !important;
+  box-shadow: 0 0 0 3px rgba(98,85,199,.07) !important;
+}
+.app-theme-light .td-dashboard-dropdown .zella-period-menu {
+  background: #fff !important;
+  border-color: #dfe5ed !important;
+  box-shadow: 0 12px 30px rgba(30,45,70,.12) !important;
+}
+.app-theme-light .td-dashboard-dropdown .zella-period-option {
+  color: #536177 !important;
+}
+.app-theme-light .td-dashboard-dropdown .zella-period-option:hover {
+  background: #faf9ff !important;
+  color: #6255c7 !important;
+}
+.app-theme-light .td-dashboard-dropdown .zella-period-option.is-selected {
+  background: #f3f0ff !important;
+  color: #6255c7 !important;
+}
+.app-theme-dark .td-dashboard-dropdown .zella-period-trigger {
+  background: #111417 !important;
+  border-color: rgba(255,255,255,.08) !important;
+  color: #9ea5b1 !important;
+}
+.app-theme-dark .td-dashboard-dropdown .zella-period-menu {
+  background: #181a1d !important;
+  border-color: rgba(255,255,255,.09) !important;
+}
+
+/* PHASE 42 — SIDEBAR REFINED MAIN-MENU PRESENTATION */
+.td-sidebar {
+  --sidebar-width: 280px !important;
+  --sidebar-collapsed-width: 84px !important;
+}
+.td-sidebar .td-brand,
+.td-sidebar .td-add,
+.td-sidebar .td-workspace-copy strong,
+.td-sidebar .td-section-dropdown-copy strong,
+.td-sidebar .td-account-settings-copy strong,
+.td-sidebar .td-profile-copy strong {
+  font-weight: 600 !important;
+}
+.td-sidebar .td-brand {
+  font-size: 14px !important;
+  letter-spacing: -.02em !important;
+}
+.td-sidebar .td-nav-label {
+  font-size: 7.5px !important;
+  font-weight: 650 !important;
+  color: var(--tl-subtle) !important;
+}
+.td-sidebar .td-workspace-trigger,
+.td-sidebar .td-section-dropdown-trigger,
+.td-sidebar .td-account-settings-trigger,
+.td-sidebar .td-profile-trigger {
+  position: relative !important;
+  overflow: hidden !important;
+  font-weight: 500 !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  transition: background .18s ease, border-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease !important;
+}
+.td-sidebar .td-workspace-trigger::before,
+.td-sidebar .td-section-dropdown-trigger::before,
+.td-sidebar .td-account-settings-trigger::before,
+.td-sidebar .td-profile-trigger::before {
+  content: "";
+  position: absolute;
+  inset: -35%;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(118,87,255,.15), transparent 58%);
+  transition: opacity .18s ease;
+}
+.td-sidebar .td-workspace-trigger:hover,
+.td-sidebar .td-section-dropdown-trigger:hover,
+.td-sidebar .td-account-settings-trigger:hover,
+.td-sidebar .td-profile-trigger:hover {
+  background: var(--tl-surface-3) !important;
+  border-color: var(--tl-border) !important;
+  transform: translateX(1px) !important;
+  box-shadow: 0 6px 20px rgba(31,41,55,.045) !important;
+}
+.td-sidebar .td-workspace-trigger:hover::before,
+.td-sidebar .td-section-dropdown-trigger:hover::before,
+.td-sidebar .td-account-settings-trigger:hover::before,
+.td-sidebar .td-profile-trigger:hover::before {
+  opacity: 1;
+}
+.td-sidebar .td-workspace-trigger.active,
+.td-sidebar .td-section-dropdown-trigger.active,
+.td-sidebar .td-account-settings-trigger.active,
+.td-sidebar .td-profile-trigger.active {
+  background: var(--tl-accent-soft) !important;
+  border-color: rgba(98,85,199,.16) !important;
+  box-shadow: inset 2px 0 0 var(--tl-accent), 0 5px 18px rgba(98,85,199,.045) !important;
+}
+.td-sidebar .td-workspace-copy small,
+.td-sidebar .td-section-dropdown-copy small,
+.td-sidebar .td-account-settings-copy small,
+.td-sidebar .td-profile-copy small {
+  font-weight: 400 !important;
+  opacity: .88;
+}
+.td-sidebar .td-nav-group {
+  margin-bottom: 8px !important;
+  padding-bottom: 8px !important;
+}
+.td-sidebar .td-add {
+  font-weight: 600 !important;
+  box-shadow: 0 8px 22px rgba(98,85,199,.14) !important;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease !important;
+}
+.td-sidebar .td-add:hover {
+  transform: translateY(-1px) !important;
+  filter: brightness(1.03);
+  box-shadow: 0 11px 26px rgba(98,85,199,.20) !important;
+}
+.td-sidebar .td-section-dropdown-menu,
+.td-sidebar .td-workspace-menu,
+.td-sidebar .td-account-settings-menu,
+.td-sidebar .td-profile-menu {
+  display: none !important;
+}
+.td-sidebar .td-workspace-chevron,
+.td-sidebar .td-section-dropdown-chevron,
+.td-sidebar .td-account-settings-chevron,
+.td-sidebar .td-profile-chevron {
+  opacity: .72;
+}
+.app-theme-light .td-sidebar .td-workspace-trigger:hover,
+.app-theme-light .td-sidebar .td-section-dropdown-trigger:hover,
+.app-theme-light .td-sidebar .td-account-settings-trigger:hover,
+.app-theme-light .td-sidebar .td-profile-trigger:hover {
+  background: #f6f7ff !important;
+  border-color: rgba(98,85,199,.10) !important;
+  box-shadow: 0 8px 24px rgba(98,85,199,.055) !important;
+}
+.app-theme-light .td-sidebar .td-workspace-trigger::before,
+.app-theme-light .td-sidebar .td-section-dropdown-trigger::before,
+.app-theme-light .td-sidebar .td-account-settings-trigger::before,
+.app-theme-light .td-sidebar .td-profile-trigger::before {
+  background: radial-gradient(circle at 50% 50%, rgba(98,85,199,.10), transparent 62%);
+}
+.app-theme-light .td-sidebar .td-workspace-trigger.active,
+.app-theme-light .td-sidebar .td-section-dropdown-trigger.active,
+.app-theme-light .td-sidebar .td-account-settings-trigger.active,
+.app-theme-light .td-sidebar .td-profile-trigger.active {
+  background: #f0efff !important;
+}
+.app-theme-dark .td-sidebar .td-workspace-trigger:hover,
+.app-theme-dark .td-sidebar .td-section-dropdown-trigger:hover,
+.app-theme-dark .td-sidebar .td-account-settings-trigger:hover,
+.app-theme-dark .td-sidebar .td-profile-trigger:hover {
+  background: #181a21 !important;
+}
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .td-sidebar { --sidebar-width: 230px !important; }
+}
+
+/* Account milestone notifications */
+.td-dashboard-notifications {
+  margin: 14px 0 16px;
+  padding: 14px 16px;
+  border: 1px solid rgba(77,138,255,.16);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(255,255,255,.92), rgba(247,249,255,.86));
+  box-shadow: 0 10px 28px rgba(30,40,70,.06);
+}
+.td-dashboard-notifications-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.td-dashboard-notifications-eyebrow { display:block; font-size:8px; font-weight:800; letter-spacing:1px; color:#6576d8; }
+.td-dashboard-notifications h2 { margin:3px 0 0; font-size:15px; color:#263247; }
+.td-dashboard-notifications p { margin:3px 0 0; font-size:10px; color:#7c8798; }
+.td-dashboard-notification-count { min-width:22px; height:22px; display:grid; place-items:center; border-radius:50%; background:rgba(77,138,255,.10); border:1px solid rgba(77,138,255,.18); color:#5269c8; font-size:9px; font-weight:800; }
+.td-dashboard-notification-list { display:grid; gap:7px; margin-top:11px; }
+.td-dashboard-notification { display:flex; align-items:center; gap:9px; padding:9px 10px; border:1px solid rgba(20,30,50,.08); border-radius:10px; background:rgba(255,255,255,.72); }
+.td-dashboard-notification-icon { width:25px; height:25px; flex:0 0 25px; display:grid; place-items:center; border-radius:7px; background:rgba(53,223,162,.10); border:1px solid rgba(53,223,162,.20); color:#16966d; font-weight:800; }
+.td-dashboard-notification-copy { min-width:0; flex:1; }
+.td-dashboard-notification-copy strong { display:block; font-size:10px; color:#263247; }
+.td-dashboard-notification-copy span { display:block; margin-top:2px; font-size:9px; color:#657184; }
+.td-dashboard-notification-copy small { display:block; margin-top:2px; font-size:7px; color:#98a1af; }
+.td-dashboard-notification > button { width:22px; height:22px; border:0; border-radius:6px; background:transparent; color:#98a1af; cursor:pointer; font-size:15px; }
+.td-dashboard-notification > button:hover { background:rgba(77,138,255,.07); color:#5269c8; }
+.td-theme-dark .td-dashboard-notifications { border-color:rgba(145,120,255,.18); background:linear-gradient(145deg,#151329,#11101e); box-shadow:0 12px 38px rgba(0,0,0,.12); }
+.td-theme-dark .td-dashboard-notifications-eyebrow { color:#9075ff; }
+.td-theme-dark .td-dashboard-notifications h2 { color:#f0ecfa; }
+.td-theme-dark .td-dashboard-notifications p,.td-theme-dark .td-dashboard-notification-copy span { color:#817b8d; }
+.td-theme-dark .td-dashboard-notification { border-color:#302b46; background:#14131f; }
+.td-theme-dark .td-dashboard-notification-copy strong { color:#ddd8e8; }
+.td-theme-dark .td-dashboard-notification-copy small { color:#716b7e; }
+@media(max-width:680px){.td-dashboard-notifications{margin:10px 0 12px;padding:12px}.td-dashboard-notification{align-items:flex-start}}
+
+/* ============================================================
+   DASHBOARD FILTER MENU
+   ============================================================ */
+.td-filter-menu{position:relative;z-index:80}
+.td-filter-trigger{display:inline-flex!important;align-items:center;gap:5px!important}
+.td-filter-trigger.is-active{border-color:#7665e8!important;color:#6255c7!important;background:#f7f5ff!important}
+.td-filter-count{display:inline-grid;place-items:center;min-width:15px;height:15px;padding:0 4px;border-radius:999px;background:#6255c7;color:#fff;font-size:8px;line-height:1;font-weight:700}
+.td-filter-dropdown{position:absolute;top:calc(100% + 7px);right:0;width:310px;padding:10px;background:#fff;border:1px solid #dfe5ed;border-radius:10px;box-shadow:0 18px 42px rgba(30,45,70,.14),0 3px 10px rgba(30,45,70,.06);z-index:100}
+.td-filter-dropdown-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:4px 4px 10px;border-bottom:1px solid #edf0f4}
+.td-filter-dropdown-head strong{display:block;color:#172033;font-size:11px;font-weight:700}
+.td-filter-dropdown-head small{display:block;margin-top:3px;color:#8792a4;font-size:8px;line-height:1.35}
+.td-filter-reset{border:0!important;background:transparent!important;color:#6255c7!important;padding:3px 4px!important;font-size:8px!important;box-shadow:none!important}
+.td-filter-section-label{padding:10px 4px 6px;color:#8a96a8;font-size:7px;font-weight:800;letter-spacing:.12em}
+.td-filter-option{width:100%;display:grid!important;grid-template-columns:20px 1fr auto;align-items:center;gap:7px!important;min-height:45px;padding:7px 6px!important;border:1px solid transparent!important;border-radius:7px!important;background:transparent!important;text-align:left;box-shadow:none!important;transform:none!important}
+.td-filter-option:hover{background:#f7f5ff!important;border-color:#ebe7ff!important}
+.td-filter-option.selected{background:#f5f2ff!important;border-color:#e5defd!important}
+.td-filter-option.disabled{opacity:.56;cursor:default}
+.td-filter-option.disabled:hover{background:transparent!important;border-color:transparent!important}
+.td-filter-option-radio{width:17px;height:17px;display:grid;place-items:center;border:1px solid #cfd6e1;border-radius:50%;color:#fff;background:#fff;font-size:9px;font-weight:800}
+.td-filter-option.selected .td-filter-option-radio{border-color:#6255c7;background:#6255c7}
+.td-filter-option-copy{min-width:0}
+.td-filter-option-copy strong{display:block;color:#273246;font-size:9px;font-weight:650}
+.td-filter-option-copy small{display:block;margin-top:2px;color:#8a96a8;font-size:7px;line-height:1.3;white-space:normal}
+.td-filter-option em{font-style:normal;min-width:19px;text-align:center;padding:3px 5px;border-radius:5px;background:#f0f2f6;color:#68758a;font-size:7px;font-weight:700}
+.td-filter-summary{display:flex;justify-content:space-between;gap:8px;margin:8px 4px 2px;padding-top:8px;border-top:1px solid #edf0f4;color:#8994a5;font-size:8px}
+.td-filter-summary strong{color:#6255c7;font-weight:700;text-align:right}
+.td-filter-context-note{margin:6px 4px 2px;padding:7px 8px;border:1px solid #ebeef3;background:#f8f9fb;border-radius:6px;color:#7d899b;font-size:7px;line-height:1.4}
+.td-filter-context-note strong{color:#59677c}
+.td-theme-dark .td-filter-dropdown{background:#11161d;border-color:#2a313b;box-shadow:0 18px 42px rgba(0,0,0,.38)}
+.td-theme-dark .td-filter-dropdown-head{border-bottom-color:#252c35}
+.td-theme-dark .td-filter-dropdown-head strong{color:#edf1f6}
+.td-theme-dark .td-filter-dropdown-head small,.td-theme-dark .td-filter-option-copy small,.td-theme-dark .td-filter-summary,.td-theme-dark .td-filter-context-note{color:#7f8996}
+.td-theme-dark .td-filter-option:hover{background:#181f28!important;border-color:#2a313b!important}
+.td-theme-dark .td-filter-option.selected{background:rgba(124,92,255,.11)!important;border-color:rgba(124,92,255,.18)!important}
+.td-theme-dark .td-filter-option-copy strong{color:#e8ecf2}
+.td-theme-dark .td-filter-option-radio{background:#11161d;border-color:#4a5360}
+.td-theme-dark .td-filter-option.selected .td-filter-option-radio{background:#7c5cff;border-color:#7c5cff}
+.td-theme-dark .td-filter-option em{background:#1b222b;color:#a5afbc}
+.td-theme-dark .td-filter-context-note{background:#151b22;border-color:#2a313b}
+.td-theme-dark .td-filter-context-note strong{color:#c5ceda}
+.td-theme-dark .td-filter-summary{border-top-color:#252c35}
+.td-theme-dark .td-filter-summary strong{color:#bcaeff}
+@media(max-width:650px){.td-filter-dropdown{right:auto;left:0;width:min(310px,calc(100vw - 28px))}}
+
+/* ============================================================
+   DASHBOARD HEADER — EXACT JOURNAL LEDGER CONTROL LANGUAGE
+   Keep dashboard header controls visually identical to Trade Log.
+   ============================================================ */
+.td-header-actions{
+  gap:8px !important;
+}
+.td-header-actions > .td-account-menu > .td-account-select,
+.td-header-actions > .td-date-menu > button,
+.td-header-actions > .td-filter-menu > .td-filter-trigger,
+.td-header-actions > .td-theme-icon-button,
+.td-header-actions > .td-export{
+  height:34px !important;
+  min-height:34px !important;
+  padding:0 11px !important;
+  border:1px solid #e1e5ec !important;
+  border-radius:8px !important;
+  background:#fff !important;
+  color:#657188 !important;
+  font-size:10px !important;
+  font-weight:500 !important;
+  line-height:1 !important;
+  box-shadow:0 1px 2px rgba(30,43,65,.02) !important;
+  transition:background .14s ease,border-color .14s ease,color .14s ease,box-shadow .14s ease,transform .14s ease !important;
+}
+.td-header-actions > .td-account-menu > .td-account-select:hover,
+.td-header-actions > .td-date-menu > button:hover,
+.td-header-actions > .td-filter-menu > .td-filter-trigger:hover,
+.td-header-actions > .td-theme-icon-button:hover,
+.td-header-actions > .td-export:hover{
+  background:#fbfbff !important;
+  border-color:#cfc9f3 !important;
+  color:#6255c7 !important;
+  box-shadow:0 3px 10px rgba(101,88,216,.08) !important;
+  transform:none !important;
+}
+.td-header-actions > .td-account-menu > .td-account-select{
+  min-width:172px !important;
+  justify-content:flex-start !important;
+  gap:8px !important;
+  padding:4px 10px !important;
+  text-align:left !important;
+}
+.td-header-actions .td-account-select-icon{
+  color:#6758df !important;
+  font-size:12px !important;
+  line-height:1 !important;
+}
+.td-header-actions .td-account-select-copy{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  gap:1px !important;
+  min-width:0 !important;
+  flex:1 !important;
+}
+.td-header-actions .td-account-select-copy small{
+  font-size:7px !important;
+  line-height:1 !important;
+  text-transform:uppercase !important;
+  letter-spacing:.08em !important;
+  color:#7c8798 !important;
+  font-weight:600 !important;
+}
+.td-header-actions .td-account-select-copy strong{
+  max-width:112px !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+  font-size:10px !important;
+  line-height:1.2 !important;
+  color:#263247 !important;
+  font-weight:650 !important;
+}
+.td-header-actions .td-account-select-chevron{
+  font-size:9px !important;
+  color:#78859a !important;
+}
+.td-header-actions > .td-date-menu > button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:4px !important;
+  min-width:104px !important;
+}
+.td-header-actions > .td-filter-menu > .td-filter-trigger{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:5px !important;
+  min-width:96px !important;
+}
+.td-header-actions > .td-filter-menu > .td-filter-trigger.is-active{
+  background:#f7f5ff !important;
+  border-color:#cfc9f3 !important;
+  color:#6255c7 !important;
+}
+.td-header-actions > .td-theme-icon-button{
+  width:34px !important;
+  min-width:34px !important;
+  padding:0 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  flex:0 0 34px !important;
+}
+.td-header-actions > .td-export{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:6px !important;
+  cursor:pointer !important;
+}
+.td-header-actions .td-filter-count{
+  min-width:15px !important;
+  height:15px !important;
+  padding:0 4px !important;
+  font-size:8px !important;
+}
+
+/* The Ledger is the source of truth for these controls in light mode. */
+.td-theme-dark .td-header-actions > .td-account-menu > .td-account-select,
+.td-theme-dark .td-header-actions > .td-date-menu > button,
+.td-theme-dark .td-header-actions > .td-filter-menu > .td-filter-trigger,
+.td-theme-dark .td-header-actions > .td-theme-icon-button,
+.td-theme-dark .td-header-actions > .td-export{
+  background:#171a1d !important;
+  border-color:#30353b !important;
+  color:#aab2bf !important;
+}
+.td-theme-dark .td-header-actions > .td-account-menu > .td-account-select:hover,
+.td-theme-dark .td-header-actions > .td-date-menu > button:hover,
+.td-theme-dark .td-header-actions > .td-filter-menu > .td-filter-trigger:hover,
+.td-theme-dark .td-header-actions > .td-theme-icon-button:hover,
+.td-theme-dark .td-header-actions > .td-export:hover{
+  background:#1d1a29 !important;
+  border-color:#51477d !important;
+  color:#9a8cff !important;
+  box-shadow:0 2px 9px rgba(94,78,170,.16) !important;
+}
+.td-theme-dark .td-header-actions .td-account-select-copy strong{color:#e4e8ed !important}
+.td-theme-dark .td-header-actions .td-account-select-copy small,
+.td-theme-dark .td-header-actions .td-account-select-chevron{color:#858e9b !important}
+
+@media(max-width:650px){
+  .td-header-actions > .td-account-menu > .td-account-select{
+    min-width:34px !important;
+    width:34px !important;
+    padding:0 !important;
+    justify-content:center !important;
+  }
+  .td-header-actions .td-account-select-copy,
+  .td-header-actions .td-account-select-chevron{display:none !important}
+  .td-header-actions > .td-date-menu > button{min-width:34px !important;width:34px !important;padding:0 !important}
+  .td-header-actions > .td-date-menu > button > span{display:none !important}
+  .td-header-actions > .td-filter-menu > .td-filter-trigger{min-width:34px !important;width:34px !important;padding:0 !important}
+  .td-header-actions > .td-filter-menu > .td-filter-trigger > span{display:none !important}
+  .td-header-actions > .td-export{width:34px !important;min-width:34px !important;padding:0 !important}
+  .td-header-actions > .td-export{font-size:0 !important}
+  .td-header-actions > .td-export::first-letter{font-size:10px !important}
+}

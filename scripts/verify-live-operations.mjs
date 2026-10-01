@@ -1,0 +1,7 @@
+import fs from 'node:fs'; import path from 'node:path';
+const root=process.cwd(); const required=['src/hooks/useSyncEngine.js','src/services/sync/syncEngine.js','src/components/apex/SyncCenter.jsx','src/hooks/useLiveTradeCapture.js','src/services/sync/eventProcessor.js','src/hooks/useLiveComplianceMonitor.js','src/hooks/useAdvancedAccountIntelligence.js','src/services/securityAudit.js','supabase/migrations/20260920_sync_engine.sql'];
+for(const f of required) if(!fs.existsSync(path.join(root,f))) throw new Error(`Missing required file: ${f}`);
+const read=f=>fs.readFileSync(path.join(root,f),'utf8');
+const checks=[read(required[0]).includes('syncAll'),read(required[0]).includes('configureAutoSync'),read(required[8]).includes('connector_sync_runs'),read(required[4]).includes('createEventProcessor'),read(required[3]).includes('new WebSocket'),read(required[5]).includes('DAILY_LOSS_LIMIT'),read(required[6]).includes('processEfficiency'),read(required[7]).includes('SECRET_IN_SOURCE'),read(required[2]).includes('Live Operations Center')||read(required[2]).includes('Sync Center'),read('src/App.jsx').includes('view === "sync"'),!read(required[1]).match(/placeOrder|cancelOrder|liquidate/i)];
+if(checks.some(v=>!v)) throw new Error('Live operations QA failed: one or more current orchestration contracts are missing');
+console.log(`Live operations QA passed: ${required.length} required files present; ${checks.length} checks passed.`);

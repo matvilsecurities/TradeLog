@@ -1,0 +1,118 @@
+/* ============================================================
+   TRADELOG — AVG WIN / LOSS TRADE
+   Compact KPI with the win/loss bar positioned on the right.
+   ============================================================ */
+
+.td-kpi-avglw {
+  position: relative;
+  min-width: 0;
+}
+
+/* Keep the KPI title on its own line. */
+.td-kpi-avglw > span {
+  white-space: nowrap;
+}
+
+/* Ratio on the left, visual breakdown on the right. */
+.td-avglw-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  width: 100%;
+}
+
+/* 2.12 ratio */
+.td-avglw-body > strong {
+  flex: 0 0 auto;
+  color: #e8ebef;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Right-side bar + values */
+.td-avglw-right {
+  flex: 0 0 92px;
+  width: 92px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-left: auto;
+}
+
+/* Small horizontal win/loss line */
+.td-avglw-bar {
+  width: 92px;
+  height: 4px;
+  display: flex;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #24272b;
+}
+
+.td-avglw-bar i {
+  display: block;
+  height: 100%;
+}
+
+.td-avglw-bar i.win {
+  background: #53b98e;
+}
+
+.td-avglw-bar i.loss {
+  background: #d96470;
+}
+
+/* Dollar values under the line */
+.td-avglw-values {
+  width: 92px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.td-avglw-values b {
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.td-avglw-values b:first-child {
+  color: #53c69b;
+}
+
+.td-avglw-values b:last-child {
+  color: #e1707a;
+}
+
+/* Smaller screens */
+@media (max-width: 650px) {
+  .td-avglw-body {
+    gap: 8px;
+  }
+
+  .td-avglw-body > strong {
+    font-size: 14px;
+  }
+
+  .td-avglw-right {
+    flex-basis: 72px;
+    width: 72px;
+  }
+
+  .td-avglw-bar,
+  .td-avglw-values {
+    width: 72px;
+  }
+
+  .td-avglw-values b {
+    font-size: 6px;
+  }
+}

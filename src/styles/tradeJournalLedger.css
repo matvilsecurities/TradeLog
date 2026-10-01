@@ -1,0 +1,1202 @@
+/* ============================================================
+   TradeLog — Journal Ledger
+   Isolated reference-design styling layer
+   ============================================================ */
+
+.td-main:has(.trade-row) {
+  background: #f5f8fc !important;
+  color: #172033 !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+.td-main:has(.trade-row) > div:first-child {
+  background: #f5f8fc !important;
+  padding: 20px 24px !important;
+  border-bottom: 0 !important;
+}
+
+.td-main:has(.trade-row) > div:first-child > div:first-child {
+  margin-bottom: 18px !important;
+}
+
+.td-main:has(.trade-row) > div:first-child > div:first-child p:first-child {
+  font-size: 24px !important;
+  line-height: 1.15 !important;
+  font-weight: 700 !important;
+  color: #172033 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.td-main:has(.trade-row) > div:first-child > div:first-child p:last-child {
+  font-size: 13px !important;
+  color: #71809a !important;
+}
+
+.td-main:has(.trade-row) > div:first-child > div:first-child > button {
+  min-height: 42px !important;
+  padding: 0 24px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #4d8aff, #8b6df6) !important;
+  box-shadow: 0 7px 18px rgba(77,138,255,.24) !important;
+  font-size: 14px !important;
+  font-weight: 650 !important;
+}
+
+.td-main:has(.trade-row) > div:first-child > div:nth-child(2) {
+  gap: 14px !important;
+  margin-bottom: 18px !important;
+}
+
+.td-main:has(.trade-row) > div:first-child > div:nth-child(2) > div {
+  min-height: 68px !important;
+  padding: 12px 16px !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  border: 1px solid #e4e9f1 !important;
+  box-shadow: 0 2px 8px rgba(29,48,77,.035) !important;
+}
+
+.td-main:has(.trade-row) > div:first-child > div:nth-child(2) p:first-child {
+  font-size: 10px !important;
+  color: #7a879b !important;
+  letter-spacing: .055em !important;
+}
+
+.td-main:has(.trade-row) > div:first-child > div:nth-child(2) p:last-child {
+  margin-top: 3px !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  font-weight: 700 !important;
+}
+
+.td-main:has(.trade-row) .search-input {
+  height: 40px !important;
+  box-sizing: border-box !important;
+  background: #fff !important;
+  border: 1px solid #dfe6ef !important;
+  color: #172033 !important;
+  border-radius: 10px !important;
+  font-size: 13px !important;
+  box-shadow: 0 1px 3px rgba(29,48,77,.025) !important;
+}
+
+.td-main:has(.trade-row) .search-input::placeholder {
+  color: #8a96a8 !important;
+}
+
+.td-main:has(.trade-row) .search-input:focus {
+  outline: none !important;
+  border-color: #9ab9ff !important;
+  box-shadow: 0 0 0 3px rgba(77,138,255,.10) !important;
+}
+
+.td-main:has(.trade-row) .filter-btn {
+  min-height: 32px !important;
+  padding: 0 17px !important;
+  border-radius: 8px !important;
+  font-size: 12px !important;
+}
+
+.td-main:has(.trade-row) > div:nth-child(2) {
+  background: #fff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px 12px 0 0 !important;
+  margin: 0 20px 20px !important;
+  overflow: auto !important;
+  box-shadow: 0 3px 12px rgba(29,48,77,.035) !important;
+}
+
+.td-main:has(.trade-row) table {
+  background: #fff !important;
+  color: #172033 !important;
+}
+
+.td-main:has(.trade-row) thead {
+  background: #f8fafc !important;
+}
+
+.td-main:has(.trade-row) thead tr {
+  height: 48px !important;
+  border-bottom: 1px solid #e5eaf1 !important;
+}
+
+.td-main:has(.trade-row) th {
+  height: 48px !important;
+  padding: 0 12px !important;
+  color: #6f7d92 !important;
+  background: #f8fafc !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  font-weight: 650 !important;
+  letter-spacing: .055em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+.td-main:has(.trade-row) .trade-row {
+  height: 60px !important;
+  background: #fff !important;
+  color: #445168 !important;
+  border-bottom: 1px solid #edf1f5 !important;
+}
+
+.td-main:has(.trade-row) .trade-row:hover {
+  background: #f8fbff !important;
+}
+
+.td-main:has(.trade-row) .trade-row td {
+  height: 60px !important;
+  padding: 0 12px !important;
+  color: #526077 !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  vertical-align: middle !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:first-child {
+  padding-left: 20px !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:first-child p {
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  font-weight: 650 !important;
+  color: #263247 !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:nth-child(5) span {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #263247 !important;
+  letter-spacing: 0 !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:nth-child(4) span {
+  background: #f1efff !important;
+  color: #6654c9 !important;
+  border-radius: 5px !important;
+  padding: 4px 7px !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:nth-child(7),
+.td-main:has(.trade-row) .trade-row td:nth-child(8),
+.td-main:has(.trade-row) .trade-row td:nth-child(9) {
+  font-size: 12px !important;
+  color: #536177 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:nth-child(10) span {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:nth-child(11) span {
+  min-width: 38px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 24px !important;
+  padding: 0 7px !important;
+  border-radius: 5px !important;
+  font-size: 10px !important;
+  font-weight: 650 !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:nth-child(13) span {
+  min-width: 27px !important;
+  height: 25px !important;
+  padding: 0 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 11px !important;
+  border-radius: 999px !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:nth-child(15) {
+  font-size: 19px !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:nth-child(16) img {
+  width: 42px !important;
+  height: 30px !important;
+  border-radius: 5px !important;
+  border: 1px solid #dfe5ed !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:last-child {
+  width: 100px !important;
+  min-width: 100px !important;
+  padding-right: 18px !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:last-child > div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 4px !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity .15s ease, visibility .15s ease !important;
+}
+
+.td-main:has(.trade-row) .trade-row:hover td:last-child > div {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:last-child button {
+  width: 30px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid #dce3ec !important;
+  border-radius: 7px !important;
+  background: #fff !important;
+  color: #647188 !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:last-child button:hover {
+  background: #f2f6ff !important;
+  border-color: #9ab9ff !important;
+  color: #4d8aff !important;
+}
+
+.td-main:has(.trade-row) .trade-row td:last-child button:last-child:hover {
+  background: #fff1f3 !important;
+  border-color: #f0a2af !important;
+  color: #e64c69 !important;
+}
+
+@media (max-width: 1200px) {
+  .td-main:has(.trade-row) > div:first-child > div:nth-child(2) {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .td-main:has(.trade-row) > div:first-child {
+    padding: 14px !important;
+  }
+
+  .td-main:has(.trade-row) > div:first-child > div:nth-child(2) {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ============================================================
+   JOURNAL LEDGER — TOP SECTION REFERENCE DESIGN
+   ============================================================ */
+
+/* Page background */
+.td-main:has(.trade-row) {
+  background: #f5f8fc !important;
+  color: #172033 !important;
+}
+
+
+/* Main Ledger header area */
+.td-main:has(.trade-row) > div:first-child {
+  background: #f5f8fc !important;
+  color: #172033 !important;
+}
+
+
+/* Trade Log title */
+.td-main:has(.trade-row) > div:first-child
+> div:first-child
+p:first-child {
+  color: #172033 !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.4px !important;
+}
+
+
+/* Subtitle */
+.td-main:has(.trade-row) > div:first-child
+> div:first-child
+p:last-child {
+  color: #71809a !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+}
+
+
+/* Log Trade button */
+.td-main:has(.trade-row) > div:first-child
+> div:first-child
+> button {
+  height: 42px !important;
+  min-height: 42px !important;
+  padding: 0 25px !important;
+
+  border-radius: 11px !important;
+
+  background: linear-gradient(
+    135deg,
+    #4d8aff,
+    #8b6df6
+  ) !important;
+
+  color: #ffffff !important;
+
+  font-size: 14px !important;
+  font-weight: 650 !important;
+
+  border: none !important;
+
+  box-shadow:
+    0 6px 18px rgba(77,138,255,.25) !important;
+}
+
+
+/* Log Trade hover */
+.td-main:has(.trade-row) > div:first-child
+> div:first-child
+> button:hover {
+  transform: translateY(-1px) !important;
+
+  box-shadow:
+    0 9px 24px rgba(77,138,255,.32) !important;
+}
+
+
+/* ============================================================
+   KPI CARDS
+   ============================================================ */
+
+.td-main:has(.trade-row)
+> div:first-child
+> div:nth-child(2) {
+  gap: 14px !important;
+}
+
+
+.td-main:has(.trade-row)
+> div:first-child
+> div:nth-child(2)
+> div {
+  background: #ffffff !important;
+
+  border: 1px solid #e3e8ef !important;
+
+  border-radius: 10px !important;
+
+  min-height: 68px !important;
+
+  box-shadow:
+    0 2px 8px rgba(30,45,70,.035) !important;
+}
+
+
+/* KPI labels */
+.td-main:has(.trade-row)
+> div:first-child
+> div:nth-child(2)
+p:first-child {
+  color: #7a879b !important;
+
+  font-size: 10px !important;
+  font-weight: 600 !important;
+
+  letter-spacing: .05em !important;
+
+  text-transform: uppercase !important;
+}
+
+
+/* KPI values */
+.td-main:has(.trade-row)
+> div:first-child
+> div:nth-child(2)
+p:last-child {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+
+  margin-top: 3px !important;
+}
+
+
+/* KPI icon squares */
+.td-main:has(.trade-row)
+> div:first-child
+> div:nth-child(2)
+> div
+> span {
+  width: 30px !important;
+  height: 30px !important;
+
+  border-radius: 8px !important;
+}
+
+
+/* ============================================================
+   SEARCH / FILTER BAR
+   ============================================================ */
+
+.td-main:has(.trade-row)
+.search-input {
+  height: 40px !important;
+
+  background: #ffffff !important;
+
+  border: 1px solid #dfe5ed !important;
+
+  border-radius: 10px !important;
+
+  color: #172033 !important;
+
+  font-size: 13px !important;
+}
+
+
+.td-main:has(.trade-row)
+.search-input::placeholder {
+  color: #8a96a8 !important;
+}
+
+
+.td-trades-view
+.filter-btn {
+  min-height: 32px !important;
+
+  padding: 0 16px !important;
+
+  border-radius: 8px !important;
+
+  font-size: 12px !important;
+}
+
+/* ============================================================
+   TRADE LOG — HEADER + KPI REFINEMENT
+   ============================================================ */
+
+.td-trades-view {
+  background: #f5f8fc !important;
+  color: #172033 !important;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+
+/* ---------------- HEADER ---------------- */
+
+.td-trades-view > div:first-child {
+  padding: 24px 28px 0 !important;
+}
+
+.td-trades-view h1,
+.td-trades-view h2 {
+  color: #f2f4f8 !important;
+  font-weight: 650 !important;
+  letter-spacing: -0.02em !important;
+}
+
+
+/* ---------------- KPI ROW ---------------- */
+
+.td-trades-view > div:first-child > div:nth-child(2) {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  margin-top: 18px !important;
+}
+
+
+.td-trades-view > div:first-child > div:nth-child(2) > div {
+  min-width: 0 !important;
+  height: 64px !important;
+  min-height: 64px !important;
+
+  padding: 12px 14px !important;
+
+  background: #151922 !important;
+  border: 1px solid #222936 !important;
+  border-radius: 9px !important;
+
+  box-sizing: border-box !important;
+}
+
+
+/* KPI label */
+
+.td-trades-view > div:first-child > div:nth-child(2)
+span,
+.td-trades-view > div:first-child > div:nth-child(2)
+small {
+  color: #778298 !important;
+  font-size: 9px !important;
+  font-weight: 500 !important;
+  letter-spacing: .04em !important;
+}
+
+
+/* KPI number */
+
+.td-trades-view > div:first-child > div:nth-child(2)
+strong {
+  font-size: 16px !important;
+  line-height: 1.1 !important;
+  font-weight: 650 !important;
+  letter-spacing: -0.01em !important;
+}
+
+
+/* KPI icon */
+
+.td-trades-view > div:first-child > div:nth-child(2)
+> div > div:first-child {
+  width: 29px !important;
+  height: 29px !important;
+  min-width: 29px !important;
+
+  border-radius: 7px !important;
+}
+
+
+/* ---------------- SEARCH BAR ---------------- */
+
+.td-trades-view input {
+  background: #151922 !important;
+  border: 1px solid #222936 !important;
+  color: #e7ebf2 !important;
+
+  height: 38px !important;
+
+  border-radius: 9px !important;
+
+  font-family: inherit !important;
+  font-size: 12px !important;
+}
+
+.td-trades-view input::placeholder {
+  color: #697386 !important;
+}
+
+
+/* ---------------- FILTER BUTTONS ---------------- */
+
+.td-trades-view button {
+  font-family: inherit !important;
+}
+
+.td-trades-view button {
+  border-radius: 8px;
+}
+
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 1100px) {
+  .td-trades-view > div:first-child > div:nth-child(2) {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .td-trades-view > div:first-child > div:nth-child(2) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ============================================================
+   JOURNAL LEDGER — TABLE TYPOGRAPHY & CONTRAST
+   ============================================================ */
+
+.td-trades-view .trade-row td {
+  color: #526077 !important;
+  opacity: 1 !important;
+}
+
+
+/* Date */
+.td-trades-view .trade-row td:first-child,
+.td-trades-view .trade-row td:first-child * {
+  color: #263247 !important;
+  opacity: 1 !important;
+}
+
+.td-trades-view .trade-row td:first-child p {
+  font-size: 13px !important;
+  font-weight: 650 !important;
+}
+
+
+/* Entry / Exit / Quantity */
+.td-trades-view .trade-row td:nth-child(2),
+.td-trades-view .trade-row td:nth-child(3),
+.td-trades-view .trade-row td:nth-child(7),
+.td-trades-view .trade-row td:nth-child(8),
+.td-trades-view .trade-row td:nth-child(9) {
+  color: #536177 !important;
+  opacity: 1 !important;
+  font-size: 12px !important;
+}
+
+
+/* Hold */
+.td-trades-view .trade-row td:nth-child(4) * {
+  opacity: 1 !important;
+}
+
+
+/* Symbol */
+.td-trades-view .trade-row td:nth-child(5),
+.td-trades-view .trade-row td:nth-child(5) * {
+  color: #263247 !important;
+  opacity: 1 !important;
+}
+
+.td-trades-view .trade-row td:nth-child(5) span {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+
+/* Direction */
+.td-trades-view .trade-row td:nth-child(6) * {
+  opacity: 1 !important;
+}
+
+
+/* P&L */
+.td-trades-view .trade-row td:nth-child(10) * {
+  opacity: 1 !important;
+}
+
+
+/* R:R */
+.td-trades-view .trade-row td:nth-child(11) * {
+  opacity: 1 !important;
+}
+
+
+/* Setup */
+.td-trades-view .trade-row td:nth-child(12),
+.td-trades-view .trade-row td:nth-child(12) * {
+  color: #637087 !important;
+  opacity: 1 !important;
+}
+
+
+/* Grade */
+.td-trades-view .trade-row td:nth-child(13) * {
+  opacity: 1 !important;
+}
+
+
+/* Mistakes */
+.td-trades-view .trade-row td:nth-child(14),
+.td-trades-view .trade-row td:nth-child(14) * {
+  opacity: 1 !important;
+}
+
+
+/* Mood */
+.td-trades-view .trade-row td:nth-child(15) * {
+  opacity: 1 !important;
+}
+
+
+/* Charts */
+.td-trades-view .trade-row td:nth-child(16) img {
+  opacity: 1 !important;
+}
+
+
+/* Actions */
+.td-trades-view .trade-row td:last-child * {
+  opacity: 1;
+}
+
+/* ============================================================
+   JOURNAL LEDGER — LIGHT TABLE HEADER
+   ============================================================ */
+
+.td-trades-view thead {
+  background: #f8fafc !important;
+}
+
+.td-trades-view thead tr {
+  height: 48px !important;
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e3e8ef !important;
+}
+
+.td-trades-view thead th {
+  height: 48px !important;
+  padding: 0 12px !important;
+
+  background: #f8fafc !important;
+  color: #6f7d92 !important;
+
+  font-family: Inter, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif !important;
+
+  font-size: 10px !important;
+  font-weight: 650 !important;
+  line-height: 1 !important;
+
+  letter-spacing: .045em !important;
+  text-transform: uppercase !important;
+
+  white-space: nowrap !important;
+}
+
+
+/* First column */
+.td-trades-view thead th:first-child {
+  padding-left: 20px !important;
+}
+
+
+/* Header hover should not change anything */
+.td-trades-view thead th:hover {
+  background: #f8fafc !important;
+}
+
+/* ============================================================
+   JOURNAL LEDGER — BALANCED TABLE SPACING
+   ============================================================ */
+
+.td-trades-view table {
+  width: 100% !important;
+  table-layout: auto !important;
+}
+
+
+/* General spacing */
+.td-trades-view thead th,
+.td-trades-view .trade-row td {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+
+/* Date */
+.td-trades-view thead th:nth-child(1),
+.td-trades-view .trade-row td:nth-child(1) {
+  min-width: 80px !important;
+}
+
+
+/* Entry time */
+.td-trades-view thead th:nth-child(2),
+.td-trades-view .trade-row td:nth-child(2) {
+  min-width: 88px !important;
+}
+
+
+/* Exit time */
+.td-trades-view thead th:nth-child(3),
+.td-trades-view .trade-row td:nth-child(3) {
+  min-width: 88px !important;
+}
+
+
+/* Hold */
+.td-trades-view thead th:nth-child(4),
+.td-trades-view .trade-row td:nth-child(4) {
+  min-width: 65px !important;
+}
+
+
+/* Symbol */
+.td-trades-view thead th:nth-child(5),
+.td-trades-view .trade-row td:nth-child(5) {
+  min-width: 70px !important;
+}
+
+
+/* Direction */
+.td-trades-view thead th:nth-child(6),
+.td-trades-view .trade-row td:nth-child(6) {
+  min-width: 58px !important;
+}
+
+
+/* Entry */
+.td-trades-view thead th:nth-child(7),
+.td-trades-view .trade-row td:nth-child(7) {
+  min-width: 90px !important;
+}
+
+
+/* Exit */
+.td-trades-view thead th:nth-child(8),
+.td-trades-view .trade-row td:nth-child(8) {
+  min-width: 90px !important;
+}
+
+
+/* Quantity */
+.td-trades-view thead th:nth-child(9),
+.td-trades-view .trade-row td:nth-child(9) {
+  min-width: 50px !important;
+}
+
+
+/* P&L */
+.td-trades-view thead th:nth-child(10),
+.td-trades-view .trade-row td:nth-child(10) {
+  min-width: 75px !important;
+}
+
+
+/* R:R */
+.td-trades-view thead th:nth-child(11),
+.td-trades-view .trade-row td:nth-child(11) {
+  min-width: 55px !important;
+}
+
+
+/* Setup */
+.td-trades-view thead th:nth-child(12),
+.td-trades-view .trade-row td:nth-child(12) {
+  min-width: 65px !important;
+}
+
+
+/* Grade */
+.td-trades-view thead th:nth-child(13),
+.td-trades-view .trade-row td:nth-child(13) {
+  min-width: 60px !important;
+}
+
+
+/* Mistakes */
+.td-trades-view thead th:nth-child(14),
+.td-trades-view .trade-row td:nth-child(14) {
+  min-width: 70px !important;
+}
+
+
+/* Mood */
+.td-trades-view thead th:nth-child(15),
+.td-trades-view .trade-row td:nth-child(15) {
+  min-width: 60px !important;
+}
+
+
+/* Charts */
+.td-trades-view thead th:nth-child(16),
+.td-trades-view .trade-row td:nth-child(16) {
+  min-width: 105px !important;
+}
+
+
+/* Actions — reserve space */
+.td-trades-view thead th:nth-child(17),
+.td-trades-view .trade-row td:nth-child(17) {
+  min-width: 85px !important;
+}
+
+
+/* ============================================================
+   CHART THUMBNAILS
+   ============================================================ */
+
+.td-trades-view .trade-row td:nth-child(16) img {
+  width: 38px !important;
+  height: 28px !important;
+  object-fit: cover !important;
+  border-radius: 5px !important;
+  vertical-align: middle !important;
+}
+
+.td-trades-view .trade-row td:nth-child(16) img + img {
+  margin-left: 4px !important;
+}
+
+
+/* ============================================================
+   ROW HEIGHT
+   ============================================================ */
+
+.td-trades-view .trade-row {
+  height: 62px !important;
+}
+
+.td-trades-view .trade-row td {
+  height: 62px !important;
+  vertical-align: middle !important;
+}
+
+
+/* ============================================================
+   CHART THUMBNAILS
+   ============================================================ */
+
+.td-trades-view .trade-row td:nth-child(16) img {
+  width: 42px !important;
+  height: 30px !important;
+  object-fit: cover !important;
+  border-radius: 5px !important;
+  vertical-align: middle !important;
+}
+
+
+/* Space between two chart thumbnails */
+.td-trades-view .trade-row td:nth-child(16) img + img {
+  margin-left: 5px !important;
+}
+
+
+/* ============================================================
+   ROW SPACING
+   ============================================================ */
+
+.td-trades-view .trade-row {
+  height: 64px !important;
+}
+
+.td-trades-view .trade-row td {
+  height: 64px !important;
+  vertical-align: middle !important;
+}
+
+
+/* Slightly softer separators */
+.td-trades-view .trade-row {
+  border-bottom: 1px solid #e8edf3 !important;
+}
+
+
+/* Subtle hover */
+.td-trades-view .trade-row:hover {
+  background: #f8fbff !important;
+}
+
+/* ============================================================
+   JOURNAL LEDGER — COLUMN GROUPING REFINEMENT
+   ============================================================ */
+
+/* Date */
+.td-trades-view thead th:nth-child(1),
+.td-trades-view .trade-row td:nth-child(1) {
+  min-width: 78px !important;
+}
+
+/* Entry / Exit time */
+.td-trades-view thead th:nth-child(2),
+.td-trades-view .trade-row td:nth-child(2),
+.td-trades-view thead th:nth-child(3),
+.td-trades-view .trade-row td:nth-child(3) {
+  min-width: 82px !important;
+}
+
+/* Hold */
+.td-trades-view thead th:nth-child(4),
+.td-trades-view .trade-row td:nth-child(4) {
+  min-width: 62px !important;
+}
+
+/* Symbol + direction */
+.td-trades-view thead th:nth-child(5),
+.td-trades-view .trade-row td:nth-child(5) {
+  min-width: 68px !important;
+}
+
+.td-trades-view thead th:nth-child(6),
+.td-trades-view .trade-row td:nth-child(6) {
+  min-width: 56px !important;
+}
+
+/* Entry / Exit prices */
+.td-trades-view thead th:nth-child(7),
+.td-trades-view .trade-row td:nth-child(7),
+.td-trades-view thead th:nth-child(8),
+.td-trades-view .trade-row td:nth-child(8) {
+  min-width: 88px !important;
+}
+
+/* Quantity */
+.td-trades-view thead th:nth-child(9),
+.td-trades-view .trade-row td:nth-child(9) {
+  min-width: 48px !important;
+}
+
+/* P&L — slightly more room */
+.td-trades-view thead th:nth-child(10),
+.td-trades-view .trade-row td:nth-child(10) {
+  min-width: 82px !important;
+}
+
+/* R:R */
+.td-trades-view thead th:nth-child(11),
+.td-trades-view .trade-row td:nth-child(11) {
+  min-width: 58px !important;
+}
+
+/* Setup */
+.td-trades-view thead th:nth-child(12),
+.td-trades-view .trade-row td:nth-child(12) {
+  min-width: 62px !important;
+}
+
+/* Grade */
+.td-trades-view thead th:nth-child(13),
+.td-trades-view .trade-row td:nth-child(13) {
+  min-width: 58px !important;
+}
+
+/* Mistakes */
+.td-trades-view thead th:nth-child(14),
+.td-trades-view .trade-row td:nth-child(14) {
+  min-width: 68px !important;
+}
+
+/* Mood */
+.td-trades-view thead th:nth-child(15),
+.td-trades-view .trade-row td:nth-child(15) {
+  min-width: 58px !important;
+}
+
+/* Charts */
+.td-trades-view thead th:nth-child(16),
+.td-trades-view .trade-row td:nth-child(16) {
+  min-width: 110px !important;
+}
+
+/* Actions */
+.td-trades-view thead th:nth-child(17),
+.td-trades-view .trade-row td:nth-child(17) {
+  min-width: 82px !important;
+}
+
+/* ============================================================
+   JOURNAL LEDGER — KPI CARDS REFINEMENT
+   ============================================================ */
+
+.td-trades-view > div:first-child > div:nth-child(2) {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  margin-top: 16px !important;
+}
+
+
+/* Card */
+.td-trades-view > div:first-child > div:nth-child(2) > div {
+  height: 66px !important;
+  min-height: 66px !important;
+  padding: 11px 14px !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  background: #151922 !important;
+  border: 1px solid #252d3a !important;
+  border-radius: 9px !important;
+
+  box-sizing: border-box !important;
+}
+
+
+/* Icon block */
+.td-trades-view > div:first-child > div:nth-child(2)
+> div > div:first-child {
+  width: 29px !important;
+  height: 29px !important;
+  min-width: 29px !important;
+
+  margin-right: 11px !important;
+
+  border-radius: 7px !important;
+}
+
+
+/* KPI content */
+.td-trades-view > div:first-child > div:nth-child(2)
+> div > div:last-child {
+  min-width: 0 !important;
+}
+
+
+/* Labels */
+.td-trades-view > div:first-child > div:nth-child(2)
+span {
+  display: block !important;
+
+  color: #778398 !important;
+
+  font-size: 9px !important;
+  line-height: 1.1 !important;
+  font-weight: 500 !important;
+
+  letter-spacing: .045em !important;
+}
+
+
+/* Values */
+.td-trades-view > div:first-child > div:nth-child(2)
+strong {
+  display: block !important;
+
+  margin-top: 3px !important;
+
+  font-size: 16px !important;
+  line-height: 1.05 !important;
+  font-weight: 650 !important;
+
+  letter-spacing: -0.01em !important;
+
+  font-variant-numeric: tabular-nums !important;
+}
+
+
+/* Prevent KPI content from stretching */
+.td-trades-view > div:first-child > div:nth-child(2)
+> div > div {
+  flex-shrink: 0 !important;
+}
+
+
+/* ============================================================
+   KPI COLORS
+   ============================================================ */
+
+.td-trades-view > div:first-child > div:nth-child(2)
+> div:nth-child(1) strong,
+.td-trades-view > div:first-child > div:nth-child(3) strong,
+.td-trades-view > div:first-child > div:nth-child(5) strong {
+  color: #00d6a0 !important;
+}
+
+
+.td-trades-view > div:first-child > div:nth-child(2)
+> div:nth-child(2) strong,
+.td-trades-view > div:first-child > div:nth-child(4) strong,
+.td-trades-view > div:first-child > div:nth-child(6) strong {
+  color: #ff3f67 !important;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1100px) {
+  .td-trades-view > div:first-child > div:nth-child(2) {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .td-trades-view > div:first-child > div:nth-child(2) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+/* Phase 12 — dense-workspace affordances */
+.td-kpi-grid > *, .td-dashboard-grid > * { min-width: 0; }
+button, input, select, textarea { accent-color: #4d8aff; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid rgba(77,138,255,.55); outline-offset: 2px; }

@@ -1,0 +1,30 @@
+/* =========================================================
+   TradeLog — Lightweight Scroll Effects
+   Phase 1: Scroll Reveal
+   ========================================================= */
+
+.tl-scroll-reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0) scale(0.985);
+
+  transition:
+    opacity 650ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  will-change: opacity, transform;
+}
+
+.tl-scroll-reveal.tl-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Reduced-motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .tl-scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}

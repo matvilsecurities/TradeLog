@@ -1,0 +1,451 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import { usePropFirmRules } from "../../hooks/usePropFirmRules.js";
+import { filterTradesForAccount } from "../../hooks/useAccountPortfolio.js";
+import { calculatePropFirmCompliance } from "../../services/propFirmCompliance.js";
+
+const money = (v) => Number.isFinite(Number(v)) ? `$${Number(v).toLocaleString()}` : (v ?? "—");
+
+const ruleRows = (rules = {}) => [
+  ["Profit target", rules.profitTarget != null ? money(rules.profitTarget) : rules.profitTargetPct != null ? `${rules.profitTargetPct}%` : "—", "i-target"],
+  ["Maximum loss / drawdown", rules.maxDrawdown != null ? money(rules.maxDrawdown) : rules.maxLossPct != null ? `${rules.maxLossPct}%` : "—", "i-down"],
+  ["Daily loss", rules.dailyLossLimit != null ? money(rules.dailyLossLimit) : rules.maxDailyLossPct != null ? `${rules.maxDailyLossPct}%` : rules.performanceDailyLossLimit ?? "—", "i-trend"],
+  ["Consistency", rules.consistencyRule != null ? `${rules.consistencyRule}%` : rules.evaluationConsistencyRule != null ? `${rules.evaluationConsistencyRule}%` : "—", "i-percent"],
+  ["Minimum trading days", rules.minTradingDays ?? "—", "i-calendar"],
+  ["Evaluation period", rules.evaluationDays != null ? `${rules.evaluationDays} days` : "—", "i-clock"],
+  ["Minimum profitable days", rules.minProfitableDays ?? "—", "i-calendar"],
+  ["Minimum daily profit", rules.minDailyProfit != null ? money(rules.minDailyProfit) : "—", "i-dollar"],
+  ["Max contracts", rules.maxContracts != null ? `${rules.maxContracts} mini${rules.maxMicros != null ? ` / ${rules.maxMicros} micro` : ""}` : "—", "i-file"],
+  ["PA max contracts", rules.performanceMaxContracts != null ? `${rules.performanceMaxContracts} mini${rules.performanceMaxMicros != null ? ` / ${rules.performanceMaxMicros} micro` : ""}` : "—", "i-file"],
+  ["PA max drawdown", rules.performanceMaxDrawdown != null ? money(rules.performanceMaxDrawdown) : "—", "i-down"],
+  ["Activation fee", rules.activationFee != null ? money(rules.activationFee) : "—", "i-dollar"],
+  ["Activation deadline", rules.activationDeadlineDays != null ? `${rules.activationDeadlineDays} days` : "—", "i-calendar"],
+  ["Payout frequency", rules.payoutFrequencyDays != null ? `${rules.payoutFrequencyDays} trading days` : "—", "i-refresh"],
+  ["Max accounts", rules.maxAccounts ?? "—", "i-users"],
+  ["Inactivity", rules.inactivityDays ? `${rules.inactivityDays} days` : rules.inactivityPolicy ?? "—", "i-eyeoff"],
+  ["Payout split", rules.payoutSplit != null ? `${rules.payoutSplit}%` : "—", "i-pie"],
+  ["Max payout requests", rules.maxPayouts ?? "—", "i-upload"],
+];
+
+const pricingRows = (pricing) => pricing ? [
+  ["One pack", money(pricing.onePack)],
+  ["Five pack", money(pricing.fivePack)],
+] : [];
+
+const ICONS = {
+  "i-target": <><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 2v4M22 12h-4M12 22v-4M2 12h4"/></>,
+  "i-down": <><path d="M12 3v14M7 12l5 5 5-5"/><path d="M5 21h14"/></>,
+  "i-trend": <><path d="M3 17l6-6 4 4 8-9"/><path d="M16 6h5v5"/></>,
+  "i-percent": <><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></>,
+  "i-calendar": <><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></>,
+  "i-clock": <><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></>,
+  "i-file": <><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></>,
+  "i-dollar": <><path d="M12 2v20M16 6.5c-.8-1-2-1.5-4-1.5-2.5 0-4 1.2-4 3s1.5 3 4 3 4 1.2 4 3-1.5 3-4 3c-2 0-3.3-.5-4.2-1.7"/></>,
+  "i-refresh": <><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.2 9A7 7 0 0 1 19 12M18 15A7 7 0 0 1 5 12"/></>,
+  "i-users": <><circle cx="9" cy="8" r="3"/><path d="M3 20c.5-3.2 2.4-5 6-5s5.5 1.8 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 15c2.7.1 4.3 1.7 5 4"/></>,
+  "i-eyeoff": <><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 5.2A11.5 11.5 0 0 1 12 5c5.5 0 9 7 9 7a16 16 0 0 1-3.1 3.8M6.2 6.2C3.9 7.8 3 12 3 12s3.5 7 9 7a9.5 9.5 0 0 0 3.1-.5"/></>,
+  "i-pie": <><path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M14 3a7 7 0 0 1 7 7h-7z"/></>,
+  "i-upload": <><path d="M12 16V4M8 8l4-4 4 4"/><path d="M5 14v5h14v-5"/></>,
+};
+
+export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, onClose, accounts = [], activeAccountId = "primary", trades = [] }) {
+  const { catalog, status, refresh } = usePropFirmRules(settings);
+  const [firmId, setFirmId] = useState(settings.propFirmId || "");
+  const [vendor, setVendor] = useState(settings.propVendor || "");
+  const [programId, setProgramId] = useState(settings.propProgramId || "");
+  const [accountId, setAccountId] = useState(settings.accountId || "");
+  const [accountLabel, setAccountLabel] = useState(settings.accountLabel || "");
+  const [saved, setSaved] = useState(false);
+  const [created, setCreated] = useState(false);
+  const [customRules, setCustomRules] = useState(Array.isArray(settings.customRules) ? settings.customRules : []);
+  const [showAllAccounts, setShowAllAccounts] = useState(false);
+  const [detailAccountId, setDetailAccountId] = useState(null);
+  const [showSetupForm, setShowSetupForm] = useState(false);
+  const [setupMode, setSetupMode] = useState("edit");
+  const [purchasePrice, setPurchasePrice] = useState(settings.purchasePrice ?? settings.accountPurchasePrice ?? "");
+  const [activationFeePaid, setActivationFeePaid] = useState(settings.activationFeePaid ?? "");
+  const initialAccountRef = useRef(activeAccountId);
+
+  const firm = useMemo(() => catalog.find((f) => f.id === firmId), [catalog, firmId]);
+  const vendors = useMemo(() => [...new Set((firm?.programs || []).map((p) => p.vendor).filter(Boolean))], [firm]);
+  const availablePrograms = useMemo(() => (firm?.programs || []).filter((p) => !vendor || !p.vendor || p.vendor === vendor), [firm, vendor]);
+  const program = useMemo(() => availablePrograms.find((p) => p.id === programId) || firm?.programs.find((p) => p.id === programId), [availablePrograms, firm, programId]);
+
+  useEffect(() => {
+    if (!firm) return;
+    const currentVendor = vendor || vendors[0] || "";
+    if (vendors.length && !vendors.includes(currentVendor)) setVendor(vendors[0]);
+    const programs = (firm.programs || []).filter((p) => !currentVendor || !p.vendor || p.vendor === currentVendor);
+    if (!programs.some((p) => p.id === programId)) setProgramId(programs[0]?.id || "");
+  }, [firm, vendors, vendor, programId]);
+
+  useEffect(() => {
+    setAccountId(settings.accountId || "");
+    setAccountLabel(settings.accountLabel || "");
+    setPurchasePrice(settings.purchasePrice ?? settings.accountPurchasePrice ?? "");
+    setActivationFeePaid(settings.activationFeePaid ?? "");
+  }, [settings.accountId, settings.accountLabel, settings.purchasePrice, settings.accountPurchasePrice, settings.activationFeePaid]);
+
+  useEffect(() => {
+    if (initialAccountRef.current !== activeAccountId) {
+      initialAccountRef.current = activeAccountId;
+      // Switching accounts opens the editor, never the All Accounts directory.
+      setShowAllAccounts(false);
+      setDetailAccountId(null);
+      setSetupMode("edit");
+      setShowSetupForm(true);
+    }
+  }, [activeAccountId]);
+
+  const buildSettings = () => {
+    if (!firm || !program) return null;
+    const r = program.rules || {};
+    const generatedName = `${firm.name} · ${program.shortName || program.name}`;
+    return {
+      ...settings,
+      propFirmId: firm.id,
+      propFirm: firm.name,
+      propProgramId: program.id,
+      propProgram: program.name,
+      propVendor: program.vendor || vendor || "",
+      platform: program.platform || settings.platform || "",
+      propProgramFamily: program.programFamily || "",
+      propPlanVariant: program.id.includes("no-activation") ? "No Activation Fee" : "Standard",
+      propPricing: program.pricing || null,
+      propRules: r,
+      propRulesSource: firm.source,
+      propRulesVerifiedAt: new Date().toISOString(),
+      accountId: accountId.trim(),
+      accountLabel: accountLabel.trim(),
+      accountName: accountLabel.trim() || generatedName,
+      purchasePrice: Number(purchasePrice) || 0,
+      accountPurchasePrice: Number(purchasePrice) || 0,
+      activationFeePaid: Number(activationFeePaid) || 0,
+      customRules: customRules.filter((rule) => rule.label?.trim() || rule.value?.trim()),
+      ...(program.accountSize ? { accountSize: program.accountSize } : {}),
+      ...(r.maxDrawdown != null ? { maxDrawdown: r.maxDrawdown } : {}),
+      ...(r.dailyLossLimit != null ? { dailyLossLimit: r.dailyLossLimit } : {}),
+      ...(r.profitTarget != null ? { profitTarget: r.profitTarget } : {}),
+      ...(r.consistencyRule != null ? { consistencyRule: r.consistencyRule } : {}),
+      ...(r.minTradingDays != null ? { minTradingDays: r.minTradingDays } : {}),
+      ...(r.minProfitableDays != null ? { minProfitableDays: r.minProfitableDays } : {}),
+      ...(r.minDailyProfit != null ? { minDailyProfit: r.minDailyProfit } : {}),
+    };
+  };
+
+  // Reference labels: Program / Account Type; Apply Rules & Start Journal.
+  // Legacy action retained for compatibility.
+  const applyRules = async () => {
+    const next = buildSettings();
+    if (!next) return;
+    await onSave(next);
+    setSaved(true);
+    window.setTimeout(() => setSaved(false), 2200);
+  };
+
+  const createAccountFromSetup = async () => {
+    const next = buildSettings();
+    if (!next) return;
+
+    // Editing an existing account should save its settings and immediately
+    // return to the portfolio home. It must not create a duplicate account.
+    if (setupMode === "edit") {
+      if (!onSave) return;
+      await onSave(next);
+      setSaved(true);
+      window.setTimeout(() => setSaved(false), 1600);
+      setShowSetupForm(false);
+      return;
+    }
+
+    // Adding an account creates a new independent portfolio entry and then
+    // returns to the portfolio home so the new account is visible there.
+    if (!onCreateAccount) return;
+    const account = onCreateAccount(next, { inheritBase: false });
+    if (account?.id) {
+      setCreated(true);
+      window.setTimeout(() => setCreated(false), 1600);
+      setShowSetupForm(false);
+    }
+  };
+
+  const selectFirm = (nextFirm) => {
+    const next = catalog.find((f) => f.id === nextFirm);
+    const nextVendors = [...new Set((next?.programs || []).map((p) => p.vendor).filter(Boolean))];
+    setFirmId(nextFirm);
+    setVendor(nextVendors[0] || "");
+    setProgramId("");
+  };
+
+  const updateAccountIdentity = () => {};
+  const displayId = accountId.trim();
+  const displayLabel = accountLabel.trim();
+  const openAddAccount = () => {
+    // The setup form and the All Accounts directory are mutually exclusive views.
+    setShowAllAccounts(false);
+    setDetailAccountId(null);
+    setSetupMode("add");
+    setAccountId("");
+    setAccountLabel("");
+    setPurchasePrice("");
+    setActivationFeePaid("");
+    setShowSetupForm(true);
+  };
+  const closeSetupForm = () => setShowSetupForm(false);
+  const addCustomRule = () => setCustomRules((items) => [...items, { id: `custom_${Date.now()}_${items.length}`, label: "", value: "" }]);
+  const updateCustomRule = (id, key, value) => setCustomRules((items) => items.map((item) => item.id === id ? { ...item, [key]: value } : item));
+  const removeCustomRule = (id) => setCustomRules((items) => items.filter((item) => item.id !== id));
+
+  const portfolioRows = useMemo(() => (Array.isArray(accounts) ? accounts : []).map((account) => {
+    const accountTrades = filterTradesForAccount(trades, account.id);
+    const compliance = calculatePropFirmCompliance(accountTrades, account.settings || {});
+    const pnl = accountTrades.reduce((sum, trade) => sum + Number(trade?.pnl ?? trade?.profit_loss ?? 0), 0);
+    const rawStatus = String(account?.settings?.accountStatus || account?.status || "Active").toLowerCase();
+    const blown = rawStatus.includes("blown") || rawStatus.includes("failed");
+    return { account, accountTrades, compliance, pnl, blown };
+  }), [accounts, trades]);
+  const activeCount = portfolioRows.filter((row) => !row.blown).length;
+  const blownCount = portfolioRows.filter((row) => row.blown).length;
+  const totalPaid = portfolioRows.reduce((sum, row) => sum + Number(row.account?.settings?.purchasePrice ?? row.account?.settings?.accountPurchasePrice ?? row.account?.settings?.propPricing?.onePack ?? 0), 0);
+  const portfolioTotal = portfolioRows.length;
+  const activePct = portfolioTotal ? Math.round((activeCount / portfolioTotal) * 100) : 0;
+  const accountReport = (row) => {
+    const list = Array.isArray(row?.accountTrades) ? row.accountTrades : [];
+    const pnlOf = (trade) => Number(trade?.pnl ?? trade?.profit_loss ?? 0) || 0;
+    const wins = list.filter((trade) => pnlOf(trade) > 0);
+    const losses = list.filter((trade) => pnlOf(trade) < 0);
+    const grossProfit = wins.reduce((sum, trade) => sum + pnlOf(trade), 0);
+    const grossLoss = Math.abs(losses.reduce((sum, trade) => sum + pnlOf(trade), 0));
+    const totalPnl = list.reduce((sum, trade) => sum + pnlOf(trade), 0);
+    const winRate = list.length ? (wins.length / list.length) * 100 : 0;
+    const avgWin = wins.length ? grossProfit / wins.length : 0;
+    const avgLoss = losses.length ? grossLoss / losses.length : 0;
+    const profitFactor = grossLoss > 0 ? grossProfit / grossLoss : (grossProfit > 0 ? Infinity : 0);
+    const expectancy = list.length ? totalPnl / list.length : 0;
+    const bestTrade = list.length ? Math.max(...list.map(pnlOf)) : 0;
+    const worstTrade = list.length ? Math.min(...list.map(pnlOf)) : 0;
+    const dates = new Set(list.map((trade) => trade?.date || trade?.trade_date).filter(Boolean));
+    const settingsForAccount = row.account?.settings || {};
+    const accountSize = Number(settingsForAccount.accountSize || 0);
+    const roi = accountSize ? (totalPnl / accountSize) * 100 : 0;
+    const compliance = row.compliance || {};
+    const currentEquity = accountSize + Number(settingsForAccount.initialProfit ?? settingsForAccount.unloggedProfitOffset ?? 0) + totalPnl;
+    return {
+      trades: list.length, wins: wins.length, losses: losses.length, winRate, grossProfit, grossLoss, totalPnl, avgWin, avgLoss,
+      profitFactor, expectancy, bestTrade, worstTrade, tradingDays: dates.size, roi, currentEquity, accountSize,
+      drawdownRemaining: compliance.drawdownRemaining, dailyLossRemaining: compliance.dailyLossRemaining,
+      consistencyPct: compliance.consistencyPct, consistencyRule: compliance.rules?.consistencyRule,
+      payoutEligible: compliance.payoutEligible, hardViolations: compliance.hardViolations?.length || 0, warnings: compliance.warnings?.length || 0,
+    };
+  };
+
+  const selectedDetailRow = detailAccountId ? portfolioRows.find((row) => row.account.id === detailAccountId) : null;
+
+  return (
+    <main className="pf-setup">
+      <div className={`pf-app ${showSetupForm ? "pf-form-mode" : "pf-portfolio-mode"}`} onPointerMove={(e) => {
+        const root = e.currentTarget;
+        const r = root.getBoundingClientRect();
+        root.style.setProperty("--x", `${e.clientX - r.left}px`);
+        root.style.setProperty("--y", `${e.clientY - r.top}px`);
+      }}>
+        <header className="pf-header">
+          <div className="pf-top">
+            <div className="pf-title-wrap">
+              {showSetupForm && (
+                <button type="button" className="pf-back-button" aria-label="Back to account overview" title="Back to account overview" onClick={closeSetupForm}>←</button>
+              )}
+              <div className="pf-logo">♜</div>
+              <div><h1>Prop Firm Setup</h1><p className="pf-sub">Select a firm, vendor and account program to initialize the journal with a versioned rule snapshot.</p></div>
+            </div>
+            <button type="button" className="pf-close" aria-label="Close" onClick={() => onClose?.()}>×</button>
+          </div>
+        </header>
+
+        {!showSetupForm ? (
+          <section className="pf-portfolio-home">
+            <div className="pf-portfolio-home-head">
+              <div><div className="pf-panel-eyebrow">ACCOUNT PORTFOLIO</div><h2>Account Overview</h2><p>Manage all of your prop-firm accounts from one place.</p></div>
+              <button type="button" className="pf-add-account-primary" onClick={openAddAccount}>+ Add Account</button>
+            </div>
+            <div className="pf-home-summary">
+              <div className="pf-portfolio-hero"><div><span>Total Accounts</span><strong>{portfolioTotal}</strong><small>Across your portfolio</small></div><div className="pf-portfolio-ring" style={{"--active-pct": `${activePct}%`}}><div><b>{activePct}%</b><span>Active</span></div></div></div>
+              <div className="pf-account-stats"><div className="pf-account-stat pf-active-stat"><div className="pf-stat-icon-small">✓</div><div><span>Active Accounts</span><strong>{activeCount}</strong><small>{activePct}% of portfolio</small></div></div><div className="pf-account-stat pf-blown-stat"><div className="pf-stat-icon-small">×</div><div><span>Blown Accounts</span><strong>{blownCount}</strong><small>{portfolioTotal ? Math.round((blownCount / portfolioTotal) * 100) : 0}% of portfolio</small></div></div></div>
+              <div className="pf-section-title">Financial Overview</div>
+              <div className="pf-money-card"><span>Total Paid for Accounts</span><strong>{money(totalPaid)}</strong><small>Based on your recorded purchase prices</small></div>
+              <div className="pf-money-row"><div><span>Average / Account</span><strong>{money(portfolioTotal ? totalPaid / portfolioTotal : 0)}</strong></div><div><span>Active Account Cost</span><strong>{money(portfolioRows.filter((r) => !r.blown).reduce((sum, r) => sum + Number(r.account?.settings?.purchasePrice ?? r.account?.settings?.accountPurchasePrice ?? 0), 0))}</strong></div></div>
+              <div className="pf-section-title">Portfolio Status</div>
+              <div className="pf-portfolio-bar"><div className="pf-bar-label"><span>Account distribution</span><b>{activeCount} active · {blownCount} blown</b></div><div className="pf-bar"><i style={{width:`${activePct}%`}}></i><i style={{width:`${100-activePct}%`}}></i></div><div className="pf-bar-legend"><span><b className="pf-green-dot"></b>Active <strong>{activeCount}</strong></span><span><b className="pf-red-dot"></b>Blown <strong>{blownCount}</strong></span></div></div>
+              <button type="button" className="pf-view-all-accounts" onClick={() => { setShowSetupForm(false); setDetailAccountId(null); setShowAllAccounts(true); }}>View All Accounts <span>→</span></button>
+            </div>
+          </section>
+        ) : program ? (
+          <>
+            <div className="pf-workspace">
+              <div className="pf-left-column">
+                <div className="pf-selector">
+                  <div className="pf-field"><label>PROP FIRM</label><select value={firmId} onChange={(e) => selectFirm(e.target.value)}><option value="">Select prop firm…</option>{catalog.map((f) => <option key={f.id} value={f.id}>{f.name} · {f.category}</option>)}</select></div>
+                  <div className="pf-field"><label>VENDOR / PLATFORM</label><select value={vendor} onChange={(e) => { setVendor(e.target.value); setProgramId(""); }} disabled={!firm}><option value="">All vendors</option>{vendors.map((v) => <option key={v} value={v}>{v}</option>)}</select></div>
+                  <div className="pf-field"><label>PROGRAM / ACCOUNT TYPE</label><select value={programId} onChange={(e) => setProgramId(e.target.value)} disabled={!firm}><option value="">Select program…</option>{availablePrograms.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}</select></div>
+                  <button type="button" className="pf-refresh" onClick={refresh} disabled={status.state === "loading"} aria-label="Refresh official rules" title="Refresh official rules"><svg viewBox="0 0 24 24" aria-hidden="true">{ICONS["i-refresh"]}</svg></button>
+                  <div className="pf-field pf-account-id"><label>ACCOUNT ID</label><input type="text" value={accountId} onChange={(e) => { setAccountId(e.target.value); updateAccountIdentity(); }} placeholder="e.g. 25K-001" maxLength={40}/></div>
+                  <div className="pf-field pf-account-name"><label>ACCOUNT LABEL <span>(Optional)</span></label><input type="text" value={accountLabel} onChange={(e) => { setAccountLabel(e.target.value); updateAccountIdentity(); }} placeholder="e.g. Main / Account 1" maxLength={40}/></div>
+                  <div className="pf-field pf-purchase-price"><label>PRICE PAID</label><input type="number" min="0" step="0.01" value={purchasePrice} onChange={(e) => setPurchasePrice(e.target.value)} placeholder="e.g. 49.00"/></div>
+                  <div className="pf-field pf-activation-paid"><label>ACTIVATION FEE PAID</label><input type="number" min="0" step="0.01" value={activationFeePaid} onChange={(e) => setActivationFeePaid(e.target.value)} placeholder="e.g. 80.00"/></div>
+                  <div className="pf-verified"><b></b>Rule catalog: {status.state === "fresh" ? "official-source refresh" : "verified snapshot"}</div>
+                </div>
+
+              <section className="pf-details">
+                <div className="pf-detail-head">
+                  <div><h2>{program.name}</h2><p>{firm.name} · {program.stage}{program.vendor ? ` · ${program.vendor}` : ""}</p></div>
+                  <div className="pf-head-right">
+                    <div className="pf-account-badge">Account ID: <strong>{displayId || "Not set"}</strong>{displayLabel ? ` · ${displayLabel}` : ""}</div>
+                    <div className="pf-badge">● Official source tracked</div>
+                  </div>
+                </div>
+
+                <div className="pf-grid">
+                  {ruleRows(program.rules).filter(([, value]) => value !== "—").map(([label, value, icon]) => (
+                    <div className="pf-stat" key={label}>
+                      <span className="pf-stat-icon"><svg viewBox="0 0 24 24">{ICONS[icon]}</svg></span>
+                      <span><span className="pf-label">{label}</span><strong>{value}</strong></span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="pf-custom-rules">
+                  <div className="pf-custom-head">
+                    <div><strong>Additional Rules</strong><span>Add any custom rule that should be tracked for this program.</span></div>
+                    <button type="button" className="pf-add-rule" onClick={addCustomRule}>+ Add Rule</button>
+                  </div>
+                  {customRules.length > 0 && <div className="pf-custom-list">
+                    {customRules.map((rule) => (
+                      <div className="pf-stat pf-custom-stat" key={rule.id}>
+                        <span className="pf-stat-icon"><svg viewBox="0 0 24 24">{ICONS["i-file"]}</svg></span>
+                        <span className="pf-custom-stat-content">
+                          <input className="pf-custom-label" value={rule.label} onChange={(e) => updateCustomRule(rule.id, "label", e.target.value)} placeholder="Rule name" maxLength={60} aria-label="Custom rule name" />
+                          <input className="pf-custom-value" value={rule.value} onChange={(e) => updateCustomRule(rule.id, "value", e.target.value)} placeholder="Rule value / condition" maxLength={100} aria-label="Custom rule value or condition" />
+                        </span>
+                        <button type="button" className="pf-remove-rule" onClick={() => removeCustomRule(rule.id)} aria-label="Remove rule">×</button>
+                      </div>
+                    ))}
+                  </div>}
+                </div>
+
+                {program.pricing && <div className="pf-pricing"><div className="pf-price-title">Current pricing snapshot</div><div className="pf-prices">{pricingRows(program.pricing).map(([label, value]) => <div className="pf-price" key={label}><span>{label}</span><strong>{value}</strong></div>)}</div><div className="pf-coupon">{program.pricing.promo || "Coupon pricing shown on checkout"}</div></div>}
+                {program.rules?.scaling && <div className="pf-notice">ⓘ &nbsp; Scaling: {program.rules.scaling}</div>}
+                {program.rules?.ruleNote && <div className="pf-notice">ⓘ &nbsp; {program.rules.ruleNote}</div>}
+                <div className="pf-source-line">Source: {firm.source}</div>
+              </section>
+              </div>
+
+              <aside className={`pf-account-panel ${showSetupForm ? "pf-form-account-panel" : ""}`}>
+                <div className="pf-account-panel-head">
+                  <div><div className="pf-panel-eyebrow">ACCOUNT PORTFOLIO</div><h3>Account Overview</h3><p className="pf-panel-subtitle">Track every account purchased under this firm and program.</p></div>
+                  <span className="pf-live-dot"></span>
+                </div>
+
+                <div className="pf-portfolio-hero">
+                  <div><span>Total Accounts</span><strong>{portfolioTotal}</strong><small>Across this prop-firm setup</small></div>
+                  <div className="pf-portfolio-ring" style={{"--active-pct": `${activePct}%`}}><div><b>{activePct}%</b><span>Active</span></div></div>
+                </div>
+
+                <div className="pf-account-stats">
+                  <div className="pf-account-stat pf-active-stat"><div className="pf-stat-icon-small">✓</div><div><span>Active Accounts</span><strong>{activeCount}</strong><small>{activePct}% of portfolio</small></div></div>
+                  <div className="pf-account-stat pf-blown-stat"><div className="pf-stat-icon-small">×</div><div><span>Blown Accounts</span><strong>{blownCount}</strong><small>{portfolioTotal ? Math.round((blownCount / portfolioTotal) * 100) : 0}% of portfolio</small></div></div>
+                </div>
+
+                <div className="pf-section-title">Financial Overview</div>
+                <div className="pf-money-card"><span>Total Paid for Accounts</span><strong>{money(totalPaid)}</strong><small>Including all {portfolioTotal} account purchases</small></div>
+                <div className="pf-money-row"><div><span>Average / Account</span><strong>{money(portfolioTotal ? totalPaid / portfolioTotal : 0)}</strong></div><div><span>Active Account Cost</span><strong>{money(portfolioRows.filter((r) => !r.blown).reduce((sum, r) => sum + Number(r.account?.settings?.propPricing?.onePack ?? r.account?.settings?.activationFee ?? 0), 0))}</strong></div></div>
+
+                <div className="pf-section-title">Portfolio Status</div>
+                <div className="pf-portfolio-bar"><div className="pf-bar-label"><span>Account distribution</span><b>{activeCount} active · {blownCount} blown</b></div><div className="pf-bar"><i style={{width:`${activePct}%`}}></i><i style={{width:`${100-activePct}%`}}></i></div><div className="pf-bar-legend"><span><b className="pf-green-dot"></b>Active <strong>{activeCount}</strong></span><span><b className="pf-red-dot"></b>Blown <strong>{blownCount}</strong></span></div></div>
+
+                <button type="button" className="pf-view-all-accounts" onClick={() => { setShowSetupForm(false); setDetailAccountId(null); setShowAllAccounts(true); }}>View All Accounts <span>→</span></button>
+              </aside>
+            </div>
+
+            {showAllAccounts && (
+              <div className="pf-accounts-overlay" role="dialog" aria-modal="true" aria-label="All accounts">
+                <div className="pf-accounts-modal">
+                  <div className="pf-accounts-modal-head">
+                    <div>
+                      <div className="pf-panel-eyebrow">ACCOUNT PORTFOLIO</div>
+                      <h2>{selectedDetailRow ? "Account Details" : "All Accounts"}</h2>
+                      <p>{selectedDetailRow ? "Detailed profitability, risk and prop-firm performance report." : `Review all ${portfolioTotal} accounts in your portfolio.`}</p>
+                    </div>
+                    <button type="button" className="pf-modal-close" aria-label="Close accounts" onClick={() => { setShowAllAccounts(false); setDetailAccountId(null); }}>×</button>
+                  </div>
+
+                  {!selectedDetailRow ? (
+                    <div className="pf-all-accounts-grid">
+                      {portfolioRows.map((row) => {
+                        const report = accountReport(row);
+                        const accountSettings = row.account.settings || {};
+                        return (
+                          <article className="pf-account-detail-card" key={row.account.id}>
+                            <div className="pf-account-card-top">
+                              <div>
+                                <span className="pf-account-card-status">{row.blown ? "Blown" : "Active"}</span>
+                                <h3>{accountSettings.accountLabel || accountSettings.accountId || row.account.name}</h3>
+                                <p>{accountSettings.propFirm || "Prop Firm"} · {accountSettings.propProgram || accountSettings.accountName || "Trading Account"}</p>
+                              </div>
+                              <div className={`pf-account-health ${row.blown ? "bad" : "good"}`}>{row.blown ? "Review" : "Healthy"}</div>
+                            </div>
+                            <div className="pf-account-card-metrics">
+                              <div><span>Net P&L</span><strong className={report.totalPnl >= 0 ? "positive" : "negative"}>{money(report.totalPnl)}</strong></div>
+                              <div><span>Win Rate</span><strong>{report.winRate.toFixed(1)}%</strong></div>
+                              <div><span>Profit Factor</span><strong>{Number.isFinite(report.profitFactor) ? report.profitFactor.toFixed(2) : "∞"}</strong></div>
+                              <div><span>Trades</span><strong>{report.trades}</strong></div>
+                            </div>
+                            <div className="pf-account-card-foot">
+                              <span>{report.tradingDays} trading days · {money(report.currentEquity)} equity</span>
+                              <button type="button" onClick={() => setDetailAccountId(row.account.id)}>View Details <span>→</span></button>
+                            </div>
+                          </article>
+                        );
+                      })}
+                      {!portfolioRows.length && <div className="pf-all-empty">No accounts have been added yet.</div>}
+                    </div>
+                  ) : (
+                    <div className="pf-account-report">
+                      <button type="button" className="pf-back-accounts" onClick={() => setDetailAccountId(null)}>← All Accounts</button>
+                      <div className="pf-report-hero">
+                        <div><span>{selectedDetailRow.account.settings?.propFirm || "Prop Firm"}</span><h3>{selectedDetailRow.account.settings?.accountLabel || selectedDetailRow.account.settings?.accountId || selectedDetailRow.account.name}</h3><p>{selectedDetailRow.account.settings?.propProgram || selectedDetailRow.account.settings?.accountName || "Trading Account"} · {selectedDetailRow.account.settings?.platform || "—"}</p></div>
+                        <div className={`pf-report-status ${selectedDetailRow.blown ? "bad" : "good"}`}>{selectedDetailRow.blown ? "BLOWN / REVIEW" : "ACTIVE"}</div>
+                      </div>
+                      {(() => { const r = accountReport(selectedDetailRow); const s = selectedDetailRow.account.settings || {}; return <>
+                        <div className="pf-report-grid">
+                          <div><span>Net P&L</span><strong className={r.totalPnl >= 0 ? "positive" : "negative"}>{money(r.totalPnl)}</strong><small>{r.roi.toFixed(2)}% return on account size</small></div>
+                          <div><span>Current Equity</span><strong>{money(r.currentEquity)}</strong><small>Starting size {money(r.accountSize)}</small></div>
+                          <div><span>Win Rate</span><strong>{r.winRate.toFixed(1)}%</strong><small>{r.wins} wins · {r.losses} losses</small></div>
+                          <div><span>Profit Factor</span><strong>{Number.isFinite(r.profitFactor) ? r.profitFactor.toFixed(2) : "∞"}</strong><small>Gross profit {money(r.grossProfit)}</small></div>
+                        </div>
+                        <div className="pf-report-section"><h4>Profitability</h4><div className="pf-report-table">
+                          <div><span>Total trades</span><b>{r.trades}</b></div><div><span>Expectancy / trade</span><b>{money(r.expectancy)}</b></div><div><span>Average winning trade</span><b>{money(r.avgWin)}</b></div><div><span>Average losing trade</span><b>{money(-r.avgLoss)}</b></div><div><span>Best trade</span><b className="positive">{money(r.bestTrade)}</b></div><div><span>Worst trade</span><b className="negative">{money(r.worstTrade)}</b></div>
+                        </div></div>
+                        <div className="pf-report-section"><h4>Risk & Compliance</h4><div className="pf-report-table">
+                          <div><span>Trading days</span><b>{r.tradingDays}</b></div><div><span>Drawdown remaining</span><b>{r.drawdownRemaining != null ? money(r.drawdownRemaining) : "—"}</b></div><div><span>Daily loss remaining</span><b>{r.dailyLossRemaining != null ? money(r.dailyLossRemaining) : "—"}</b></div><div><span>Consistency</span><b>{r.consistencyPct != null ? `${Number(r.consistencyPct).toFixed(1)}%${r.consistencyRule != null ? ` / ${r.consistencyRule}%` : ""}` : "—"}</b></div><div><span>Payout eligibility</span><b className={r.payoutEligible ? "positive" : "negative"}>{r.payoutEligible ? "Eligible" : "Not eligible"}</b></div><div><span>Compliance alerts</span><b>{r.hardViolations ? `${r.hardViolations} blocking` : `${r.warnings} warning${r.warnings === 1 ? "" : "s"}`}</b></div>
+                        </div></div>
+                        <div className="pf-report-section"><h4>Account Configuration</h4><div className="pf-report-table">
+                          <div><span>Account ID</span><b>{s.accountId || "Not set"}</b></div><div><span>Platform</span><b>{s.platform || "—"}</b></div><div><span>Activation fee</span><b>{s.propPricing?.onePack != null ? money(s.propPricing.onePack) : s.activationFee != null ? money(s.activationFee) : "—"}</b></div><div><span>Max drawdown</span><b>{s.maxDrawdown != null ? money(s.maxDrawdown) : "—"}</b></div><div><span>Daily loss limit</span><b>{s.dailyLossLimit != null ? money(s.dailyLossLimit) : "—"}</b></div><div><span>Profit target</span><b>{s.profitTarget != null ? money(s.profitTarget) : "—"}</b></div>
+                        </div></div>
+                      </>; })()}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <footer className="pf-footer">
+              <button type="button" className="pf-btn pf-cancel" onClick={closeSetupForm}>Cancel</button>
+              {onCreateAccount && <button type="button" className={`pf-btn pf-next ${created ? "pf-success" : ""}`} onClick={createAccountFromSetup}>{created ? "✓ Created" : (setupMode === "add" ? "Add Account" : "Save Changes")}</button>}
+            </footer>
+          </>
+        ) : (
+          <section className="pf-details pf-empty">Select a prop firm and program to configure this account.</section>
+        )}
+      </div>
+    </main>
+  );
+}

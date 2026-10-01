@@ -1,0 +1,88 @@
+{
+  "generatedAt": "2026-09-29T05:27:08.393Z",
+  "summary": {
+    "passed": 13,
+    "failed": 0,
+    "total": 13
+  },
+  "results": [
+    {
+      "name": "Broker synchronization removed from active App route",
+      "status": "PASS",
+      "ms": 1.15,
+      "detail": "manual journaling remains the active trade-entry path"
+    },
+    {
+      "name": "Broker synchronization removed from active sidebar",
+      "status": "PASS",
+      "ms": 0.38,
+      "detail": "future connector files remain archived but unreachable"
+    },
+    {
+      "name": "Dashboard export control is wired",
+      "status": "PASS",
+      "ms": 0.42,
+      "detail": "CSV export is generated client-side from current dashboard trades"
+    },
+    {
+      "name": "Supabase account_size hydrates Journal Ledger equity on first load",
+      "status": "PASS",
+      "ms": 0.21,
+      "detail": "Supabase account_size is hydrated into both account_size and settings.accountSize before Journal Ledger renders"
+    },
+    {
+      "name": "Current Equity uses prop-firm account size plus P&L",
+      "status": "PASS",
+      "ms": 0.42,
+      "detail": "25K + 375 = 25,375; legacy initial-profit offsets are ignored"
+    },
+    {
+      "name": "Dashboard date control is wired",
+      "status": "PASS",
+      "ms": 0.49,
+      "detail": "latest month/all dates change the dashboard trade dataset"
+    },
+    {
+      "name": "Calendar controls are wired",
+      "status": "PASS",
+      "ms": 3.33,
+      "detail": "settings, view density and info controls have actions"
+    },
+    {
+      "name": "Execution aggregator scale-in/partial-exit/full-close",
+      "status": "PASS",
+      "ms": 6.58,
+      "detail": "closed journal P&L 34.00"
+    },
+    {
+      "name": "Execution deduplication",
+      "status": "PASS",
+      "ms": 0.15,
+      "detail": "duplicate execution ignored"
+    },
+    {
+      "name": "100,000-trade dashboard statistics load",
+      "status": "PASS",
+      "ms": 2551.99,
+      "detail": "100,000 trades processed in 2461ms"
+    },
+    {
+      "name": "10,000 execution stress test",
+      "status": "PASS",
+      "ms": 136.56,
+      "detail": "20 journals / 5000 executions"
+    },
+    {
+      "name": "Multi-user isolation model",
+      "status": "PASS",
+      "ms": 2.14,
+      "detail": "5 isolated users × 1,000 synthetic trades verified"
+    },
+    {
+      "name": "No live-capture UI is reachable",
+      "status": "PASS",
+      "ms": 0.5,
+      "detail": "connector implementation remains available for a later phase but is not exposed"
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+/* TradeLog Trading Plan — Dashboard-faithful compact workspace */
+.trading-plan-workspace{width:100%;max-width:1500px;margin:0 auto;padding:18px 24px 28px;box-sizing:border-box;font-family:Inter,system-ui,sans-serif;background:#f5f7fb;color:#172033;}
+.trading-plan-header{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:10px;}
+.trading-plan-eyebrow{font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#7a879b;margin-bottom:4px;}
+.trading-plan-title{margin:0;color:#172033;font-size:24px;line-height:1.15;font-weight:750;letter-spacing:-.02em;}
+.trading-plan-subtitle{margin-top:4px;color:#7a879b;font-size:11px;line-height:1.35;}
+.trading-plan-actions{display:flex;gap:7px;align-items:center;}
+.trading-plan-btn{height:30px;padding:0 10px;border:1px solid #dfe5ed;border-radius:7px;background:#fff;color:#52627a;font:600 10px/1 Inter,system-ui,sans-serif;cursor:pointer;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease,background .15s ease,color .15s ease;}
+.trading-plan-btn:hover{border-color:#c8d2df;background:#fbfcfe;color:#172033;box-shadow:0 4px 12px rgba(30,45,70,.07);transform:translateY(-1px);}
+.trading-plan-btn.primary{border-color:#6255e8;background:#6255e8;color:#fff;box-shadow:0 2px 7px rgba(98,85,232,.12);}
+.trading-plan-btn.primary:hover{background:#6f60ee;border-color:#6f60ee;color:#fff;box-shadow:0 5px 14px rgba(98,85,232,.20);}
+.trading-plan-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-bottom:10px;}
+.trading-plan-kpi{min-width:0;height:72px;padding:9px 11px;border:1px solid #dfe5ed;background:#fff;border-radius:7px;box-shadow:0 2px 8px rgba(30,45,70,.035);display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease,background .15s ease;}
+.trading-plan-kpi:hover{border-color:#6255c7;box-shadow:0 0 0 1px rgba(98,85,199,.10),0 5px 14px rgba(30,45,70,.07);transform:translateY(-1px);}
+.trading-plan-kpi-label{color:#7a879b;font-size:8px;line-height:1.1;margin-bottom:4px;}
+.trading-plan-kpi-value{color:#172033;font-size:17px;font-weight:500;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.trading-plan-kpi-sub{color:#8a96a8;font-size:8px;line-height:1.1;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.trading-plan-kpi.positive .trading-plan-kpi-value,.trading-plan-kpi.positive .trading-plan-kpi-sub{color:#42b98d;}
+.trading-plan-kpi.warning .trading-plan-kpi-value{color:#d8941b;}
+.trading-plan-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:start;}
+.trading-plan-card{background:#fff;border:1px solid #dfe5ed;border-radius:8px;box-shadow:0 2px 10px rgba(30,45,70,.025);overflow:visible;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease;}
+.trading-plan-card:hover{border-color:#cfd7e4;box-shadow:0 4px 14px rgba(30,45,70,.05);transform:translateY(-1px);}
+.trading-plan-card-head{padding:11px 12px;border-bottom:1px solid #e5e9ef;}
+.trading-plan-card-title{font-size:11px;font-weight:700;color:#172033;line-height:1.2;}
+.trading-plan-card-sub{font-size:8px;color:#8a96a8;margin-top:3px;line-height:1.2;}
+.trading-plan-card-body{padding:11px 12px;display:grid;gap:10px;}
+.trading-plan-field{display:grid;gap:5px;position:relative;}
+.trading-plan-label{font-size:8px;font-weight:600;color:#7a879b;line-height:1.1;}
+.trading-plan-input,.trading-plan-textarea,.trading-plan-select-trigger{width:100%;box-sizing:border-box;border:1px solid #dfe5ed;border-radius:7px;background:#fff;color:#172033;font:500 11px/1.35 Inter,system-ui,sans-serif;outline:none;transition:border-color .15s ease,box-shadow .15s ease,background .15s ease;}
+.trading-plan-input{height:32px;padding:0 9px;}
+.trading-plan-textarea{min-height:76px;padding:8px 9px;resize:vertical;}
+.trading-plan-input::placeholder,.trading-plan-textarea::placeholder{color:#9aa5b5;}
+.trading-plan-input:hover,.trading-plan-textarea:hover,.trading-plan-select-trigger:hover{border-color:#cbd5e1;}
+.trading-plan-input:focus,.trading-plan-textarea:focus,.trading-plan-select-trigger:focus{border-color:#7665e8;box-shadow:0 0 0 2px rgba(118,101,232,.10);}
+.trading-plan-two{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.trading-plan-select-trigger{height:32px;padding:0 9px;display:flex;align-items:center;justify-content:space-between;text-align:left;cursor:pointer;}
+.trading-plan-select-value{display:flex;align-items:center;gap:7px;min-width:0;}
+.trading-plan-bias-dot{width:7px;height:7px;border-radius:50%;background:#94a3b8;flex:0 0 auto;}
+.trading-plan-bias-dot.strong-bullish,.trading-plan-bias-dot.bullish{background:#42b98d;}
+.trading-plan-bias-dot.bearish,.trading-plan-bias-dot.strong-bearish{background:#ef5368;}
+.trading-plan-bias-dot.neutral{background:#a78bfa;}
+.trading-plan-select-menu{position:absolute;z-index:40;left:0;right:0;top:calc(100% + 5px);padding:5px;border:1px solid #dfe5ed;border-radius:8px;background:#fff;box-shadow:0 14px 30px rgba(30,45,70,.14);}
+.trading-plan-select-option{width:100%;min-height:35px;padding:6px 8px;border:0;border-radius:6px;background:transparent;color:#172033;display:flex;align-items:center;gap:8px;text-align:left;font:500 10px/1.2 Inter,system-ui,sans-serif;cursor:pointer;}
+.trading-plan-select-option:hover,.trading-plan-select-option.selected{background:#f3f1ff;color:#4f46b5;}
+.trading-plan-select-option small{display:block;color:#8a96a8;font-size:8px;margin-top:2px;}
+.trading-plan-note-card{background:#fff;border:1px solid #dfe5ed;border-radius:8px;box-shadow:0 2px 10px rgba(30,45,70,.025);overflow:hidden;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease;margin-top:10px;}
+.trading-plan-note-card:hover{border-color:#cfd7e4;box-shadow:0 4px 14px rgba(30,45,70,.05);transform:translateY(-1px);}
+.trading-plan-note-head{padding:11px 12px;border-bottom:1px solid #e5e9ef;}
+.trading-plan-note-title{font-size:11px;font-weight:700;color:#172033;}
+.trading-plan-note-sub{font-size:8px;color:#8a96a8;margin-top:3px;}
+.trading-plan-note-body{padding:10px 12px;}
+.trading-plan-note-textarea{width:100%;min-height:82px;resize:vertical;box-sizing:border-box;border:1px solid #dfe5ed;border-radius:7px;background:#fff;color:#172033;padding:8px 9px;font:500 11px/1.4 Inter,system-ui,sans-serif;outline:none;transition:border-color .15s ease,box-shadow .15s ease;}
+.trading-plan-note-textarea:focus{border-color:#7665e8;box-shadow:0 0 0 2px rgba(118,101,232,.10);}
+.trading-plan-note-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:7px;}
+.trading-plan-char{font-size:8px;color:#8a96a8;}
+.trading-plan-confirm{display:flex;align-items:center;gap:7px;font-size:10px;color:#52627a;cursor:pointer;}
+.trading-plan-confirm input{width:13px;height:13px;accent-color:#6255c7;}
+.trading-plan-saved{font-size:8px;color:#42b98d;}
+.trading-plan-error{margin-top:8px;padding:7px 9px;border:1px solid #f0c9a0;border-radius:7px;background:#fff8ee;color:#b66a13;font-size:9px;}
+.trading-plan-footer-actions{display:flex;align-items:center;justify-content:flex-end;gap:7px;margin-top:10px;}
+.trading-plan-dark{background:#0f1117;color:#e8ebef;}
+.trading-plan-dark .trading-plan-eyebrow,.trading-plan-dark .trading-plan-subtitle,.trading-plan-dark .trading-plan-label,.trading-plan-dark .trading-plan-kpi-label,.trading-plan-dark .trading-plan-kpi-sub,.trading-plan-dark .trading-plan-card-sub,.trading-plan-dark .trading-plan-note-sub,.trading-plan-dark .trading-plan-char{color:#707780;}
+.trading-plan-dark .trading-plan-title,.trading-plan-dark .trading-plan-kpi-value,.trading-plan-dark .trading-plan-card-title,.trading-plan-dark .trading-plan-note-title,.trading-plan-dark .trading-plan-select-option,.trading-plan-dark .trading-plan-select-trigger,.trading-plan-dark .trading-plan-input,.trading-plan-dark .trading-plan-textarea,.trading-plan-dark .trading-plan-note-textarea{color:#e8ebef;}
+.trading-plan-dark .trading-plan-kpi,.trading-plan-dark .trading-plan-card,.trading-plan-dark .trading-plan-note-card{background:#141719;border-color:#282c32;box-shadow:none;}
+.trading-plan-dark .trading-plan-kpi:hover,.trading-plan-dark .trading-plan-card:hover,.trading-plan-dark .trading-plan-note-card:hover{border-color:#6255c7;box-shadow:0 0 0 1px rgba(98,85,199,.10);}
+.trading-plan-dark .trading-plan-card-head,.trading-plan-dark .trading-plan-note-head{border-bottom-color:#282c32;}
+.trading-plan-dark .trading-plan-btn{background:#171a1e;border-color:#30353c;color:#c8ced6;}
+.trading-plan-dark .trading-plan-btn:hover{background:#1d2125;border-color:#4b535d;color:#fff;box-shadow:0 5px 14px rgba(0,0,0,.25);}
+.trading-plan-dark .trading-plan-btn.primary{background:#6255e8;border-color:#6255e8;color:#fff;}
+.trading-plan-dark .trading-plan-input,.trading-plan-dark .trading-plan-textarea,.trading-plan-dark .trading-plan-select-trigger,.trading-plan-dark .trading-plan-note-textarea{background:#111417;border-color:#30353c;color:#e8ebef;}
+.trading-plan-dark .trading-plan-select-menu{background:#141719;border-color:#30353c;box-shadow:0 18px 36px rgba(0,0,0,.42);}
+.trading-plan-dark .trading-plan-select-option:hover,.trading-plan-dark .trading-plan-select-option.selected{background:#1d1a31;color:#d9ceff;}
+.trading-plan-dark .trading-plan-error{background:#261d13;border-color:#7c5422;color:#f1b45a;}
+.trading-plan-dark .trading-plan-confirm{color:#c8ced6;}
+@media(max-width:900px){.trading-plan-kpis{grid-template-columns:repeat(2,minmax(0,1fr));}.trading-plan-grid{grid-template-columns:1fr;}}
+@media(max-width:650px){.trading-plan-workspace{padding:14px 12px 24px}.trading-plan-header{align-items:flex-start;flex-direction:column}.trading-plan-actions{width:100%}.trading-plan-btn{flex:1}.trading-plan-kpis{grid-template-columns:1fr 1fr}.trading-plan-two{grid-template-columns:1fr;}.trading-plan-note-footer{align-items:flex-start;flex-direction:column}.trading-plan-footer-actions{width:100%}.trading-plan-footer-actions .trading-plan-btn{flex:1;}}
+
+/* Trading Plan history / calendar / plan-to-trade integration */
+.trading-plan-saved-banner{display:flex;align-items:center;gap:8px;margin:0 0 10px;padding:8px 10px;border:1px solid #cde9dc;border-radius:7px;background:#f4fbf7;color:#3b7f63;font-size:9px;line-height:1.2;}
+.trading-plan-saved-banner strong{color:#246b50;}
+.trading-plan-saved-banner button{margin-left:auto;border:0;background:transparent;color:#5b4dd0;font:700 9px/1 Inter,system-ui,sans-serif;cursor:pointer;padding:2px 0;}
+.trading-plan-saved-banner button:hover{text-decoration:underline;}
+.trading-plan-tabs{display:flex;align-items:center;gap:3px;margin:0 0 10px;padding:3px;border:1px solid #dfe5ed;border-radius:8px;background:#fff;width:max-content;box-shadow:0 2px 8px rgba(30,45,70,.025);}
+.trading-plan-tabs button{height:27px;padding:0 9px;border:0;border-radius:6px;background:transparent;color:#7a879b;display:inline-flex;align-items:center;gap:5px;font:600 9px/1 Inter,system-ui,sans-serif;cursor:pointer;transition:background .15s ease,color .15s ease,box-shadow .15s ease,transform .15s ease;}
+.trading-plan-tabs button:hover{color:#4f46b5;background:#f5f3ff;transform:translateY(-1px);}
+.trading-plan-tabs button.active{background:#eeecff;color:#5145bd;box-shadow:0 1px 4px rgba(79,70,181,.08);}
+.trading-plan-history-section,.trading-plan-calendar-section{background:#fff;border:1px solid #dfe5ed;border-radius:8px;box-shadow:0 2px 10px rgba(30,45,70,.025);overflow:hidden;}
+.trading-plan-section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 12px;border-bottom:1px solid #e5e9ef;}
+.trading-plan-history-list{display:grid;gap:0;}
+.trading-plan-history-row{display:grid;grid-template-columns:minmax(130px,1.2fr) minmax(100px,.8fr) minmax(110px,.7fr) 28px;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid #edf0f4;cursor:pointer;transition:background .15s ease,border-color .15s ease,transform .15s ease,box-shadow .15s ease;}
+.trading-plan-history-row:last-child{border-bottom:0;}
+.trading-plan-history-row:hover{background:#fafbfe;box-shadow:inset 2px 0 0 #6255e8;transform:translateX(1px);}
+.trading-plan-history-row.selected{background:#f7f5ff;box-shadow:inset 2px 0 0 #6255e8;}
+.trading-plan-history-date{display:grid;gap:2px;min-width:0;}
+.trading-plan-history-date strong{font-size:10px;color:#172033;font-weight:700;}
+.trading-plan-history-date small{font-size:8px;color:#8a96a8;}
+.trading-plan-history-bias{display:inline-flex;width:max-content;max-width:100%;padding:4px 7px;border-radius:999px;border:1px solid #e2e6ed;background:#f8fafc;color:#64748b;font-size:8px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.trading-plan-history-bias.bullish,.trading-plan-history-bias.strong-bullish{border-color:#cde9dc;background:#f2fbf6;color:#2d8b68;}
+.trading-plan-history-bias.bearish,.trading-plan-history-bias.strong-bearish{border-color:#f2cbd2;background:#fff5f6;color:#d23d57;}
+.trading-plan-history-bias.neutral{border-color:#ddd6fe;background:#f7f5ff;color:#6d5bd0;}
+.trading-plan-history-meta{display:flex;justify-content:flex-end;align-items:center;gap:9px;font-size:8px;color:#8a96a8;}
+.trading-plan-history-meta strong{font-size:10px;font-weight:700;}
+.trading-plan-history-meta .positive{color:#35a67f;}.trading-plan-history-meta .negative{color:#e94c63;}
+.trading-plan-icon-btn{width:27px;height:27px;border:1px solid #dfe5ed;border-radius:6px;background:#fff;color:#66758c;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s ease,background .15s ease,color .15s ease,box-shadow .15s ease,transform .15s ease;}
+.trading-plan-icon-btn:hover{border-color:#6255e8;background:#f7f5ff;color:#5145bd;box-shadow:0 4px 10px rgba(79,70,181,.10);transform:translateY(-1px);}
+.trading-plan-detail-card{margin:10px 12px 12px;border:1px solid #dfe5ed;border-radius:8px;background:#fbfcfe;overflow:hidden;}
+.trading-plan-detail-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 11px;border-bottom:1px solid #e5e9ef;}
+.trading-plan-detail-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;padding:10px 11px 0;}
+.trading-plan-detail-grid .trading-plan-kpi{height:62px;box-shadow:none;background:#fff;}
+.trading-plan-detail-columns{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:9px 11px 11px;}
+.trading-plan-detail-columns>div{padding:8px 9px;border:1px solid #e5e9ef;border-radius:7px;background:#fff;min-width:0;}
+.trading-plan-detail-columns p{margin:4px 0 0;color:#52627a;font-size:9px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere;}
+.trading-plan-detail-notes{grid-column:1/-1;}
+.trading-plan-empty{min-height:150px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;color:#8a96a8;font-size:9px;}
+.trading-plan-empty strong{font-size:11px;color:#52627a;}
+.trading-plan-calendar-nav{display:flex;align-items:center;gap:7px;color:#52627a;font-size:10px;}
+.trading-plan-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:10px;gap:5px;}
+.trading-plan-calendar-weekday{padding:0 4px 3px;color:#8a96a8;font-size:7px;font-weight:700;text-transform:uppercase;}
+.trading-plan-calendar-day{min-height:55px;border:1px solid #e5e9ef;border-radius:7px;background:#fff;color:#172033;text-align:left;padding:6px;display:flex;flex-direction:column;gap:3px;cursor:pointer;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease,background .15s ease;}
+.trading-plan-calendar-day:hover{border-color:#6255e8;background:#faf9ff;box-shadow:0 4px 10px rgba(79,70,181,.08);transform:translateY(-1px);}
+.trading-plan-calendar-day.muted{opacity:.4;}.trading-plan-calendar-day.today{box-shadow:inset 0 0 0 1px #6255e8;}
+.trading-plan-calendar-day strong{font-size:9px;}.trading-plan-calendar-day i{width:5px;height:5px;border-radius:50%;background:#6255e8;display:block;}.trading-plan-calendar-day small{font-size:7px;}.trading-plan-calendar-day small.positive{color:#35a67f;}.trading-plan-calendar-day small.negative{color:#e94c63;}
+.trading-plan-linked-card{margin-top:10px;padding:9px 11px;border:1px solid #dfe5ed;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 2px 8px rgba(30,45,70,.025);}
+.trading-plan-linked-pill{display:inline-flex;align-items:center;gap:5px;padding:5px 7px;border:1px solid #cde9dc;border-radius:999px;background:#f4fbf7;color:#2d8b68;font-size:8px;font-weight:700;white-space:nowrap;}
+
+/* Dark theme for the same compact surfaces. */
+.trading-plan-dark .trading-plan-tabs,.trading-plan-dark .trading-plan-history-section,.trading-plan-dark .trading-plan-calendar-section,.trading-plan-dark .trading-plan-linked-card{background:#141719;border-color:#282c32;box-shadow:none;}
+.trading-plan-dark .trading-plan-tabs button{color:#707780;}.trading-plan-dark .trading-plan-tabs button:hover{background:#1d1a31;color:#d9ceff;}.trading-plan-dark .trading-plan-tabs button.active{background:#211d38;color:#d9ceff;}
+.trading-plan-dark .trading-plan-section-head,.trading-plan-dark .trading-plan-history-row,.trading-plan-dark .trading-plan-detail-head{border-color:#282c32;}
+.trading-plan-dark .trading-plan-history-row:hover,.trading-plan-dark .trading-plan-history-row.selected{background:#191a24;}
+.trading-plan-dark .trading-plan-history-date strong,.trading-plan-dark .trading-plan-calendar-day strong{color:#e8ebef;}
+.trading-plan-dark .trading-plan-history-bias{background:#191d21;border-color:#30353c;color:#9ba4af;}.trading-plan-dark .trading-plan-history-bias.bullish,.trading-plan-dark .trading-plan-history-bias.strong-bullish{background:#15251f;border-color:#275c4b;color:#62caa4;}.trading-plan-dark .trading-plan-history-bias.bearish,.trading-plan-dark .trading-plan-history-bias.strong-bearish{background:#2a171d;border-color:#69303c;color:#ff7185;}.trading-plan-dark .trading-plan-history-bias.neutral{background:#211d38;border-color:#4d447c;color:#b9adff;}
+.trading-plan-dark .trading-plan-icon-btn{background:#171a1e;border-color:#30353c;color:#aeb6c0;}.trading-plan-dark .trading-plan-icon-btn:hover{background:#211d38;border-color:#6255e8;color:#d9ceff;}
+.trading-plan-dark .trading-plan-detail-card,.trading-plan-dark .trading-plan-detail-columns>div{background:#111417;border-color:#30353c;}.trading-plan-dark .trading-plan-detail-columns p{color:#9ba4af;}.trading-plan-dark .trading-plan-empty strong{color:#c8ced6;}
+.trading-plan-dark .trading-plan-calendar-day{background:#171a1e;border-color:#30353c;color:#e8ebef;}.trading-plan-dark .trading-plan-calendar-day:hover{background:#211d38;border-color:#6255e8;}.trading-plan-dark .trading-plan-calendar-day.today{box-shadow:inset 0 0 0 1px #6255e8;}
+.trading-plan-dark .trading-plan-saved-banner{background:#14231d;border-color:#275c4b;color:#78d5b0;}.trading-plan-dark .trading-plan-saved-banner strong{color:#a4e5cc;}.trading-plan-dark .trading-plan-saved-banner button{color:#c4baff;}
+.trading-plan-dark .trading-plan-linked-card{background:#141719;}.trading-plan-dark .trading-plan-linked-pill{background:#15251f;border-color:#275c4b;color:#62caa4;}
+
+@media(max-width:1000px){.trading-plan-detail-grid{grid-template-columns:repeat(3,minmax(0,1fr));}.trading-plan-history-row{grid-template-columns:minmax(120px,1fr) minmax(90px,.8fr) minmax(90px,.7fr) 28px;}}
+@media(max-width:650px){.trading-plan-tabs{width:100%;}.trading-plan-tabs button{flex:1;justify-content:center;}.trading-plan-history-row{grid-template-columns:1fr auto 28px;gap:7px;}.trading-plan-history-meta{grid-column:2;grid-row:1;flex-direction:column;align-items:flex-end;gap:1px;}.trading-plan-history-bias{grid-column:1;grid-row:2;}.trading-plan-history-row .trading-plan-icon-btn{grid-column:3;grid-row:1 / span 2;}.trading-plan-detail-grid{grid-template-columns:1fr 1fr;}.trading-plan-detail-columns{grid-template-columns:1fr;}.trading-plan-detail-notes{grid-column:auto;}.trading-plan-calendar-day{min-height:48px;}.trading-plan-calendar-grid{gap:3px;padding:7px;}.trading-plan-linked-card{align-items:flex-start;flex-direction:column;}}
+
+/* ============================================================
+   TRADING PLAN — DASHBOARD OVERVIEW
+   Mirrors the main Dashboard hierarchy: KPI strip → primary
+   content → calendar / quick actions → readiness / integration.
+   ============================================================ */
+.trading-plan-overview-kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;margin-bottom:10px;}
+.trading-plan-overview-kpis .trading-plan-kpi{height:76px;}
+.trading-plan-dashboard-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(320px,.85fr);gap:10px;align-items:start;}
+.trading-plan-dashboard-main,.trading-plan-dashboard-side{display:grid;gap:10px;min-width:0;}
+.trading-plan-dashboard-card{background:#fff;border:1px solid #dfe5ed;border-radius:8px;box-shadow:0 2px 10px rgba(30,45,70,.025);overflow:hidden;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease;}
+.trading-plan-dashboard-card:hover{border-color:#cfd7e4;box-shadow:0 5px 16px rgba(30,45,70,.055);transform:translateY(-1px);}
+.trading-plan-dashboard-card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 12px;border-bottom:1px solid #e5e9ef;min-height:42px;box-sizing:border-box;}
+.trading-plan-dashboard-card-head>svg{color:#8c7ae8;flex:0 0 auto;}
+.trading-plan-dashboard-card-body{padding:12px;}
+.trading-plan-today-preview{min-height:230px;}
+.trading-plan-plan-hero{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #e4e0f8;background:linear-gradient(90deg,#faf9ff,#fff);border-radius:8px;}
+.trading-plan-plan-hero-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#f0edff;color:#6555d7;border:1px solid #e1dcfb;flex:0 0 auto;}
+.trading-plan-plan-hero-copy{display:grid;gap:2px;min-width:0;flex:1;}
+.trading-plan-plan-hero-copy strong{font-size:13px;color:#172033;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.trading-plan-plan-hero-copy small{font-size:8px;color:#8a96a8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.trading-plan-status-pill{display:inline-flex;align-items:center;gap:5px;padding:5px 7px;border-radius:999px;border:1px solid #e1e5eb;background:#f8fafc;color:#778397;font-size:8px;font-weight:700;white-space:nowrap;}
+.trading-plan-status-pill i{width:5px;height:5px;border-radius:50%;background:#94a3b8;}
+.trading-plan-status-pill.ready{background:#f2fbf6;border-color:#cde9dc;color:#2d8b68;}.trading-plan-status-pill.ready i{background:#42b98d;}
+.trading-plan-status-pill.pending{background:#fff8ee;border-color:#f1d5ae;color:#b66a13;}.trading-plan-status-pill.pending i{background:#d8941b;}
+.trading-plan-overview-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:9px;}
+.trading-plan-overview-metrics>div{min-width:0;padding:9px;border:1px solid #e6e9ef;border-radius:7px;background:#fbfcfe;display:grid;gap:4px;}
+.trading-plan-overview-metrics span,.trading-plan-previous-grid span{font-size:7px;color:#8a96a8;text-transform:uppercase;letter-spacing:.03em;font-weight:700;}
+.trading-plan-overview-metrics strong{font-size:10px;color:#263246;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.trading-plan-progress-block{margin-top:10px;padding:9px 10px;border:1px solid #e5e9ef;border-radius:7px;background:#fff;}
+.trading-plan-progress-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px;font-size:8px;color:#7a879b;}.trading-plan-progress-head strong{color:#4f46b5;font-size:9px;}
+.trading-plan-progress{height:6px;border-radius:999px;background:#edf0f5;overflow:hidden;}.trading-plan-progress span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#7665e8,#6255e8);transition:width .25s ease;}
+.trading-plan-progress-block small{display:block;margin-top:5px;color:#9aa5b5;font-size:7px;}
+.trading-plan-text-link{display:inline-flex;align-items:center;gap:4px;border:0;background:transparent;color:#5b4dd0;font:700 8px/1 Inter,system-ui,sans-serif;cursor:pointer;padding:4px 0;white-space:nowrap;}.trading-plan-text-link:hover{text-decoration:underline;color:#4638ad;}
+.trading-plan-previous-body{padding:12px;}.trading-plan-previous-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:9px;border-bottom:1px solid #edf0f4;}.trading-plan-previous-top>div:first-child{display:grid;gap:3px;min-width:0;}.trading-plan-previous-top strong{font-size:13px;color:#172033;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}.trading-plan-previous-pnl{display:grid;text-align:right;font-size:15px;font-weight:700;line-height:1.05;}.trading-plan-previous-pnl small{font-size:7px;font-weight:500;color:#8a96a8;margin-top:4px;}.trading-plan-previous-pnl.positive{color:#35a67f;}.trading-plan-previous-pnl.negative{color:#e94c63;}
+.trading-plan-previous-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:9px;}.trading-plan-previous-grid>div{padding:8px 9px;border:1px solid #e6e9ef;border-radius:7px;background:#fbfcfe;display:grid;gap:4px;min-width:0;}.trading-plan-previous-grid strong{font-size:9px;color:#52627a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.trading-plan-mini-calendar{min-height:100%;}.trading-plan-mini-calendar-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px 4px;color:#52627a;font-size:10px;}.trading-plan-mini-calendar-head .trading-plan-icon-btn{width:25px;height:25px;}.trading-plan-mini-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;padding:6px 10px 8px;}.trading-plan-mini-calendar-grid>span{padding:2px 0 4px;text-align:center;color:#9aa5b5;font-size:7px;font-weight:800;text-transform:uppercase;}.trading-plan-mini-calendar-grid>button{position:relative;min-width:0;height:36px;border:1px solid #edf0f4;border-radius:6px;background:#fff;color:#344054;display:flex;align-items:flex-start;justify-content:center;padding-top:6px;cursor:pointer;font:500 8px/1 Inter,system-ui,sans-serif;transition:.15s ease;}.trading-plan-mini-calendar-grid>button:hover{border-color:#cfc6f5;background:#faf9ff;transform:translateY(-1px);}.trading-plan-mini-calendar-grid>button.muted{opacity:.35;}.trading-plan-mini-calendar-grid>button.today{border-color:#6255e8;box-shadow:inset 0 0 0 1px rgba(98,85,232,.15);background:#faf9ff;}.trading-plan-mini-calendar-grid>button.has-plan b{color:#5145bd;}.trading-plan-mini-calendar-grid>button i{position:absolute;bottom:6px;width:4px;height:4px;border-radius:50%;background:#6255e8;}.trading-plan-mini-calendar-grid>button small{position:absolute;right:4px;bottom:3px;font-size:6px;font-weight:800;}.trading-plan-mini-calendar-grid>button small.positive{color:#35a67f;}.trading-plan-mini-calendar-grid>button small.negative{color:#e94c63;}
+.trading-plan-calendar-legend{display:flex;align-items:center;gap:9px;padding:0 12px 11px;color:#8a96a8;font-size:7px;}.trading-plan-calendar-legend span{display:inline-flex;align-items:center;gap:4px;}.trading-plan-calendar-legend i{display:block;width:5px;height:5px;border-radius:50%;background:#6255e8;}.trading-plan-calendar-legend i.today{border:1px solid #6255e8;background:#fff;box-sizing:border-box;}.trading-plan-calendar-legend i.pnl{background:#35a67f;}
+.trading-plan-quick-actions .trading-plan-dashboard-card-head{margin-bottom:2px;}.trading-plan-quick-action{width:100%;display:grid;grid-template-columns:28px minmax(0,1fr) 13px;align-items:center;gap:9px;padding:9px 12px;border:0;border-top:1px solid #edf0f4;background:#fff;color:#52627a;text-align:left;cursor:pointer;transition:.15s ease;}.trading-plan-quick-action:hover{background:#faf9ff;padding-left:14px;}.trading-plan-quick-action .icon{width:27px;height:27px;border-radius:7px;display:flex;align-items:center;justify-content:center;border:1px solid #e4e0f8;background:#f8f6ff;color:#6255e8;}.trading-plan-quick-action.primary .icon{background:#6255e8;border-color:#6255e8;color:#fff;}.trading-plan-quick-action>span:nth-child(2){display:grid;gap:2px;min-width:0;}.trading-plan-quick-action strong{font-size:9px;color:#263246;}.trading-plan-quick-action small{font-size:7px;color:#8a96a8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}.trading-plan-quick-action>svg{color:#9aa5b5;}
+.trading-plan-dashboard-bottom{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:10px;margin-top:10px;}.trading-plan-command-card .trading-plan-dashboard-card-head,.trading-plan-link-card{min-height:76px;}.trading-plan-readiness-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;padding:10px 12px 12px;}.trading-plan-readiness-list>div{display:flex;align-items:center;justify-content:space-between;gap:5px;padding:8px 9px;border:1px solid #e5e9ef;border-radius:7px;background:#fbfcfe;font-size:8px;color:#52627a;}.trading-plan-readiness-list>div i{width:6px;height:6px;border-radius:50%;background:#c1c8d3;flex:0 0 auto;}.trading-plan-readiness-list>div b{font-size:7px;}.trading-plan-readiness-list .complete i{background:#42b98d;}.trading-plan-readiness-list .complete b{color:#2d8b68;}.trading-plan-readiness-list .pending b{color:#b66a13;}
+.trading-plan-link-card{padding:11px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;}.trading-plan-link-card>div{min-width:0;}.trading-plan-link-card strong{display:block;margin-top:3px;font-size:12px;color:#172033;}.trading-plan-link-card p{margin:5px 0 0;color:#8a96a8;font-size:8px;line-height:1.35;max-width:520px;}.trading-plan-link-card .trading-plan-btn{display:inline-flex;align-items:center;gap:5px;flex:0 0 auto;}
+.trading-plan-empty.compact{min-height:116px;padding:10px;box-sizing:border-box;}.trading-plan-empty.compact span{text-align:center;max-width:300px;}
+
+.trading-plan-dark .trading-plan-dashboard-card{background:#141719;border-color:#282c32;box-shadow:none;}.trading-plan-dark .trading-plan-dashboard-card:hover{border-color:#6255c7;box-shadow:0 0 0 1px rgba(98,85,199,.10);}.trading-plan-dark .trading-plan-dashboard-card-head{border-color:#282c32;}.trading-plan-dark .trading-plan-plan-hero{background:linear-gradient(90deg,#191725,#141719);border-color:#35304f;}.trading-plan-dark .trading-plan-plan-hero-icon{background:#211d38;border-color:#3c3561;color:#b9adff;}.trading-plan-dark .trading-plan-plan-hero-copy strong,.trading-plan-dark .trading-plan-overview-metrics strong,.trading-plan-dark .trading-plan-previous-top strong,.trading-plan-dark .trading-plan-link-card strong,.trading-plan-dark .trading-plan-quick-action strong{color:#e8ebef;}.trading-plan-dark .trading-plan-overview-metrics>div,.trading-plan-dark .trading-plan-previous-grid>div,.trading-plan-dark .trading-plan-progress-block,.trading-plan-dark .trading-plan-readiness-list>div{background:#111417;border-color:#30353c;}.trading-plan-dark .trading-plan-progress{background:#272c33;}.trading-plan-dark .trading-plan-mini-calendar-grid>button{background:#171a1e;border-color:#30353c;color:#c8ced6;}.trading-plan-dark .trading-plan-mini-calendar-grid>button:hover,.trading-plan-dark .trading-plan-mini-calendar-grid>button.today{background:#211d38;border-color:#6255e8;}.trading-plan-dark .trading-plan-quick-action{background:#141719;border-color:#282c32;color:#c8ced6;}.trading-plan-dark .trading-plan-quick-action:hover{background:#1a1828;}.trading-plan-dark .trading-plan-quick-action .icon{background:#211d38;border-color:#3c3561;color:#b9adff;}.trading-plan-dark .trading-plan-quick-action.primary .icon{background:#6255e8;border-color:#6255e8;color:#fff;}.trading-plan-dark .trading-plan-readiness-list>div{color:#9ba4af;}.trading-plan-dark .trading-plan-link-card p{color:#7f8894;}.trading-plan-dark .trading-plan-text-link{color:#c4baff;}
+
+@media(max-width:1180px){.trading-plan-overview-kpis{grid-template-columns:repeat(3,minmax(0,1fr));}.trading-plan-dashboard-grid{grid-template-columns:minmax(0,1fr) 320px;}.trading-plan-dashboard-bottom{grid-template-columns:1fr;}.trading-plan-readiness-list{grid-template-columns:repeat(4,minmax(0,1fr));}}
+@media(max-width:900px){.trading-plan-dashboard-grid{grid-template-columns:1fr;}.trading-plan-dashboard-side{grid-template-columns:1fr 1fr;align-items:start;}.trading-plan-dashboard-bottom{grid-template-columns:1fr;}.trading-plan-overview-metrics,.trading-plan-previous-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:650px){.trading-plan-overview-kpis{grid-template-columns:repeat(2,minmax(0,1fr));}.trading-plan-dashboard-side{grid-template-columns:1fr;}.trading-plan-dashboard-card-head{align-items:flex-start;}.trading-plan-plan-hero{align-items:flex-start;}.trading-plan-status-pill{margin-left:auto;}.trading-plan-readiness-list{grid-template-columns:1fr 1fr;}.trading-plan-link-card{align-items:flex-start;flex-direction:column;}.trading-plan-link-card .trading-plan-btn{width:100%;justify-content:center;}.trading-plan-mini-calendar-grid>button{height:34px;}}
+
+/* Setup Focus — mirrors the Guided Entry / Log Trade checklist language. */
+.trading-plan-setup-focus-card{margin-top:10px;overflow:hidden;}
+.trading-plan-setup-score-pill{display:inline-flex;align-items:center;justify-content:center;padding:5px 8px;border:1px solid #ded7ff;background:#f5f2ff;color:#6255c7;border-radius:999px;font:700 9px/1 Inter,system-ui,sans-serif;white-space:nowrap;}
+.trading-plan-setup-focus-layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(255px,.75fr);gap:14px;padding:12px;}
+.trading-plan-setup-checklist{display:grid;grid-template-rows:repeat(10,minmax(39px,1fr));gap:5px;min-width:0;}
+.trading-plan-check{appearance:none;width:100%;border:1px solid #dfe4ec;background:#fff;color:#273043;border-radius:7px;display:grid;grid-template-columns:18px minmax(0,1fr) 18px;align-items:center;gap:8px;padding:0 9px;text-align:left;cursor:pointer;font:600 10px/1.2 Inter,system-ui,sans-serif;transition:border-color .15s ease,background .15s ease,box-shadow .15s ease,transform .15s ease;}
+.trading-plan-check:hover{border-color:#b9b0f4;background:#faf9ff;box-shadow:0 2px 8px rgba(98,85,199,.07);}
+.trading-plan-check.is-checked{border-color:#b9b0f4;background:#f8f6ff;}
+.trading-plan-check-box{width:15px;height:15px;border:1px solid #bcc5d2;border-radius:4px;display:grid;place-items:center;color:#fff;font-size:9px;font-weight:800;box-sizing:border-box;}
+.trading-plan-check.is-checked .trading-plan-check-box{background:linear-gradient(135deg,#7665e8,#5d50ca);border-color:#7665e8;box-shadow:0 0 0 2px rgba(118,101,232,.09);}
+.trading-plan-check-info{width:14px;height:14px;border:1px solid #b7bfcc;border-radius:50%;display:grid;place-items:center;color:#7d8797;font-size:8px;font-weight:700;justify-self:end;}
+.trading-plan-setup-side{border-left:1px solid #e6e9ef;padding-left:14px;display:grid;grid-template-rows:auto auto minmax(105px,auto) minmax(0,1fr);gap:10px;min-width:0;}
+.trading-plan-setup-quality{border:1px solid #e0d9ff;background:#faf9ff;border-radius:9px;padding:9px 10px;}
+.trading-plan-setup-quality>div:first-child{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.trading-plan-setup-quality strong{font-size:10px;color:#283044;}
+.trading-plan-setup-quality b{font-size:9px;color:#7166c8;}
+.trading-plan-quality-bars{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-top:7px;}
+.trading-plan-quality-bars span{height:4px;border-radius:3px;background:#dddfe7;}
+.trading-plan-quality-bars span.is-filled{background:linear-gradient(90deg,#7665e8,#9b8cf3);box-shadow:0 0 6px rgba(118,101,232,.16);}
+.trading-plan-side-notes{display:grid;gap:5px;min-width:0;}
+.trading-plan-side-notes>span{font-size:9px;color:#707b8d;}
+.trading-plan-side-notes>span em{font-style:normal;color:#a2aaba;}
+.trading-plan-side-notes textarea{width:100%;height:86px;box-sizing:border-box;resize:vertical;border:1px solid #dfe4ec;border-radius:7px;background:#fff;color:#273043;padding:8px 9px;outline:none;font:500 10px/1.4 Inter,system-ui,sans-serif;transition:border-color .15s ease,box-shadow .15s ease;}
+.trading-plan-side-notes textarea:focus{border-color:#7665e8;box-shadow:0 0 0 2px rgba(118,101,232,.10);}
+.trading-plan-side-notes small{text-align:right;color:#98a1af;font-size:8px;}
+.trading-plan-setup-grade{border-top:1px solid #e6e9ef;padding-top:10px;text-align:center;display:flex;flex-direction:column;align-items:center;min-height:0;}
+.trading-plan-setup-grade-head{width:100%;display:flex;align-items:center;gap:5px;text-align:left;}
+.trading-plan-setup-grade-head strong{font-size:9px;color:#283044;}
+.trading-plan-setup-grade-head span{width:13px;height:13px;border:1px solid #b7bfcc;border-radius:50%;display:grid;place-items:center;color:#7d8797;font-size:7px;font-weight:700;}
+.trading-plan-grade-circle{width:48px;height:48px;border-radius:50%;border:2px solid var(--grade-color,#64748b);display:grid;place-items:center;margin:10px auto 4px;box-shadow:0 0 0 4px color-mix(in srgb,var(--grade-color,#64748b) 10%,transparent);}
+.trading-plan-grade-circle strong{font-size:19px;color:var(--grade-color,#64748b);}
+.trading-plan-setup-grade>b{font-size:9px;color:var(--grade-color,#64748b);}
+.trading-plan-setup-grade p{max-width:220px;margin:4px auto 0;color:#8a94a5;font-size:8px;line-height:1.35;}
+
+.trading-plan-dark .trading-plan-setup-score-pill{background:#1b182a;border-color:#4b416e;color:#b9aefe;}
+.trading-plan-dark .trading-plan-setup-side{border-left-color:#282c32;}
+.trading-plan-dark .trading-plan-check{background:#15181c;border-color:#30353c;color:#e8ebef;}
+.trading-plan-dark .trading-plan-check:hover,.trading-plan-dark .trading-plan-check.is-checked{background:#1b1926;border-color:#5b4ec0;}
+.trading-plan-dark .trading-plan-check-box{border-color:#4b525c;}
+.trading-plan-dark .trading-plan-check-info,.trading-plan-dark .trading-plan-setup-grade-head span{border-color:#4b525c;color:#9299a5;}
+.trading-plan-dark .trading-plan-setup-quality{background:#191725;border-color:#3d3560;}
+.trading-plan-dark .trading-plan-setup-quality strong,.trading-plan-dark .trading-plan-setup-grade-head strong{color:#e8ebef;}
+.trading-plan-dark .trading-plan-quality-bars span{background:#333740;}
+.trading-plan-dark .trading-plan-side-notes textarea{background:#111417;border-color:#30353c;color:#e8ebef;}
+.trading-plan-dark .trading-plan-side-notes>span{color:#89919e;}
+.trading-plan-dark .trading-plan-setup-grade{border-top-color:#282c32;}
+
+@media(max-width:900px){
+  .trading-plan-setup-focus-layout{grid-template-columns:1fr;}
+  .trading-plan-setup-side{border-left:0;border-top:1px solid #e6e9ef;padding-left:0;padding-top:12px;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;}
+  .trading-plan-setup-quality{grid-column:1/-1;}
+  .trading-plan-setup-grade{grid-column:2;grid-row:2;border-top:0;border-left:1px solid #e6e9ef;padding:0 0 0 12px;}
+  .trading-plan-side-notes{grid-column:1;grid-row:2;}
+  .trading-plan-dark .trading-plan-setup-side{border-top-color:#282c32;}
+  .trading-plan-dark .trading-plan-setup-grade{border-left-color:#282c32;}
+}
+@media(max-width:650px){
+  .trading-plan-setup-score-pill{display:none;}
+  .trading-plan-setup-checklist{grid-template-rows:repeat(10,minmax(38px,1fr));}
+  .trading-plan-setup-side{grid-template-columns:1fr;grid-template-rows:auto auto auto;}
+  .trading-plan-setup-quality,.trading-plan-side-notes,.trading-plan-setup-grade{grid-column:auto;grid-row:auto;}
+  .trading-plan-setup-grade{border-left:0;border-top:1px solid #e6e9ef;padding:10px 0 0;}
+  .trading-plan-dark .trading-plan-setup-grade{border-top-color:#282c32;}
+}
+
+
+/* Trading Plan grades are informational only; they never block progression or saving. */
+.trading-plan-grade-note{display:block;margin-top:8px;font-size:10px;line-height:1.45;color:var(--tp-muted,#8f8a9e);font-weight:600}
+.app-theme-light .trading-plan-grade-note{color:#7c7890}

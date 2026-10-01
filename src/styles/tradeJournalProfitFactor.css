@@ -1,0 +1,160 @@
+/* ============================================================
+   PROFIT FACTOR KPI
+   Text = left
+   Gauge = right
+   ============================================================ */
+
+.td-kpi-profit-factor {
+  position: relative !important;
+  min-width: 0;
+}
+
+/* ------------------------------------------------------------
+   LEFT SIDE — PROFIT FACTOR TEXT
+   ------------------------------------------------------------ */
+
+.td-profit-factor-copy {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  min-width: 0;
+  text-align: left;
+}
+
+/* Title */
+.td-profit-factor-copy > span {
+  display: block;
+  margin: 0 0 4px 0;
+
+  color: #858b94;
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 400;
+
+  white-space: nowrap;
+}
+
+/* Value */
+.td-profit-factor-copy > strong {
+  display: block;
+
+  color: #ddd5ff;
+  font-size: 17px;
+  line-height: 1.1;
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+
+/* ------------------------------------------------------------
+   RIGHT SIDE — MINI PROFIT FACTOR CIRCLE
+   ------------------------------------------------------------ */
+
+.td-profit-factor-gauge {
+  position: absolute;
+
+  right: 10px;
+  top: 50%;
+
+  width: 46px;
+  height: 46px;
+
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  flex: none;
+}
+
+.td-profit-factor-gauge svg {
+  display: block;
+
+  width: 46px;
+  height: 46px;
+
+  transform: rotate(-90deg);
+
+  overflow: visible;
+}
+
+
+/* ------------------------------------------------------------
+   CIRCLE
+   ------------------------------------------------------------ */
+
+.td-pf-track,
+.td-pf-segment {
+  fill: none;
+  stroke-width: 5;
+  stroke-linecap: butt;
+}
+
+.td-pf-track {
+  stroke: #24272d;
+}
+
+.td-pf-green {
+  stroke: #53b98e;
+}
+
+.td-pf-red {
+  stroke: #d96470;
+}
+
+
+/* ------------------------------------------------------------
+   SMALL SCREENS
+   ------------------------------------------------------------ */
+
+@media (max-width: 650px) {
+
+  .td-profit-factor-copy {
+    left: 9px;
+  }
+
+  .td-profit-factor-gauge {
+    right: 9px;
+
+    width: 40px;
+    height: 40px;
+  }
+
+  .td-profit-factor-gauge svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .td-profit-factor-copy > strong {
+    font-size: 16px;
+  }
+}
+
+/* ============================================================
+   PROFIT FACTOR — CLEAN DONUT
+   ============================================================ */
+
+.td-pf-segment {
+  stroke-linecap: butt !important;
+}
+
+.td-pf-green,
+.td-pf-red {
+  stroke-width: 5 !important;
+}
+
+.td-pf-track {
+  display: none !important;
+}

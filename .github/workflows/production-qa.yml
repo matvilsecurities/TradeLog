@@ -1,0 +1,23 @@
+name: TradeLog Production QA
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  production-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - run: npm test
+      - run: npm run verify:all
+      - run: npm run qa:deep
+      - run: npm run verify:production-hardening

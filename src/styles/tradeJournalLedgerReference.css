@@ -1,0 +1,488 @@
+
+/* ============================================================
+   TRADELOG — JOURNAL LEDGER / REFERENCE DESIGN
+   Fresh isolated visual layer.
+   Scope: .td-trades-view only.
+   Does NOT change trading logic or data.
+   ============================================================ */
+
+.td-trades-view {
+  --ledger-bg: #f5f7fb;
+  --ledger-surface: #ffffff;
+  --ledger-surface-soft: #f8faff;
+  --ledger-border: #e2e7ef;
+  --ledger-border-soft: #edf0f5;
+  --ledger-text: #172033;
+  --ledger-text-2: #52617a;
+  --ledger-muted: #7a879b;
+  --ledger-purple: #6255e8;
+  --ledger-purple-2: #8b7cf6;
+  --ledger-green: #00a878;
+  --ledger-red: #f0445d;
+  --ledger-blue: #4d7ff0;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  box-sizing: border-box;
+  background: var(--ledger-bg) !important;
+  color: var(--ledger-text) !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+/* ---------------- PAGE HEADER ---------------- */
+
+.td-trades-view > div:first-child {
+  background: var(--ledger-bg) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 22px 24px 18px !important;
+  box-sizing: border-box;
+}
+
+.td-trades-view > div:first-child > div:first-child {
+  margin-bottom: 18px !important;
+}
+
+/* Title */
+.td-trades-view > div:first-child > div:first-child p:first-child {
+  margin: 0 !important;
+  color: #172033 !important;
+  font-size: 24px !important;
+  line-height: 1.15 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.035em !important;
+}
+
+/* Subtitle */
+.td-trades-view > div:first-child > div:first-child p:last-child {
+  margin: 4px 0 0 !important;
+  color: #7a879b !important;
+  font-size: 12px !important;
+  line-height: 1.3 !important;
+  font-weight: 400 !important;
+}
+
+/* Log Trade button */
+.td-trades-view > div:first-child > div:first-child > button {
+  height: 42px !important;
+  min-height: 42px !important;
+  padding: 0 22px !important;
+  border: 0 !important;
+  border-radius: 11px !important;
+  background: linear-gradient(135deg, #4d7ff0 0%, #8b72ef 100%) !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  font-weight: 650 !important;
+  box-shadow: 0 7px 18px rgba(77,127,240,.22) !important;
+  transition: transform .15s ease, box-shadow .15s ease !important;
+}
+
+.td-trades-view > div:first-child > div:first-child > button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 9px 22px rgba(77,127,240,.28) !important;
+}
+
+/* ---------------- KPI STRIP ---------------- */
+
+.td-trades-view > div:first-child > div:nth-child(2) {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  margin-bottom: 18px !important;
+}
+
+.td-trades-view > div:first-child > div:nth-child(2) > div {
+  min-width: 0 !important;
+  height: 70px !important;
+  min-height: 70px !important;
+  padding: 12px 16px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  background: var(--ledger-surface) !important;
+  border: 1px solid var(--ledger-border) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 8px rgba(29,48,77,.035) !important;
+}
+
+/* KPI icon block */
+.td-trades-view > div:first-child > div:nth-child(2)
+  > div > div:first-child {
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  border-radius: 8px !important;
+  flex: 0 0 30px !important;
+}
+
+/* KPI label */
+.td-trades-view > div:first-child > div:nth-child(2)
+  p:first-child {
+  margin: 0 !important;
+  color: #7a879b !important;
+  font-size: 9px !important;
+  line-height: 1.15 !important;
+  font-weight: 500 !important;
+  letter-spacing: .055em !important;
+  text-transform: uppercase !important;
+}
+
+/* KPI value */
+.td-trades-view > div:first-child > div:nth-child(2)
+  p:last-child {
+  margin: 3px 0 0 !important;
+  font-size: 16px !important;
+  line-height: 1.1 !important;
+  font-weight: 700 !important;
+  letter-spacing: -.015em !important;
+}
+
+/* ---------------- SEARCH / FILTER BAR ---------------- */
+
+.td-trades-view > div:first-child > div:nth-child(3) {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 0 !important;
+}
+
+.td-trades-view .search-input,
+.td-trades-view input {
+  height: 40px !important;
+  min-height: 40px !important;
+  box-sizing: border-box !important;
+  background: #ffffff !important;
+  color: #172033 !important;
+  border: 1px solid #dfe5ee !important;
+  border-radius: 10px !important;
+  outline: none !important;
+  font-family: inherit !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  box-shadow: 0 1px 3px rgba(29,48,77,.025) !important;
+}
+
+.td-trades-view input::placeholder {
+  color: #8b96a8 !important;
+  opacity: 1 !important;
+}
+
+.td-trades-view .search-input:focus,
+.td-trades-view input:focus {
+  border-color: #9baeff !important;
+  box-shadow: 0 0 0 3px rgba(98,85,232,.08) !important;
+}
+
+/* Filter group */
+.td-trades-view > div:first-child > div:nth-child(3) > div:last-child {
+  height: 40px !important;
+  min-height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+  padding: 3px !important;
+  box-sizing: border-box !important;
+  background: #ffffff !important;
+  border: 1px solid #dfe5ee !important;
+  border-radius: 10px !important;
+}
+
+/* Filter buttons */
+.td-trades-view .filter-btn,
+.td-trades-view > div:first-child > div:nth-child(3) button {
+  height: 34px !important;
+  min-height: 34px !important;
+  padding: 0 14px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  color: #6e7c91 !important;
+  font-family: inherit !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  box-shadow: none !important;
+}
+
+.td-trades-view .filter-btn:hover,
+.td-trades-view > div:first-child > div:nth-child(3) button:hover {
+  background: #f1f4f9 !important;
+  color: #44536d !important;
+  transform: none !important;
+}
+
+/* Active All */
+.td-trades-view .filter-btn.active,
+.td-trades-view .filter-btn.selected,
+.td-trades-view > div:first-child > div:nth-child(3) button.active {
+  background: #4d7ff0 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 6px rgba(77,127,240,.20) !important;
+}
+
+/* ---------------- TABLE WRAPPER ---------------- */
+
+.td-trades-view > div:last-child {
+  background: #ffffff !important;
+  border: 1px solid var(--ledger-border) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 10px rgba(29,48,77,.035) !important;
+}
+
+/* ---------------- TABLE ---------------- */
+
+.td-trades-view table {
+  width: 100% !important;
+  min-width: 1180px !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  table-layout: auto !important;
+  background: #ffffff !important;
+}
+
+/* Header */
+.td-trades-view thead {
+  background: #f8fafc !important;
+}
+
+.td-trades-view thead tr {
+  height: 46px !important;
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e3e8ef !important;
+}
+
+.td-trades-view thead th {
+  height: 46px !important;
+  padding: 0 10px !important;
+  box-sizing: border-box !important;
+  background: #f8fafc !important;
+  color: #71809a !important;
+  border-bottom: 1px solid #e3e8ef !important;
+  font-family: inherit !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+  letter-spacing: .045em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+.td-trades-view thead th:first-child {
+  padding-left: 20px !important;
+}
+
+.td-trades-view thead th:hover {
+  background: #f8fafc !important;
+}
+
+/* ---------------- TRADE ROWS ---------------- */
+
+.td-trades-view .trade-row {
+  height: 58px !important;
+  background: #ffffff !important;
+  transition: background .12s ease !important;
+}
+
+.td-trades-view .trade-row:hover {
+  background: #fafbfe !important;
+}
+
+.td-trades-view .trade-row td {
+  height: 58px !important;
+  padding: 0 10px !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+  color: #536177 !important;
+  border-bottom: 1px solid #e7ebf1 !important;
+  font-family: inherit !important;
+  font-size: 11px !important;
+  line-height: 1.15 !important;
+  font-weight: 400 !important;
+  white-space: nowrap !important;
+}
+
+.td-trades-view .trade-row:last-child td {
+  border-bottom: 0 !important;
+}
+
+.td-trades-view .trade-row td:first-child {
+  padding-left: 20px !important;
+  color: #263247 !important;
+  font-weight: 600 !important;
+}
+
+/* Date text */
+.td-trades-view .trade-row td:first-child p,
+.td-trades-view .trade-row td:first-child span {
+  font-size: 12px !important;
+  line-height: 1.15 !important;
+}
+
+/* Symbol */
+.td-trades-view .trade-row td:nth-child(5),
+.td-trades-view .trade-row td:nth-child(5) * {
+  color: #263247 !important;
+}
+
+.td-trades-view .trade-row td:nth-child(5) span {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+/* Times / prices / quantity */
+.td-trades-view .trade-row td:nth-child(2),
+.td-trades-view .trade-row td:nth-child(3),
+.td-trades-view .trade-row td:nth-child(7),
+.td-trades-view .trade-row td:nth-child(8),
+.td-trades-view .trade-row td:nth-child(9) {
+  color: #536177 !important;
+  font-size: 11px !important;
+}
+
+/* Hold badges */
+.td-trades-view .trade-row td:nth-child(4) * {
+  font-size: 10px !important;
+  line-height: 1 !important;
+}
+
+/* ---------------- DIRECTION ---------------- */
+
+.td-trades-view .trade-row td:nth-child(6) * {
+  font-size: 9px !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+}
+
+.td-trades-view .trade-row td:nth-child(6) [class*="long"] {
+  color: #00a878 !important;
+}
+
+/* ---------------- P&L ---------------- */
+
+.td-trades-view .trade-row td:nth-child(10) {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+.td-trades-view .trade-row td:nth-child(10) * {
+  font-size: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* ---------------- R:R ---------------- */
+
+.td-trades-view .trade-row td:nth-child(11) * {
+  font-size: 10px !important;
+  line-height: 1 !important;
+}
+
+/* ---------------- SETUP ---------------- */
+
+.td-trades-view .trade-row td:nth-child(12) {
+  font-size: 10px !important;
+  color: #637087 !important;
+}
+
+/* ---------------- GRADE ---------------- */
+
+.td-trades-view .trade-row td:nth-child(13) * {
+  font-size: 10px !important;
+  font-weight: 600 !important;
+}
+
+/* ---------------- MISTAKES ---------------- */
+
+.td-trades-view .trade-row td:nth-child(14) {
+  font-size: 10px !important;
+}
+
+/* ---------------- MOOD ---------------- */
+
+.td-trades-view .trade-row td:nth-child(15) {
+  text-align: center !important;
+  font-size: 15px !important;
+}
+
+.td-trades-view .trade-row td:nth-child(15) * {
+  font-size: 15px !important;
+}
+
+/* ---------------- CHART THUMBNAILS ---------------- */
+
+.td-trades-view .trade-row td:nth-child(16) {
+  white-space: nowrap !important;
+}
+
+.td-trades-view .trade-row td:nth-child(16) img {
+  width: 48px !important;
+  height: 30px !important;
+  object-fit: cover !important;
+  border: 1px solid #b9c2d0 !important;
+  border-radius: 5px !important;
+  background: #ffffff !important;
+  opacity: 1 !important;
+  vertical-align: middle !important;
+}
+
+/* ---------------- ACTIONS ---------------- */
+
+.td-trades-view .trade-row td:last-child {
+  min-width: 105px !important;
+  text-align: center !important;
+}
+
+.td-trades-view .trade-row td:last-child .action-btn,
+.td-trades-view .trade-row td:last-child button {
+  opacity: 0 !important;
+  transition: opacity .12s ease, transform .12s ease !important;
+}
+
+.td-trades-view .trade-row:hover td:last-child .action-btn,
+.td-trades-view .trade-row:hover td:last-child button {
+  opacity: 1 !important;
+}
+
+.td-trades-view .trade-row td:last-child .action-btn:hover,
+.td-trades-view .trade-row td:last-child button:hover {
+  transform: translateY(-1px) !important;
+}
+
+/* ---------------- PAGINATION / FOOTER ---------------- */
+
+.td-trades-view > div:last-child > div:last-child {
+  min-height: 54px !important;
+  padding: 10px 18px !important;
+  box-sizing: border-box !important;
+  background: #ffffff !important;
+  border-top: 1px solid #e3e8ef !important;
+  color: #66758d !important;
+  font-size: 11px !important;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 1250px) {
+  .td-trades-view > div:first-child {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .td-trades-view > div:first-child > div:nth-child(2) {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .td-trades-view > div:first-child > div:nth-child(2) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .td-trades-view > div:first-child > div:nth-child(3) {
+    flex-wrap: wrap !important;
+  }
+}
