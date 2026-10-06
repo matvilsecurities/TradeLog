@@ -1,0 +1,293 @@
+/* ============================================================
+   TradeLog — Current Streak — EXTRA COMPACT
+   ============================================================ */
+
+.td-kpi-streak {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Left title */
+.td-kpi-streak .td-streak-title {
+  position: absolute !important;
+  left: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.td-kpi-streak .td-streak-title > span {
+  color: #858b94 !important;
+  font-size: 7px !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  white-space: nowrap !important;
+}
+
+.td-kpi-streak .td-streak-stat:last-child {
+  transform: translateX(-12px) !important;
+}
+
+/* DAYS + TRADES */
+.td-kpi-streak .td-streak-stats {
+  position: absolute !important;
+  right: 4px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-end !important;
+
+  gap: 40px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Each section */
+.td-kpi-streak .td-streak-stat {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+
+  width: 73px !important;
+  min-width: 73px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* DAYS / TRADES heading */
+.td-kpi-streak .td-streak-label {
+  display: block !important;
+  margin: 0 0 3px 0 !important;
+  padding: 0 !important;
+
+  color: #858b94 !important;
+  font-size: 7px !important;
+  line-height: 1 !important;
+  font-weight: 500 !important;
+  letter-spacing: .03em !important;
+}
+
+/* Circle + pills */
+.td-kpi-streak .td-streak-content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+
+  width: 100% !important;
+  height: 43px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Small circle */
+.td-kpi-streak .td-streak-circle {
+  width: 31px !important;
+  height: 31px !important;
+  min-width: 31px !important;
+  min-height: 31px !important;
+  flex: 0 0 31px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 2px solid #53c69b !important;
+  border-radius: 50% !important;
+  background: #15191b !important;
+
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.td-kpi-streak .td-streak-circle strong {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #53c69b !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  font-weight: 500 !important;
+}
+
+/* Tiny stacked pills */
+.td-kpi-streak .td-streak-pills {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+
+  gap: 4px !important;
+
+  width: 47px !important;
+  min-width: 47px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Pill */
+.td-kpi-streak .td-streak-pill {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 47px !important;
+  height: 17px !important;
+  min-height: 17px !important;
+
+  margin: 0 !important;
+  padding: 0 3px !important;
+
+  border-radius: 999px !important;
+  box-sizing: border-box !important;
+
+  font-size: 6px !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  white-space: nowrap !important;
+}
+
+/* Red current */
+.td-kpi-streak .td-streak-pill.current {
+  color: #d96b72 !important;
+  background: #431817 !important;
+}
+
+/* Green best */
+.td-kpi-streak .td-streak-pill.best {
+  color: #53b98e !important;
+  background: #07372b !important;
+}
+
+/* Remove old styles */
+.td-kpi-streak .td-streak-value,
+.td-kpi-streak .td-streak-dot,
+.td-kpi-streak .td-streak-stat > small {
+  display: none !important;
+}
+
+/* Smaller screens */
+@media (max-width: 650px) {
+  .td-kpi-streak .td-streak-stats {
+    right: 3px !important;
+    gap: 4px !important;
+  }
+
+  .td-kpi-streak .td-streak-stat {
+    width: 65px !important;
+    min-width: 65px !important;
+  }
+
+  .td-kpi-streak .td-streak-content {
+    gap: 3px !important;
+  }
+
+  .td-kpi-streak .td-streak-circle {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+    flex-basis: 28px !important;
+  }
+
+  .td-kpi-streak .td-streak-circle strong {
+    font-size: 13px !important;
+  }
+
+  .td-kpi-streak .td-streak-pills,
+  .td-kpi-streak .td-streak-pill {
+    width: 42px !important;
+    min-width: 42px !important;
+  }
+
+  .td-kpi-streak .td-streak-pill {
+    height: 16px !important;
+    min-height: 16px !important;
+    font-size: 6px !important;
+  }
+}
+
+/* ============================================================
+   CURRENT STREAK — LIGHT THEME
+   ============================================================ */
+
+.td-kpi-streak .td-streak-circle {
+  background: #ffffff !important;
+  border-color: #42b98d !important;
+}
+
+.td-kpi-streak .td-streak-circle strong {
+  color: #299b78 !important;
+}
+
+.td-kpi-streak .td-streak-pill.current {
+  background: #fdf0f2 !important;
+  color: #d45b68 !important;
+}
+
+.td-kpi-streak .td-streak-pill.best {
+  background: #edf9f5 !important;
+  color: #299b78 !important;
+}
+
+/* ============================================================
+   CURRENT STREAK — DARK THEME
+   ============================================================ */
+
+.td-theme-dark .td-kpi-streak .td-streak-title > span {
+  color: #858d97 !important;
+}
+
+.td-theme-dark .td-kpi-streak .td-streak-label {
+  color: #727b85 !important;
+}
+
+
+/* Current streak circles */
+
+.td-theme-dark .td-kpi-streak .td-streak-circle {
+  background: #171a1d !important;
+  border-color: #42b98d !important;
+  color: #53c99f !important;
+}
+
+.td-theme-dark .td-kpi-streak .td-streak-circle strong {
+  color: #53c99f !important;
+}
+
+
+/* Current streak — red */
+
+.td-theme-dark .td-kpi-streak .td-streak-pill.current {
+  background: #32191e !important;
+  color: #df6674 !important;
+  border-color: transparent !important;
+}
+
+
+/* Best streak — green */
+
+.td-theme-dark .td-kpi-streak .td-streak-pill.best {
+  background: #102b24 !important;
+  color: #53c99f !important;
+  border-color: transparent !important;
+}

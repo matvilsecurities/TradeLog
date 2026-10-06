@@ -1,0 +1,1 @@
+Adjusted Prop Firm Setup from the prior 25%-reduced version to approximately 15% reduced from the original narrow-elegant reference by scaling CSS pixel dimensions by 1.1333333. No functional code was changed.

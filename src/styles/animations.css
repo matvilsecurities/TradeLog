@@ -1,0 +1,65 @@
+/* ============================================================
+   Shared TradeLog motion and interaction animations
+   ============================================================ */
+
+@keyframes rowSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes statPop {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.trade-row { animation: rowSlideIn 0.2s ease forwards; }
+.trade-row:hover td { background: rgba(77, 138, 255, 0.04) !important; }
+.stat-pop { animation: statPop 0.25s ease forwards; }
+.action-btn { opacity: 0; transition: opacity 0.15s ease, transform 0.15s ease; }
+.trade-row:hover .action-btn { opacity: 1; }
+.action-btn:hover { transform: scale(1.2); }
+.filter-btn { transition: all 0.15s ease; }
+.filter-btn:hover { opacity: 0.8; transform: translateY(-1px); }
+.search-input:focus {
+  border-color: #4d8aff !important;
+  box-shadow: 0 0 0 3px rgba(77, 138, 255, 0.1);
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.92); opacity: 0; }
+  60% { transform: scale(1.03); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.cal-day {
+  animation: popIn 0.25s ease forwards;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cal-day:hover {
+  transform: scale(1.04) translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+
+.cal-week { animation: fadeSlideIn 0.3s ease forwards; }
+
+@keyframes edgeFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes barGrow {
+  from { width: 0%; }
+  to { width: var(--bar-w); }
+}
+
+.edge-card { animation: edgeFadeIn 0.3s ease forwards; }
+.edge-tab { transition: all 0.2s ease; }
+.edge-tab:hover { opacity: 0.8; transform: translateY(-1px); }
+.compliance-bar { transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }

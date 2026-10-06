@@ -1,0 +1,165 @@
+/* ============================================================
+   TradeLog — Daily Net Cumulative P&L
+   Clean refinement layer
+   Typography is intentionally NOT overridden.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Chart size
+   ------------------------------------------------------------ */
+
+.td-left .td-card:has(.td-chart) {
+  overflow: hidden;
+}
+
+.td-left .td-card:has(.td-chart) .td-chart {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+
+  /* Vertical size */
+  height: 285px !important;
+
+  /* Keep original chart spacing */
+  padding: 12px 12px 6px !important;
+  margin: 0 !important;
+
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+
+/* ------------------------------------------------------------
+   IMPORTANT:
+   Do NOT define font-family, font-size, font-weight,
+   letter-spacing, or text selectors here.
+
+   The existing dashboard/chart CSS remains responsible for
+   all SVG text so the characters retain their original shape.
+   ------------------------------------------------------------ */
+
+
+/* ------------------------------------------------------------
+   Grid
+   ------------------------------------------------------------ */
+
+.td-chart .td-grid line {
+  stroke: rgba(255, 255, 255, 0.055) !important;
+  stroke-width: 1 !important;
+}
+
+
+/* ------------------------------------------------------------
+   Zero / break-even line
+   ------------------------------------------------------------ */
+
+.td-chart .td-zero-line {
+  stroke: rgba(255, 255, 255, 0.15) !important;
+  stroke-width: 1 !important;
+  stroke-dasharray: 3 4 !important;
+}
+
+
+/* ------------------------------------------------------------
+   P&L area
+   ------------------------------------------------------------ */
+
+.td-chart .td-area {
+  fill: url(#tdArea) !important;
+  opacity: 0.72 !important;
+}
+
+
+/* ------------------------------------------------------------
+   P&L line
+   ------------------------------------------------------------ */
+
+.td-chart .td-line {
+  stroke: #49c491 !important;
+  stroke-width: 2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  fill: none !important;
+}
+
+
+/* ------------------------------------------------------------
+   Latest point
+   ------------------------------------------------------------ */
+
+.td-chart .td-chart-dot {
+  fill: #49c491 !important;
+  stroke: #49c491 !important;
+  stroke-width: 1.5 !important;
+  filter: drop-shadow(0 0 4px rgba(73, 196, 145, 0.45)) !important;
+}
+
+
+/* ------------------------------------------------------------
+   Responsive
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .td-left .td-card:has(.td-chart) .td-chart {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 270px !important;
+    margin: 0 !important;
+  }
+}
+
+/* ============================================================
+   P&L CHART — DARK THEME
+   ============================================================ */
+
+.td-theme-dark .td-left .td-card:has(.td-chart) {
+  background: #141719 !important;
+  border-color: #292d33 !important;
+}
+
+.td-theme-dark .td-left .td-card:has(.td-chart) .td-chart {
+  background: #141719 !important;
+}
+
+
+/* Chart text */
+
+.td-theme-dark .td-chart text {
+  fill: #737d88 !important;
+}
+
+
+/* Grid */
+
+.td-theme-dark .td-chart .td-grid line {
+  stroke: rgba(255,255,255,.055) !important;
+}
+
+
+/* Zero line */
+
+.td-theme-dark .td-chart .td-zero-line {
+  stroke: rgba(255,255,255,.14) !important;
+}
+
+
+/* Current P&L */
+
+.td-theme-dark .td-chart .td-current-pnl {
+  fill: #53c69b !important;
+}
+
+
+/* Line */
+
+.td-theme-dark .td-chart .td-line {
+  stroke: #49c491 !important;
+}
+
+
+/* Latest point */
+
+.td-theme-dark .td-chart .td-chart-dot {
+  fill: #49c491 !important;
+  stroke: #49c491 !important;
+}
