@@ -181,10 +181,14 @@ function TradeJournalDashboard({
                 <div className="td-dashboard-notification" key={item.id}>
                   <div className="td-dashboard-notification-icon">✓</div>
                   <div className="td-dashboard-notification-copy"><strong>{item.title}</strong><span>{item.detail}</span><small>{item.createdAt ? new Date(item.createdAt).toLocaleString() : ""}</small></div>
+<<<<<<< HEAD
                   <div className="td-dashboard-notification-actions">
                     {item.action === "setup-funded" && <button type="button" className="td-dashboard-notification-action" onClick={() => { dismissNotification(item.id); setView?.("propfirm"); }}>Set up PA</button>}
                     <button type="button" onClick={() => dismissNotification(item.id)} aria-label="Dismiss notification">×</button>
                   </div>
+=======
+                  <button type="button" onClick={() => dismissNotification(item.id)} aria-label="Dismiss notification">×</button>
+>>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
                 </div>
               ))}
             </div>

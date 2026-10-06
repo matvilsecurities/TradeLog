@@ -9,7 +9,10 @@ import {
 
 const CACHE_PREFIX = "tradelog:account-portfolio-cache:";
 const ACTIVE_PREFIX = "tradelog:active-account:";
+<<<<<<< HEAD
 const DELETED_PREFIX = "tradelog:deleted-accounts:";
+=======
+>>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 
 const clone = (value) => {
   if (value == null) return {};
@@ -148,6 +151,7 @@ function normalizeAccountList(accounts = []) {
     });
 }
 
+<<<<<<< HEAD
 function isTradeableAccount(account) {
   const settings = account?.settings || {};
   const status = String(settings.accountStatus || account?.status || "active").trim().toLowerCase();
@@ -158,11 +162,16 @@ function isTradeableAccount(account) {
   return true;
 }
 
+=======
+>>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 export function useAccountPortfolio({ baseSettings = {}, userId = "anonymous" } = {}) {
   const authenticated = Boolean(userId && userId !== "anonymous");
   const cacheKey = `${CACHE_PREFIX}${userId}`;
   const activeKey = `${ACTIVE_PREFIX}${userId}`;
+<<<<<<< HEAD
   const deletedKey = `${DELETED_PREFIX}${userId}`;
+=======
+>>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 
   const [accounts, setAccounts] = useState(() => [buildPrimary(baseSettings)]);
   const [activeAccountId, setActiveAccountId] = useState("primary");
@@ -188,8 +197,12 @@ export function useAccountPortfolio({ baseSettings = {}, userId = "anonymous" } 
     }
 
     setLoading(true);
+<<<<<<< HEAD
     const deletedAccountIds = new Set((readJson(deletedKey, []) || []).map((id) => String(id)));
     const cached = normalizeAccountList(readJson(cacheKey, [])).filter((account) => !deletedAccountIds.has(String(account.id)));
+=======
+    const cached = normalizeAccountList(readJson(cacheKey, []));
+>>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
     const cachedActive = readJson(activeKey, "primary");
 
     (async () => {
@@ -223,9 +236,12 @@ export function useAccountPortfolio({ baseSettings = {}, userId = "anonymous" } 
           }
         }
 
+<<<<<<< HEAD
         // A successful permanent removal creates a tombstone so stale browser cache cannot resurrect the account.
         dbAccounts = dbAccounts.filter((account) => !deletedAccountIds.has(String(account.id)));
 
+=======
+>>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
         // Migrate legacy browser-only accounts into Supabase exactly once per ID.
         // The browser cache is never treated as authoritative after this merge.
         const dbIds = new Set(dbAccounts.map((account) => String(account.id)));
@@ -259,6 +275,7 @@ export function useAccountPortfolio({ baseSettings = {}, userId = "anonymous" } 
         if (cancelled) return;
         const normalized = normalizeAccountList(dbAccounts);
         setAccounts(normalized);
+<<<<<<< HEAD
 
         // The browser may contain a UUID from an older build, while the current
         // React account identity is `account_id`. Resolve the cached value by
@@ -273,6 +290,11 @@ export function useAccountPortfolio({ baseSettings = {}, userId = "anonymous" } 
           ? cachedAccount.id
           : normalized.find((account) => isTradeableAccount(account))?.id || normalized[0]?.id || "";
         const nextActive = String(repairedActive || "");
+=======
+        const nextActive = normalized.some((account) => account.id === String(cachedActive))
+          ? String(cachedActive)
+          : normalized.find((account) => account.status === "active")?.id || normalized[0]?.id || "";
+>>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
         setActiveAccountId(nextActive);
         setHydratedUserId(userId);
         writeJson(cacheKey, normalized);
@@ -334,6 +356,7 @@ export function useAccountPortfolio({ baseSettings = {}, userId = "anonymous" } 
       if (!dbAccounts.length) return accounts;
       setAccounts(dbAccounts);
       writeJson(cacheKey, dbAccounts);
+<<<<<<< HEAD
       const currentActive = String(activeAccountId || "");
       const current = dbAccounts.find((account) =>
         String(account.id || "") === currentActive
@@ -343,6 +366,12 @@ export function useAccountPortfolio({ baseSettings = {}, userId = "anonymous" } 
       const nextActive = current && isTradeableAccount(current)
         ? current.id
         : dbAccounts.find((account) => isTradeableAccount(account))?.id || dbAccounts[0]?.id || "";
+=======
+      const currentActive = activeAccountId;
+      const nextActive = dbAccounts.some((account) => account.id === currentActive)
+        ? currentActive
+        : dbAccounts.find((account) => account.status === "active")?.id || dbAccounts[0]?.id || "";
+>>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
       if (nextActive && nextActive !== currentActive) {
         setActiveAccountId(nextActive);
         writeJson(activeKey, nextActive);
@@ -401,6 +430,7 @@ export function useAccountPortfolio({ baseSettings = {}, userId = "anonymous" } 
   }, [accounts, persistAccount]);
 
   const selectAccount = useCallback((accountId) => {
+<<<<<<< HEAD
     const value = String(accountId || "");
     const account = accounts.find((item) =>
       String(item.id || "") === value
@@ -409,6 +439,10 @@ export function useAccountPortfolio({ baseSettings = {}, userId = "anonymous" } 
     );
     if (!account) return false;
     const id = String(account.id);
+=======
+    const id = String(accountId || "");
+    if (!accounts.some((account) => account.id === id)) return false;
+>>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
     setActiveAccountId(id);
     if (authenticated && hydratedUserId === userId) writeJson(activeKey, id);
     return true;
@@ -462,6 +496,7 @@ export function useAccountPortfolio({ baseSettings = {}, userId = "anonymous" } 
   const removeAccount = useCallback(async (accountId) => {
     const id = String(accountId || "");
     if (!id || id === "primary") return false;
+<<<<<<< HEAD
     const account = accounts.find((item) => String(item.id) === id);
     if (!account) return false;
     const previousAccounts = accounts;
@@ -496,6 +531,34 @@ export function useAccountPortfolio({ baseSettings = {}, userId = "anonymous" } 
       throw error;
     }
   }, [accounts, activeAccountId, activeKey, cacheKey, deletedKey, userId]);
+=======
+    const account = accounts.find((item) => item.id === id);
+    if (!account) return false;
+    const previousAccounts = accounts;
+    const previousActive = activeAccountId;
+
+    setAccounts((current) => current.filter((item) => item.id !== id));
+    if (activeAccountId === id) {
+      const fallback = accounts.find((item) => item.id !== id && item.status !== "archived");
+      const nextId = fallback?.id || "primary";
+      setActiveAccountId(nextId);
+      writeJson(activeKey, nextId);
+    }
+
+    try {
+      const removed = await deleteAccountDb(id);
+      if (!removed) throw new Error("Account could not be permanently removed");
+      removeJson(`${CACHE_PREFIX}${userId}`);
+      return true;
+    } catch (error) {
+      console.error("Account permanent deletion failed:", error);
+      setAccounts(previousAccounts);
+      setActiveAccountId(previousActive);
+      writeJson(activeKey, previousActive);
+      throw error;
+    }
+  }, [accounts, activeAccountId, activeKey, userId]);
+>>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 
   const renameAccount = useCallback((accountId, name) => {
     const safeName = String(name || "").trim();

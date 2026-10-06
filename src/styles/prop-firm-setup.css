@@ -2034,6 +2034,7 @@
     margin-top:12px !important;
   }
 }
+<<<<<<< HEAD
 
 /* ============================================================
    ACCOUNT DIRECTORY — clean list view
@@ -2104,3 +2105,5 @@
 .app-theme-dark .pf-pa-workspace{background:linear-gradient(180deg,#0f0f18,#0c0b13)}.app-theme-dark .pf-pa-hero,.app-theme-dark .pf-pa-card,.app-theme-dark .pf-pa-kpi{background:#151421;border-color:#29253a;color:#eee}.app-theme-dark .pf-pa-hero-copy h2,.app-theme-dark .pf-pa-card-head h3,.app-theme-dark .pf-pa-kpi strong,.app-theme-dark .pf-pa-rule-list b,.app-theme-dark .pf-pa-review-row strong{color:#f1eef8}.app-theme-dark .pf-pa-hero-copy p,.app-theme-dark .pf-pa-card-head p,.app-theme-dark .pf-pa-kpi small,.app-theme-dark .pf-pa-field>span,.app-theme-dark .pf-pa-rule-list span,.app-theme-dark .pf-pa-review-row span{color:#9690a5}.app-theme-dark .pf-pa-field input,.app-theme-dark .pf-pa-field select,.app-theme-dark .pf-pa-field textarea{background:#0f0e18;border-color:#363145;color:#eee}.app-theme-dark .pf-pa-review-tip{background:#1b1926;color:#9b95a9}.app-theme-dark .pf-pa-bottom-note{background:#101d18}.app-theme-dark .pf-pa-footer{background:#0d0c17!important;border-top-color:#28243a!important}
 @media(max-width:900px){.pf-pa-layout{grid-template-columns:1fr}.pf-pa-side-stack{grid-template-columns:1fr 1fr}.pf-pa-kpis{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.pf-pa-workspace{padding:10px!important}.pf-pa-hero{align-items:flex-start;flex-wrap:wrap;padding:14px}.pf-pa-status-pill{margin-left:61px}.pf-pa-kpis{grid-template-columns:1fr 1fr}.pf-pa-layout,.pf-pa-side-stack{grid-template-columns:1fr}.pf-pa-form-grid{grid-template-columns:1fr}.pf-pa-field.full{grid-column:auto}.pf-pa-footer{padding:9px 12px!important}.pf-pa-footer .pf-btn{flex:1}.pf-pa-kpi strong{font-size:18px}}
+=======
+>>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
