@@ -1,9 +1,5 @@
 import React from "react";
 import "../../styles/tradeLog.css";
-<<<<<<< HEAD
-=======
-import { fetchTradingPlanByDateDb } from "../../supabase.js";
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 import {
   getPnl,
   calculateCurrentEquity,
@@ -14,17 +10,6 @@ import {
   formatHoldTime as hold,
 } from "./tradeUtils.js";
 
-<<<<<<< HEAD
-=======
-const planGrade = (checklist, checks = []) => {
-  const total = Math.max(0, checks.length);
-  const checked = checks.reduce((count, item) => count + (checklist?.[item.key] ? 1 : 0), 0);
-  const ratio = total ? checked / total : 0;
-  const grade = checked >= 10 ? "A+" : checked >= 8 ? "A" : checked >= 6 ? "B" : checked >= 4 ? "C" : "D";
-  return { checked, total, grade, ratio };
-};
-
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 const gradeTone = (grade) => {
   const value = String(grade || "").toUpperCase();
   if (value === "A" || value === "A+") return "a";
@@ -112,14 +97,6 @@ function TradeLog({
   backLabel = "Back to Account Center",
   initialAccountId = "all",
   initialMonthFilter = "all",
-<<<<<<< HEAD
-=======
-  userId,
-  checklist = [],
-  todayPlanMode = "unset",
-  onPlanModeChange,
-  onOpenTradingPlan,
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 }) {
   const safeTrades = Array.isArray(trades) ? trades : [];
   const [search, setSearch] = React.useState("");
@@ -137,52 +114,6 @@ function TradeLog({
   const monthRef = React.useRef(null);
   const accountRef = React.useRef(null);
   const profileRef = React.useRef(null);
-<<<<<<< HEAD
-=======
-  const [todayPlan, setTodayPlan] = React.useState(null);
-  const [todayPlanLoading, setTodayPlanLoading] = React.useState(false);
-  const [todayPlanError, setTodayPlanError] = React.useState("");
-
-  const todayIso = React.useMemo(() => {
-    const now = new Date();
-    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-  }, []);
-  const todayPlanChecks = Array.isArray(checklist) ? checklist : [];
-  const todayPlanGrade = React.useMemo(
-    () => planGrade(todayPlan?.setup_checklist || {}, todayPlanChecks),
-    [todayPlan?.setup_checklist, todayPlanChecks]
-  );
-
-  React.useEffect(() => {
-    let cancelled = false;
-    const loadTodayPlan = async () => {
-      setTodayPlanError("");
-      if (!userId) {
-        setTodayPlan(null);
-        return;
-      }
-      setTodayPlanLoading(true);
-      try {
-        const data = await fetchTradingPlanByDateDb(todayIso);
-        if (!cancelled) setTodayPlan(data);
-      } catch (error) {
-        if (!cancelled) {
-          setTodayPlan(null);
-          setTodayPlanError(error?.message || "Unable to load today's Trading Plan.");
-        }
-      } finally {
-        if (!cancelled) setTodayPlanLoading(false);
-      }
-    };
-    loadTodayPlan();
-    return () => { cancelled = true; };
-  }, [userId, todayIso]);
-
-  const choosePlanMode = React.useCallback((mode) => {
-    onPlanModeChange?.(mode);
-  }, [onPlanModeChange]);
-
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
   // Dashboard is the source of the default Ledger context. If the user changes
   // the Dashboard account, the next Ledger visit follows that selection.
   React.useEffect(() => {
@@ -379,55 +310,6 @@ function TradeLog({
       </header>
 
       <main className="trade-log-workspace">
-<<<<<<< HEAD
-=======
-        <section className="trade-log-plan-gate" aria-label="Today's Trading Plan">
-          <div className="trade-log-plan-gate-head">
-            <div>
-              <span className="trade-log-plan-eyebrow">TODAY'S TRADING PLAN</span>
-              <h2>How do you want to record today's trades?</h2>
-              <p>Use the exact checklist you prepared today, or intentionally journal this session without a Trading Plan.</p>
-            </div>
-            <div className={`trade-log-plan-mode-pill ${todayPlanMode === "with-plan" && todayPlan ? "linked" : todayPlanMode === "without-plan" ? "free" : "pending"}`}>
-              <i />
-              {todayPlanMode === "with-plan" && todayPlan ? "Plan linked" : todayPlanMode === "without-plan" ? "No plan" : "Choose recording mode"}
-            </div>
-          </div>
-
-          {todayPlanLoading ? <div className="trade-log-plan-loading">Loading today's saved plan…</div> : todayPlan ? <div className="trade-log-plan-gate-body">
-            <div className="trade-log-plan-summary">
-              <div className="trade-log-plan-summary-top">
-                <div><span>Market bias</span><strong>{todayPlan.market_bias || "No bias set"}</strong></div>
-                <div><span>Setup focus</span><strong>{todayPlan.setup_focus || "Not specified"}</strong></div>
-                <div><span>Max risk</span><strong>{money(todayPlan.max_risk)}</strong></div>
-                <div><span>Max trades</span><strong>{todayPlan.max_trades || 0}</strong></div>
-              </div>
-              <div className="trade-log-plan-checklist-head"><div><strong>Today's setup checklist</strong><span>{todayPlanGrade.checked}/{todayPlanGrade.total} confirmed</span></div><b className={`tl-grade ${gradeTone(todayPlanGrade.grade)}`}>{todayPlanGrade.grade}</b></div>
-              <div className="trade-log-plan-checklist">
-                {todayPlanChecks.map((item) => {
-                  const checked = Boolean(todayPlan.setup_checklist?.[item.key]);
-                  return <div key={item.key} className={`trade-log-plan-check-item ${checked ? "checked" : ""}`}><span>{checked ? "✓" : ""}</span><strong>{item.label}</strong></div>;
-                })}
-              </div>
-              {todayPlan.notes && <div className="trade-log-plan-notes"><span>Plan notes</span><p>{todayPlan.notes}</p></div>}
-            </div>
-
-            <aside className="trade-log-plan-choice">
-              <div className="trade-log-plan-choice-icon">✓</div>
-              <strong>{todayPlanMode === "with-plan" ? "Today's plan is active" : todayPlanMode === "without-plan" ? "Journaling without the plan" : "Choose how to record"}</strong>
-              <p>{todayPlanMode === "with-plan" ? "New trades dated today will keep this plan and checklist snapshot." : todayPlanMode === "without-plan" ? "New trades dated today will not receive a Trading Plan link." : "Your choice controls whether new trades today receive this plan snapshot."}</p>
-              <div className="trade-log-plan-choice-actions">
-                <button type="button" className={`trade-log-plan-choice-btn primary ${todayPlanMode === "with-plan" ? "selected" : ""}`} onClick={() => choosePlanMode("with-plan")}>Record with today's plan</button>
-                <button type="button" className={`trade-log-plan-choice-btn ${todayPlanMode === "without-plan" ? "selected" : ""}`} onClick={() => choosePlanMode("without-plan")}>Go without trading plan</button>
-                <button type="button" className="trade-log-plan-link" onClick={onOpenTradingPlan}>Edit today's plan →</button>
-              </div>
-            </aside>
-          </div> : <div className="trade-log-plan-empty">
-            <div><strong>No Trading Plan saved for today</strong><p>Create today's plan first if you want the checklist and plan context attached to your trades.</p>{todayPlanError && <small>{todayPlanError}</small>}</div>
-            <div className="trade-log-plan-empty-actions"><button type="button" className="trade-log-plan-choice-btn primary" onClick={onOpenTradingPlan}>Make today's plan</button><button type="button" className={`trade-log-plan-choice-btn ${todayPlanMode === "without-plan" ? "selected" : ""}`} onClick={() => choosePlanMode("without-plan")}>Go without trading plan</button></div>
-          </div>}
-        </section>
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 
         <section className="trade-log-kpis">
           {/* KPI order is intentional and shared with the main Journal Ledger specification. */}

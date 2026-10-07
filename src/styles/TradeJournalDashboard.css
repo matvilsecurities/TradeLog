@@ -3323,10 +3323,7 @@ max-width: 120px;
   .td-header-actions > .td-export{font-size:0 !important}
   .td-header-actions > .td-export::first-letter{font-size:10px !important}
 }
-<<<<<<< HEAD
 
 
 .td-dashboard-notification-actions{display:flex;align-items:center;gap:8px;flex:0 0 auto}.td-dashboard-notification-action{border:1px solid rgba(118,87,255,.24);background:rgba(118,87,255,.08);color:#6f57e8;border-radius:8px;padding:7px 10px;font:700 11px/1 Inter,system-ui,sans-serif;cursor:pointer;transition:transform .16s ease,background .16s ease,border-color .16s ease}.td-dashboard-notification-action:hover{transform:translateY(-1px);background:rgba(118,87,255,.14);border-color:rgba(118,87,255,.42)}
 .app-theme-dark .td-dashboard-notification-action{color:#b6a8ff;border-color:rgba(182,168,255,.25);background:rgba(118,87,255,.12)}
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062

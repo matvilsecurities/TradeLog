@@ -51,7 +51,7 @@
     "verify:production-schema": "node scripts/verify-production-schema.mjs",
     "loadtest:create-users": "node load-tests/create-test-users.mjs",
     "loadtest:get-tokens": "node load-tests/get-test-tokens.mjs",
-    "test": "node tests/equity-order.test.mjs && node tests/security-regressions.test.mjs && node tests/csv-export.test.mjs"
+    "test": "node tests/source-integrity.test.mjs && node tests/equity-order.test.mjs && node tests/security-regressions.test.mjs && node tests/csv-export.test.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.112.4",
