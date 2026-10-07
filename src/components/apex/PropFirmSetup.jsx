@@ -101,12 +101,9 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
   const [accountStage, setAccountStage] = useState(settings.accountStage || "evaluation");
   const [fundedAccountName, setFundedAccountName] = useState(settings.fundedAccountName || "");
   const [fundedAccountNumber, setFundedAccountNumber] = useState(settings.fundedAccountNumber || "");
-<<<<<<< HEAD
   const [paPlatform, setPaPlatform] = useState(settings.paPlatform || settings.platform || "");
   const [paActivationDate, setPaActivationDate] = useState(settings.paActivationDate || new Date().toISOString().slice(0, 10));
   const [paNotes, setPaNotes] = useState(settings.paNotes || "");
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
   const [fundedFromEvaluationId, setFundedFromEvaluationId] = useState(settings.fundedFromEvaluationId || "");
   const [setupIntent, setSetupIntent] = useState("account");
   const [portfolioNotice, setPortfolioNotice] = useState("");
@@ -194,7 +191,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
     setAccountStage(settings.accountStage || "evaluation");
     setFundedAccountName(settings.fundedAccountName || "");
     setFundedAccountNumber(settings.fundedAccountNumber || "");
-<<<<<<< HEAD
     setPaPlatform(settings.paPlatform || settings.platform || "");
     setPaActivationDate(settings.paActivationDate || new Date().toISOString().slice(0, 10));
     setPaNotes(settings.paNotes || "");
@@ -202,12 +198,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
     setMarket(settings.propMarket || settings.market || "");
     setAccountVariant(settings.accountVariant || (settings.propPlanVariant === "Legacy" ? "legacy" : "new"));
   }, [settings.accountId, settings.accountLabel, settings.purchasePrice, settings.accountPurchasePrice, settings.activationFeePaid, settings.propMarket, settings.market, settings.accountVariant, settings.propPlanVariant, settings.evaluationStatus, settings.evaluationPassedAt, settings.accountStage, settings.fundedAccountName, settings.fundedAccountNumber, settings.paPlatform, settings.paActivationDate, settings.paNotes, settings.fundedFromEvaluationId]);
-=======
-    setFundedFromEvaluationId(settings.fundedFromEvaluationId || "");
-    setMarket(settings.propMarket || settings.market || "");
-    setAccountVariant(settings.accountVariant || (settings.propPlanVariant === "Legacy" ? "legacy" : "new"));
-  }, [settings.accountId, settings.accountLabel, settings.purchasePrice, settings.accountPurchasePrice, settings.activationFeePaid, settings.propMarket, settings.market, settings.accountVariant, settings.propPlanVariant, settings.evaluationStatus, settings.evaluationPassedAt, settings.accountStage, settings.fundedAccountName, settings.fundedAccountNumber, settings.fundedFromEvaluationId]);
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 
   useEffect(() => {
     if (initialAccountRef.current !== activeAccountId) {
@@ -259,12 +249,9 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
       ...(r.maxDrawdown != null ? { maxDrawdown: r.maxDrawdown } : {}),
       ...(r.dailyLossLimit != null ? { dailyLossLimit: r.dailyLossLimit } : {}),
       ...(r.profitTarget != null ? { profitTarget: r.profitTarget } : {}),
-<<<<<<< HEAD
       ...(r.passingEquity != null ? { passingEquity: r.passingEquity } : {}),
       ...(r.trailingThreshold != null ? { trailingThreshold: r.trailingThreshold } : {}),
       ...(r.oneTimePaFee != null ? { oneTimePaFee: r.oneTimePaFee } : {}),
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
       ...(r.consistencyRule != null ? { consistencyRule: r.consistencyRule } : {}),
       ...(r.minTradingDays != null ? { minTradingDays: r.minTradingDays } : {}),
       ...(r.minProfitableDays != null ? { minProfitableDays: r.minProfitableDays } : {}),
@@ -289,11 +276,7 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
     const name = fundedAccountName.trim();
     const number = fundedAccountNumber.trim();
     if (!name || !number) {
-<<<<<<< HEAD
       setPortfolioNotice("Enter the PA account name and PA account number first.");
-=======
-      setPortfolioNotice("Enter the funded account name and account number first.");
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
       window.setTimeout(() => setPortfolioNotice(""), 3000);
       return;
     }
@@ -314,20 +297,16 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
       fundedAccountNumber: number,
       activationFeePaid: Number(activationFeePaid) || 0,
       accountActivationFeePaid: Number(activationFeePaid) || 0,
-<<<<<<< HEAD
       paPlatform: paPlatform.trim() || sourceSettings.platform || sourceSettings.propVendor || "",
       platform: paPlatform.trim() || sourceSettings.platform || sourceSettings.propVendor || "",
       paActivationDate: paActivationDate || now.slice(0, 10),
       paNotes: paNotes.trim(),
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
       fundedFromEvaluationId: evaluationAccountId,
       fundedAt: now,
       evaluationPassedAt: sourceSettings.evaluationPassedAt || now,
     };
     const account = onCreateAccount(fundedSettings, { inheritBase: false });
     if (account?.id) {
-<<<<<<< HEAD
       if (onUpdateAccount) {
         onUpdateAccount(evaluationAccountId, {
           ...sourceSettings,
@@ -337,8 +316,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
           fundedAccountId: account.id,
         });
       }
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
       setFundedFromEvaluationId(evaluationAccountId);
       setAccountStage("funded");
       addAccountNotification(userId, {
@@ -352,16 +329,11 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
       setShowSetupForm(false);
       setShowAllAccounts(false);
       setDetailAccountId(null);
-<<<<<<< HEAD
       setPortfolioNotice("Funded PA added successfully. Returning to Dashboard…");
       window.setTimeout(() => {
         setPortfolioNotice("");
         onClose?.();
       }, 700);
-=======
-      setPortfolioNotice("Funded account added successfully.");
-      window.setTimeout(() => setPortfolioNotice(""), 2600);
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
     }
   };
 
@@ -470,12 +442,9 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
     setFundedFromEvaluationId("");
     setFundedAccountName("");
     setFundedAccountNumber("");
-<<<<<<< HEAD
     setPaPlatform("");
     setPaActivationDate(new Date().toISOString().slice(0, 10));
     setPaNotes("");
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
     setMarket("");
     setVendor("");
     setAccountVariant("new");
@@ -515,7 +484,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
     setFundedFromEvaluationId(row.account.id);
     setFundedAccountName("");
     setFundedAccountNumber("");
-<<<<<<< HEAD
     setPaPlatform(s.platform || s.propVendor || vendor || "");
     setPaActivationDate(new Date().toISOString().slice(0, 10));
     setPaNotes("");
@@ -531,11 +499,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
     openPassedEvaluationForFunded({ account: { id: activeAccountId, settings } });
   }, [settings?.paSetupRequired, settings?.paSetupStatus, settings?.evaluationStatus, settings?.accountStage, activeAccountId, showSetupForm]);
 
-=======
-    setShowSetupForm(true);
-  };
-  const closeSetupForm = () => setShowSetupForm(false);
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
   const addCustomRule = () => setCustomRules((items) => [...items, { id: `custom_${Date.now()}_${items.length}`, label: "", value: "" }]);
   const updateCustomRule = (id, key, value) => setCustomRules((items) => items.map((item) => item.id === id ? { ...item, [key]: value } : item));
   const removeCustomRule = (id) => setCustomRules((items) => items.filter((item) => item.id !== id));
@@ -561,7 +524,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
       ? Boolean(threshold != null && Number(compliance.currentEquity) <= threshold)
       : false;
     const blown = !evaluationPassed && (manualBlown || automaticBlown);
-<<<<<<< HEAD
     const accountStage = String(account?.settings?.accountStage || "evaluation").trim().toLowerCase();
     // A passed/cleared evaluation is historical, not an active account.
     // A funded account created from that evaluation is active again until it is blown/failed/closed/inactive.
@@ -570,11 +532,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
     return { account, accountTrades, compliance, pnl, blown, manualBlown, automaticBlown, isTrailing, threshold, evaluationPassed, passedEvaluation, active };
   }), [accounts, trades]);
   const activeCount = portfolioRows.filter((row) => row.active).length;
-=======
-    return { account, accountTrades, compliance, pnl, blown, manualBlown, automaticBlown, isTrailing, threshold, evaluationPassed };
-  }), [accounts, trades]);
-  const activeCount = portfolioRows.filter((row) => !row.blown).length;
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
   const blownCount = portfolioRows.filter((row) => row.blown).length;
   const passedRows = portfolioRows.filter((row) => row.evaluationPassed);
   const passedCount = passedRows.length;
@@ -586,7 +543,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
   const totalActivationPaid = portfolioRows.reduce((sum, row) => sum + activationPaid(row.account), 0);
   const totalInvestedPaid = totalPurchasePaid + totalActivationPaid;
   const activePct = portfolioTotal ? Math.round((activeCount / portfolioTotal) * 100) : 0;
-<<<<<<< HEAD
   const paRules = program?.rules || {};
   const paStartingCapital = Number(program?.accountSize || settings?.accountSize || 0);
   const paProfitTarget = Number(paRules.profitTarget ?? settings?.profitTarget ?? 0);
@@ -594,8 +550,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
   const paTrailingThreshold = Number(paRules.trailingThreshold ?? paRules.maxDrawdown ?? settings?.maxDrawdown ?? 0);
   const paDailyDrawdown = paRules.dailyLossLimit == null ? "None" : money(paRules.dailyLossLimit);
   const paOneTimeFee = Number(paRules.oneTimePaFee ?? paRules.activationFee ?? settings?.activationFee ?? 0);
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
   const accountReport = (row) => {
     const list = Array.isArray(row?.accountTrades) ? row.accountTrades : [];
     const pnlOf = (trade) => Number(trade?.pnl ?? trade?.profit_loss ?? 0) || 0;
@@ -756,7 +710,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
                   </div>
 
                   {!selectedDetailRow ? (
-<<<<<<< HEAD
                     <div className="pf-account-list-view">
                       <div className="pf-account-list-head">
                         <span>Account</span><span>Status</span><span>Performance</span><span>Activity</span><span>Actions</span>
@@ -793,31 +746,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
                               {(row.evaluationPassed || row.blown) && onReviewTrades && <button type="button" className="pf-list-action secondary" onClick={() => onReviewTrades(row.account.id)}>Trades</button>}
                               {row.blown ? <button type="button" className="pf-list-action success" onClick={() => restoreAccountToActive(row.account.id)}>Activate</button> : !row.evaluationPassed ? <button type="button" className="pf-list-action warning" onClick={() => openBlowReview(row.account.id)}>Mark Blown</button> : null}
                               <button type="button" className="pf-list-action danger" onClick={() => handleRemoveAccount(row.account.id)}>Remove</button>
-=======
-                    <div className="pf-all-accounts-grid">
-                      {portfolioRows.map((row) => {
-                        const report = accountReport(row);
-                        const accountSettings = row.account.settings || {};
-                        return (
-                          <article className="pf-account-detail-card" key={row.account.id}>
-                            <div className="pf-account-card-top">
-                              <div>
-                                <span className={`pf-account-card-status ${row.evaluationPassed ? "passed" : ""}`}>{row.evaluationPassed ? "Passed" : row.blown ? "Blown" : "Active"}</span><span className={`pf-account-stage-badge ${String(accountSettings.accountStage || "evaluation") === "funded" ? "funded" : "evaluation"}`}>{String(accountSettings.accountStage || "evaluation") === "funded" ? "Funded" : "Evaluation"}</span>
-                                <h3>{accountSettings.accountLabel || accountSettings.accountId || row.account.name}</h3>
-                                <p>{accountSettings.propFirm || "Prop Firm"} · {accountSettings.propProgram || accountSettings.accountName || "Trading Account"}</p>
-                              </div>
-                              <div className={`pf-account-health ${row.blown ? "bad" : "good"}`}>{row.blown ? "Review" : "Healthy"}</div>
-                            </div>
-                            <div className="pf-account-card-metrics">
-                              <div className={`pf-kpi ${report.totalPnl >= 0 ? "green" : "red"}`}><span>Net P&L</span><strong>{money(report.totalPnl)}</strong><small>Account performance</small></div>
-                              <div className="pf-kpi"><span>Win Rate</span><strong>{report.winRate.toFixed(1)}%</strong><small>{report.wins} wins · {report.losses} losses</small></div>
-                              <div className="pf-kpi violet"><span>Profit Factor</span><strong>{Number.isFinite(report.profitFactor) ? report.profitFactor.toFixed(2) : "∞"}</strong><small>Gross profit / loss</small></div>
-                              <div className="pf-kpi"><span>Trades</span><strong>{report.trades}</strong><small>{report.tradingDays} trading days</small></div>
-                            </div>
-                            <div className="pf-account-card-foot">
-                              <span>{report.tradingDays} trading days · {money(report.currentEquity)} equity</span>
-                              <div className="pf-account-card-actions"><button type="button" className="pf-edit-costs" title="Edit price paid and activation fee" aria-label={`Edit costs for ${row.account.name}`} onClick={() => openCostEditor(row.account.id)}>✎ Edit Costs</button><button type="button" onClick={() => setDetailAccountId(row.account.id)}>View Details <span>→</span></button>{(row.evaluationPassed || row.blown) && onReviewTrades && <button type="button" className="pf-review-trades" onClick={() => onReviewTrades(row.account.id)}>Review Trades</button>}{!row.evaluationPassed && <button type="button" className="pf-mark-passed" onClick={() => markEvaluationPassed(row.account.id)}>Mark Passed</button>}{!row.blown && row.evaluationPassed && <button type="button" className="pf-create-funded" onClick={() => { setSetupMode("add"); setSetupIntent("funded"); setShowAllAccounts(false); setDetailAccountId(null); setShowSetupForm(true); setFirmId(row.account.settings?.propFirmId || ""); setMarket(row.account.settings?.propMarket || row.account.settings?.market || ""); setVendor(row.account.settings?.propVendor || ""); setAccountVariant(row.account.settings?.accountVariant || "new"); setProgramId(row.account.settings?.propProgramId || ""); setAccountStage("funded"); setEvaluationStatus("not-applicable"); setFundedFromEvaluationId(row.account.id); setFundedAccountName(""); setFundedAccountNumber(""); }}>Create Funded Account</button>}{row.blown ? <button type="button" className="pf-restore-account" onClick={() => restoreAccountToActive(row.account.id)}>Mark Active</button> : <button type="button" className="pf-mark-blown" onClick={() => openBlowReview(row.account.id)}>Mark Blown</button>}<button type="button" className="pf-remove-account" onClick={() => handleRemoveAccount(row.account.id)}>Remove</button></div>
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
                             </div>
                           </article>
                         );
@@ -907,11 +835,7 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
                 <button type="button" className="pf-back-button" aria-label="Back to account overview" title="Back to account overview" onClick={closeSetupForm}>←</button>
               )}
               <div className="pf-logo">♜</div>
-<<<<<<< HEAD
               <div><h1>{isFundedCreation ? "PA Account Setup" : "Prop Firm Setup"}</h1><p className="pf-sub">{isFundedCreation ? "Your evaluation passed. Add the real PA details and activate your funded account." : "Select a firm, vendor and account program to initialize the journal with a versioned rule snapshot."}</p></div>
-=======
-              <div><h1>Prop Firm Setup</h1><p className="pf-sub">Select a firm, vendor and account program to initialize the journal with a versioned rule snapshot.</p></div>
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
             </div>
             <button type="button" className="pf-close" aria-label="Close" onClick={() => onClose?.()}>×</button>
           </div>
@@ -959,7 +883,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
           </section>
         ) : (
           <>
-<<<<<<< HEAD
             <div className={`pf-workspace ${isFundedCreation ? "pf-pa-workspace" : ""}`}>
               {isFundedCreation ? (
                 <section className="pf-pa-setup-shell" aria-label="PA account setup">
@@ -998,9 +921,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
                 </section>
               ) : (
               <>
-=======
-            <div className="pf-workspace">
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
               <div className="pf-left-column">
                 <div className={`pf-selector pf-selector-flow ${showVariantSelector ? "has-variant" : ""} ${isFundedCreation ? "funded-create" : ""}`}>
                   <div className="pf-field pf-prop-field"><label>1 · PROP FIRM</label><select value={firmId} onChange={(e) => selectFirm(e.target.value)}><option value="">Select prop firm…</option>{catalog.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}</select></div>
@@ -1090,18 +1010,13 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
 
                 <div className="pf-section-title">Financial Overview</div>
                 <div className="pf-money-card"><span>Total Invested</span><strong>{money(totalInvestedPaid)}</strong><small>Purchase cost + activation fees across {portfolioTotal} accounts</small></div>
-<<<<<<< HEAD
                 <div className="pf-money-row"><div><span>Average / Account</span><strong>{money(portfolioTotal ? totalInvestedPaid / portfolioTotal : 0)}</strong></div><div><span>Active Account Cost</span><strong>{money(portfolioRows.filter((r) => r.active).reduce((sum, r) => sum + totalInvested(r.account), 0))}</strong></div></div>
-=======
-                <div className="pf-money-row"><div><span>Average / Account</span><strong>{money(portfolioTotal ? totalInvestedPaid / portfolioTotal : 0)}</strong></div><div><span>Active Account Cost</span><strong>{money(portfolioRows.filter((r) => !r.blown).reduce((sum, r) => sum + totalInvested(r.account), 0))}</strong></div></div>
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 
                 <div className="pf-section-title">Portfolio Status</div>
                 <div className="pf-portfolio-bar"><div className="pf-bar-label"><span>Account distribution</span><b>{activeCount} active · {blownCount} blown</b></div><div className="pf-bar"><i style={{width:`${activePct}%`}}></i><i style={{width:`${100-activePct}%`}}></i></div><div className="pf-bar-legend"><span><b className="pf-green-dot"></b>Active <strong>{activeCount}</strong></span><span><b className="pf-red-dot"></b>Blown <strong>{blownCount}</strong></span></div></div>
 
                 <button type="button" className="pf-view-all-accounts" onClick={openAllAccounts}>View All Accounts <span>→</span></button>
               </aside>
-<<<<<<< HEAD
               </>
               )}
             </div>
@@ -1109,13 +1024,6 @@ export default function PropFirmSetup({ settings = {}, onSave, onCreateAccount, 
             <footer className={`pf-footer ${isFundedCreation ? "pf-pa-footer" : ""}`}>
               <button type="button" className="pf-btn pf-cancel" onClick={closeSetupForm}>Cancel</button>
               {onCreateAccount && <button type="button" className={`pf-btn pf-next ${created ? "pf-success" : ""}`} onClick={createAccountFromSetup} title={isFundedCreation ? "Create Funded Account" : "Save account"} disabled={!program || (isFundedCreation && (!fundedAccountName.trim() || !fundedAccountNumber.trim() || !paPlatform.trim() || String(activationFeePaid).trim() === "" || !paActivationDate))}>{created ? "✓ Created" : (setupIntent === "funded" ? "Create PA Account" : (setupIntent === "passed" ? "Add Passed Account" : (setupMode === "add" ? "Add Account" : "Save Changes")))}</button>}
-=======
-            </div>
-
-            <footer className="pf-footer">
-              <button type="button" className="pf-btn pf-cancel" onClick={closeSetupForm}>Cancel</button>
-              {onCreateAccount && <button type="button" className={`pf-btn pf-next ${created ? "pf-success" : ""}`} onClick={createAccountFromSetup} disabled={!program}>{created ? "✓ Created" : (setupIntent === "funded" ? "Create Funded Account" : (setupIntent === "passed" ? "Add Passed Account" : (setupMode === "add" ? "Add Account" : "Save Changes")))}</button>}
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
             </footer>
           </>
         )}

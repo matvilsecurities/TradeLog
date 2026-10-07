@@ -188,7 +188,6 @@ function resolveTradeAccountReference(reference, seen = new Set()) {
   return { legacyId: "", uuid: "" };
 }
 
-<<<<<<< HEAD
 
 async function resolveTradeAccountReferenceDb(reference, explicitUuid = "") {
   if (!supabase) return null;
@@ -242,8 +241,6 @@ async function resolveTradeAccountReferenceDb(reference, explicitUuid = "") {
   return null;
 }
 
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 // `getSession()` reads the (auto-refreshed) session from local storage/memory
 // and only touches the network when the token is actually stale, unlike
 // `getUser()` which always makes a round-trip to the Auth server to revalidate
@@ -447,7 +444,6 @@ export async function deleteAccountDb(accountId) {
     () => supabase.rpc("tradelog_delete_account", { p_account_id: String(accountId) }),
     { label: "Delete account" }
   );
-<<<<<<< HEAD
   if (error) {
     const message = String(error?.message || error || "");
     if (/tradelog_delete_account|schema cache|Could not find the function/i.test(message)) {
@@ -455,9 +451,6 @@ export async function deleteAccountDb(accountId) {
     }
     throw error;
   }
-=======
-  if (error) throw error;
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
   if (data?.deleted) return true;
   if (data?.reason === "has_trades") {
     throw new Error(`This account still has ${data.trade_count || 0} trade(s)${data.missed_trade_count ? ` and ${data.missed_trade_count} missed trade(s)` : ""}. Archive it instead to keep your history.`);
@@ -579,7 +572,6 @@ export async function saveTradeDb(trade) {
   if (!supabase) return null;
 
   const userId = await getCurrentUserId();
-<<<<<<< HEAD
   const rawAccountRef = trade?.accountId ?? trade?.account_id ?? trade?.accountUuid ?? trade?.account_uuid;
   const authoritativeAccount = await resolveTradeAccountReferenceDb(rawAccountRef, trade?.accountUuid || trade?.account_uuid || "");
   if (!authoritativeAccount?.account_id) {
@@ -594,8 +586,6 @@ export async function saveTradeDb(trade) {
   if (!isTradeable) {
     throw new Error("This account is no longer active and cannot receive a new trade. Select an active account and try again.");
   }
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 
   const dbPayload = {
     user_id: userId,
@@ -651,21 +641,9 @@ trade.grade || null,
     // `account_id` must always be the string application account key. A UI
     // component may provide the whole account object; normalize that here as
     // a final database boundary so it can never be persisted as "[object Object]".
-<<<<<<< HEAD
     // Always persist the authoritative business account_id from public.accounts.
     // Never derive trades.account_id from UUID shape or from a stale browser cache.
     account_id: String(authoritativeAccount.account_id),
-=======
-    account_id: (() => {
-      const resolved = resolveTradeAccountReference(trade?.accountId ?? trade?.account_id ?? trade?.accountUuid ?? trade?.account_uuid);
-      if (resolved.legacyId) return resolved.legacyId;
-      // A UUID-only reference is not a valid trades.account_id value. The App
-      // layer normally resolves it to the account's legacy key; if it does not,
-      // fail rather than silently writing an incorrect account.
-      // A missing account is an error, never a silent "primary" (see TL-005).
-      return "";
-    })(),
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
     external_trade_id: trade.externalTradeId || trade.external_trade_id || null,
     external_account_id: trade.externalAccountId || trade.external_account_id || null,
     connector_id: trade.connectorId || trade.connector_id || null,
@@ -673,30 +651,16 @@ trade.grade || null,
     trading_plan_id: trade.tradingPlanId || trade.trading_plan_id || null,
     trading_plan_snapshot: trade.tradingPlanSnapshot || trade.trading_plan_snapshot || null,
   };
-<<<<<<< HEAD
   const canonicalAccountUuid = String(authoritativeAccount.id || "");
   if (isUuid(canonicalAccountUuid)) {
     dbPayload.account_uuid = canonicalAccountUuid;
-=======
-  const rawAccountRef = trade?.accountId ?? trade?.account_id ?? trade?.accountUuid ?? trade?.account_uuid;
-  const resolvedAccountRef = resolveTradeAccountReference(rawAccountRef);
-  const canonicalAccountUuid = trade.accountUuid || trade.account_uuid || resolvedAccountRef.uuid;
-  if (isUuid(canonicalAccountUuid)) {
-    dbPayload.account_uuid = String(canonicalAccountUuid);
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
   } else {
     // Do not copy the legacy account_id into account_uuid. It is a text key,
     // not the canonical UUID stored by accounts.id.
     delete dbPayload.account_uuid;
   }
 
-<<<<<<< HEAD
   if (!dbPayload.account_id || dbPayload.account_id === "[object Object]") throw new Error("Trade account could not be resolved to a valid account ID.");
-=======
-  if (dbPayload.account_id === "[object Object]" || !dbPayload.account_id) {
-    throw new Error("Trade account could not be resolved to a valid account ID. Select the intended account and try again.");
-  }
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 
   // Phase 39 live-capture metadata is optional. Fetched manual trades always
   // expose executionIds as an empty array for UI convenience, so checking only

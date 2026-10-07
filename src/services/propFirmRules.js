@@ -63,7 +63,6 @@ const APEX_LEGACY_PROGRAMS = APEX_LEGACY_PRESETS.map(([size, maxDrawdown, dailyL
   accountVariant: "legacy",
   feeMode: "Legacy",
   pricing: null,
-<<<<<<< HEAD
   rules: {
     maxDrawdown,
     dailyLossLimit: size === 50 ? undefined : dailyLossLimit,
@@ -76,9 +75,6 @@ const APEX_LEGACY_PROGRAMS = APEX_LEGACY_PRESETS.map(([size, maxDrawdown, dailyL
       ? "Apex 50K Full Legacy: $50,000 starting capital, $3,000 profit goal, $53,000 passing equity, $2,500 trailing threshold, no daily drawdown."
       : "Legacy account rules. Review the saved rule snapshot before trading.",
   },
-=======
-  rules: { maxDrawdown, dailyLossLimit, drawdownType: "Trailing", ruleNote: "Legacy account rules. Review the saved rule snapshot before trading." },
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 }));
 
 export const PROP_FIRM_CATALOG = [

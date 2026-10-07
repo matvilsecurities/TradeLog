@@ -51,11 +51,8 @@ import { signOut, fetchTradingPlanByDateDb } from "./supabase.js";
 import { calculatePropFirmCompliance } from "./services/propFirmCompliance.js";
 import { addAccountNotification } from "./utils/accountNotifications.js";
 
-<<<<<<< HEAD
 const moneyForNotification = (value) => `$${Number(value || 0).toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
 
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 const getLocalIsoDate = () => {
   const now = new Date();
   const year = now.getFullYear();
@@ -328,13 +325,9 @@ export default function App() {
         return;
       }
       if (typeof value === "object") {
-<<<<<<< HEAD
         // Explicit business account_id comes first. A Supabase UUID may itself
         // look like an account_id, so identity must be matched by field, not by
         // UUID shape.
-=======
-        // Handle every account shape used by the app and by older cached data.
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
         addCandidate(value.account_id);
         addCandidate(value.accountId);
         addCandidate(value.id);
@@ -359,7 +352,6 @@ export default function App() {
     return null;
   }, [accounts]);
 
-<<<<<<< HEAD
   const isTradeableAccount = useCallback((account) => {
     const settings = account?.settings || {};
     const status = String(settings.accountStatus || account?.status || "active").trim().toLowerCase();
@@ -370,8 +362,6 @@ export default function App() {
     return true;
   }, []);
 
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
   const openAdd = useCallback((requestedAccountId = null) => {
     // Resolve the complete account object before storing trade-entry context.
     // Never stringify an account object: String(accountObject) produces the
@@ -381,23 +371,15 @@ export default function App() {
       ? resolveAccountReference(dashboardAccountId)
       : null;
     const activeTarget = resolveAccountReference(activeAccountId);
-<<<<<<< HEAD
     const candidates = [requestedAccount, dashboardTarget, activeTarget];
     const nextAccount = candidates.find((account) => account && isTradeableAccount(account))
       || accounts.find((account) => isTradeableAccount(account))
       || null;
-=======
-    const nextAccount = requestedAccount || dashboardTarget || activeTarget;
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
     setTradeEntryAccountId(nextAccount?.id || null);
     setEditing(null);
     setShowModal(false);
     setShowGuidedModal(true);
-<<<<<<< HEAD
   }, [dashboardAccountId, activeAccountId, accounts, resolveAccountReference, isTradeableAccount]);
-=======
-  }, [dashboardAccountId, activeAccountId, resolveAccountReference]);
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 
   const openEdit = useCallback((trade) => {
     // Existing trades must always retain their own account identity while editing.
@@ -446,12 +428,9 @@ export default function App() {
       if (!persistedTradeAccount?.id || persistedTradeAccount.id === "[object Object]") {
         throw new Error("Unable to resolve the selected trading account. Please select an account and try again.");
       }
-<<<<<<< HEAD
       if (!trade?.id && !isTradeableAccount(persistedTradeAccount)) {
         throw new Error("This account is no longer active and cannot receive a new trade. Select an active account and try again.");
       }
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 
       let tradePlanLink = {};
       // New trades only inherit today's plan after the user explicitly selected
@@ -519,15 +498,12 @@ export default function App() {
             && postTradeCompliance.projectedDrawdown > postTradeCompliance.drawdownLimit;
           breachedAccount = Boolean(dailyLossBreached || drawdownBreached);
 
-<<<<<<< HEAD
           const targetReached = Boolean(
             !breachedAccount
             && postTradeCompliance?.target != null
             && Number(postTradeCompliance?.currentEquity || 0) >= (Number(postTradeCompliance?.accountSize || 0) + Number(postTradeCompliance.target || 0))
           );
 
-=======
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
           if (breachedAccount) {
             const now = new Date().toISOString();
             const nextSettings = {
@@ -554,7 +530,6 @@ export default function App() {
             };
             updateAccount(persistedTradeAccount.id, nextSettings);
             setPostTradeEvaluationPrompt(false);
-<<<<<<< HEAD
           } else if (targetReached) {
             const now = new Date().toISOString();
             const passingEquity = Number(postTradeCompliance?.accountSize || 0) + Number(postTradeCompliance?.target || 0);
@@ -590,14 +565,6 @@ export default function App() {
         } catch (complianceError) {
           console.warn("Post-trade compliance check failed; no automatic evaluation transition was applied:", complianceError);
           setPostTradeEvaluationPrompt(false);
-=======
-          } else {
-            setPostTradeEvaluationPrompt(true);
-          }
-        } catch (complianceError) {
-          console.warn("Post-trade compliance check failed; leaving evaluation prompt available:", complianceError);
-          setPostTradeEvaluationPrompt(true);
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
         }
       }
       if (trade?.id) {
@@ -621,11 +588,7 @@ export default function App() {
       showToast(error?.message || "Unable to save trade.", "error");
       throw error;
     }
-<<<<<<< HEAD
   }, [persistTrade, showToast, activeAccountId, activeAccount, activeAccountSettings, activeTrades, accounts, dashboardAccountId, tradeEntryAccountId, todayTradingPlanMode, trades, updateAccount, resolveAccountReference, isTradeableAccount]);
-=======
-  }, [persistTrade, showToast, activeAccountId, activeAccount, activeAccountSettings, activeTrades, accounts, dashboardAccountId, tradeEntryAccountId, todayTradingPlanMode, trades, updateAccount, resolveAccountReference]);
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
 
   const markActiveEvaluationPassedFromPrompt = useCallback(() => {
     const passedAt = new Date().toISOString();
@@ -737,24 +700,7 @@ export default function App() {
       {showModal && <Suspense fallback={null}><TradeModal trade={editing} onSave={saveTrade} onClose={closeTradeModal} s={s} checklist={activeChecklist} trades={filterTradesForAccount(trades, accounts.find((account) => String(account.id) === String(editing?.accountId || editing?.account_id || tradeEntryAccountId)) || activeAccount)} settings={(accounts.find((account) => String(account.id) === String(editing?.accountId || editing?.account_id || tradeEntryAccountId)) || activeAccount)?.settings || activeAccountSettings} /></Suspense>}
       {showGuidedModal && <Suspense fallback={null}><GuidedEntryModal onSave={saveTrade} onClose={closeGuidedModal} s={s} checklist={activeChecklist} todayPlanMode={todayTradingPlanMode} onPlanModeChange={setTodayPlanMode} onOpenTradingPlan={() => { closeGuidedModal(); handleViewChange("plan"); }} settings={(accounts.find((account) => String(account.id) === String(tradeEntryAccountId)) || (dashboardAccountId !== "all" ? dashboardAccount : activeAccount))?.settings || activeAccountSettings} /></Suspense>}
       {viewingChart && <Suspense fallback={null}><ChartPreview trade={viewingChart} onClose={closeChart} s={s} /></Suspense>}
-<<<<<<< HEAD
 
-=======
-      {postTradeEvaluationPrompt && (
-        <div className="td-post-trade-overlay" role="dialog" aria-modal="true" aria-label="Evaluation status">
-          <div className="td-post-trade-modal">
-            <div className="td-post-trade-eyebrow">TRADE SAVED</div>
-            <h2>Did this trade clear your evaluation?</h2>
-            <p>If the evaluation is cleared, mark it as <strong>Passed</strong> and then add the new funded account separately.</p>
-            <div className="td-post-trade-actions">
-              <button type="button" className="td-post-trade-primary" onClick={markActiveEvaluationPassedFromPrompt}>Yes, mark passed</button>
-              <button type="button" className="td-post-trade-secondary" onClick={openNewAccountFromTradePrompt}>Open account setup</button>
-              <button type="button" className="td-post-trade-dismiss" onClick={() => setPostTradeEvaluationPrompt(false)}>Not now</button>
-            </div>
-          </div>
-        </div>
-      )}
->>>>>>> feddbb76747abd6de577fd5fc9875ad9829ea062
       {toast && (
         <div className={`td-toast-viewport`} aria-live="polite" aria-atomic="true">
           <div className={`td-toast td-toast-${toast.tone}`} role="status">
